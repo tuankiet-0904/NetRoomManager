@@ -1,0 +1,1325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QuanLyPhongNetDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bill">
+          <Key>
+            <PropertyRef Name="BillID" />
+          </Key>
+          <Property Name="BillID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FoundedUserID" Type="int" />
+          <Property Name="FoundedUserName" Type="nvarchar" MaxLength="60" />
+          <Property Name="FoundedDate" Type="date" />
+          <Property Name="PriceTotal" Type="float" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryName" />
+          </Key>
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="CategotyType" Type="nvarchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientName" />
+          </Key>
+          <Property Name="ClientName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="GroupClientName" Type="nvarchar" MaxLength="30" />
+          <Property Name="StatusClient" Type="varchar" MaxLength="50" />
+          <Property Name="Note" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Drink">
+          <Key>
+            <PropertyRef Name="DrinkID" />
+          </Key>
+          <Property Name="DrinkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DrinkName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="60" />
+          <Property Name="PriceUnit" Type="float" />
+          <Property Name="UnitLot" Type="nvarchar" MaxLength="100" />
+          <Property Name="InventoryNumber" Type="int" />
+        </EntityType>
+        <EntityType Name="Food">
+          <Key>
+            <PropertyRef Name="FoodID" />
+          </Key>
+          <Property Name="FoodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FoodName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="60" />
+          <Property Name="PriceUnit" Type="float" />
+          <Property Name="UnitLot" Type="nvarchar" MaxLength="100" />
+          <Property Name="InventoryNumber" Type="int" />
+        </EntityType>
+        <EntityType Name="GroupClient">
+          <Key>
+            <PropertyRef Name="GroupName" />
+          </Key>
+          <Property Name="GroupName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Discription" Type="nvarchar" MaxLength="120" />
+        </EntityType>
+        <EntityType Name="GroupClientAndGroupUser">
+          <Key>
+            <PropertyRef Name="GroupUserName" />
+            <PropertyRef Name="GroupClientName" />
+          </Key>
+          <Property Name="GroupUserName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="GroupClientName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="GiaDichVu" Type="float" />
+        </EntityType>
+        <EntityType Name="GroupUser">
+          <Key>
+            <PropertyRef Name="GroupName" />
+          </Key>
+          <Property Name="GroupName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="TypeName" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="LoginMember">
+          <Key>
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="LoginID" Type="int" Nullable="false" />
+          <Property Name="MemberID" Type="int" />
+          <Property Name="ClientName" Type="varchar" MaxLength="30" />
+          <Property Name="LoginDate" Type="date" />
+          <Property Name="StartTime" Type="time" Precision="7" />
+          <Property Name="UseTime" Type="time" Precision="7" />
+          <Property Name="LeftTime" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountName" Type="varchar" MaxLength="30" />
+          <Property Name="Password" Type="varchar" MaxLength="30" />
+          <Property Name="GroupUser" Type="nvarchar" MaxLength="30" />
+          <Property Name="CurrentTime" Type="time" Precision="7" />
+          <Property Name="CurrentMoney" Type="float" />
+          <Property Name="StatusAccount" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="MemberInformation">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="MemberName" Type="nvarchar" MaxLength="100" />
+          <Property Name="FoundedDate" Type="date" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="11" />
+          <Property Name="MemberAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="OrderCard">
+          <Key>
+            <PropertyRef Name="ClientName" />
+            <PropertyRef Name="CardID" />
+          </Key>
+          <Property Name="ClientName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="CardID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="PriceTotal" Type="float" />
+        </EntityType>
+        <EntityType Name="OrderDrink">
+          <Key>
+            <PropertyRef Name="ClientName" />
+            <PropertyRef Name="DrinkID" />
+          </Key>
+          <Property Name="ClientName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="DrinkID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="PriceTotal" Type="float" />
+        </EntityType>
+        <EntityType Name="OrderFood">
+          <Key>
+            <PropertyRef Name="ClientName" />
+            <PropertyRef Name="FoodID" />
+          </Key>
+          <Property Name="ClientName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="FoodID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="PriceTotal" Type="float" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TheCard">
+          <Key>
+            <PropertyRef Name="CardID" />
+          </Key>
+          <Property Name="CardID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="60" />
+          <Property Name="PriceUnit" Type="float" />
+          <Property Name="UnitLot" Type="nvarchar" MaxLength="100" />
+          <Property Name="InventoryNumber" Type="int" />
+        </EntityType>
+        <EntityType Name="TheUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="60" />
+          <Property Name="Type" Type="varchar" MaxLength="30" />
+          <Property Name="loginPass" Type="varchar" MaxLength="30" />
+          <Property Name="GroupUser" Type="nvarchar" MaxLength="30" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="11" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TransactionDiary2">
+          <Key>
+            <PropertyRef Name="TD_ID" />
+          </Key>
+          <Property Name="TD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="60" />
+          <Property Name="memberID" Type="int" />
+          <Property Name="TransacDate" Type="date" />
+          <Property Name="AddTime" Type="time" Precision="7" />
+          <Property Name="AddMoney" Type="float" />
+          <Property Name="UseTime" Type="time" Precision="7" />
+          <Property Name="Note" Type="nvarchar" MaxLength="120" />
+        </EntityType>
+        <Association Name="FK__Bill__FoundedUse__6754599E">
+          <End Role="TheUser" Type="Self.TheUser" Multiplicity="0..1" />
+          <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="FoundedUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Client__GroupCli__412EB0B6">
+          <End Role="GroupClient" Type="Self.GroupClient" Multiplicity="0..1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupClient">
+              <PropertyRef Name="GroupName" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="GroupClientName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Drink__CategoryN__45F365D3">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Drink" Type="Self.Drink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryName" />
+            </Principal>
+            <Dependent Role="Drink">
+              <PropertyRef Name="CategoryName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Food__CategoryNa__48CFD27E">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Food" Type="Self.Food" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryName" />
+            </Principal>
+            <Dependent Role="Food">
+              <PropertyRef Name="CategoryName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupClie__Group__3D5E1FD2">
+          <End Role="GroupUser" Type="Self.GroupUser" Multiplicity="1" />
+          <End Role="GroupClientAndGroupUser" Type="Self.GroupClientAndGroupUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupUser">
+              <PropertyRef Name="GroupName" />
+            </Principal>
+            <Dependent Role="GroupClientAndGroupUser">
+              <PropertyRef Name="GroupUserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupClie__Group__3E52440B">
+          <End Role="GroupClient" Type="Self.GroupClient" Multiplicity="1" />
+          <End Role="GroupClientAndGroupUser" Type="Self.GroupClientAndGroupUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupClient">
+              <PropertyRef Name="GroupName" />
+            </Principal>
+            <Dependent Role="GroupClientAndGroupUser">
+              <PropertyRef Name="GroupClientName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginMemb__Clien__2DE6D218">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="LoginMember" Type="Self.LoginMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientName" />
+            </Principal>
+            <Dependent Role="LoginMember">
+              <PropertyRef Name="ClientName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginMemb__Membe__2CF2ADDF">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="LoginMember" Type="Self.LoginMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="LoginMember">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Member__GroupUse__59FA5E80">
+          <End Role="GroupUser" Type="Self.GroupUser" Multiplicity="0..1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupUser">
+              <PropertyRef Name="GroupName" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="GroupUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MemberInf__membe__60A75C0F">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="MemberInformation" Type="Self.MemberInformation" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="MemberInformation">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderCard__CardI__571DF1D5">
+          <End Role="TheCard" Type="Self.TheCard" Multiplicity="1" />
+          <End Role="OrderCard" Type="Self.OrderCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheCard">
+              <PropertyRef Name="CardID" />
+            </Principal>
+            <Dependent Role="OrderCard">
+              <PropertyRef Name="CardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderCard__Clien__5629CD9C">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="OrderCard" Type="Self.OrderCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientName" />
+            </Principal>
+            <Dependent Role="OrderCard">
+              <PropertyRef Name="ClientName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDrin__Clien__4E88ABD4">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="OrderDrink" Type="Self.OrderDrink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientName" />
+            </Principal>
+            <Dependent Role="OrderDrink">
+              <PropertyRef Name="ClientName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDrin__Drink__4F7CD00D">
+          <End Role="Drink" Type="Self.Drink" Multiplicity="1" />
+          <End Role="OrderDrink" Type="Self.OrderDrink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drink">
+              <PropertyRef Name="DrinkID" />
+            </Principal>
+            <Dependent Role="OrderDrink">
+              <PropertyRef Name="DrinkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderFood__Clien__52593CB8">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="OrderFood" Type="Self.OrderFood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientName" />
+            </Principal>
+            <Dependent Role="OrderFood">
+              <PropertyRef Name="ClientName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderFood__FoodI__534D60F1">
+          <End Role="Food" Type="Self.Food" Multiplicity="1" />
+          <End Role="OrderFood" Type="Self.OrderFood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Food">
+              <PropertyRef Name="FoodID" />
+            </Principal>
+            <Dependent Role="OrderFood">
+              <PropertyRef Name="FoodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TheCard__Categor__4BAC3F29">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="TheCard" Type="Self.TheCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryName" />
+            </Principal>
+            <Dependent Role="TheCard">
+              <PropertyRef Name="CategoryName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TheUser__GroupUs__3A81B327">
+          <End Role="GroupUser" Type="Self.GroupUser" Multiplicity="0..1" />
+          <End Role="TheUser" Type="Self.TheUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupUser">
+              <PropertyRef Name="GroupName" />
+            </Principal>
+            <Dependent Role="TheUser">
+              <PropertyRef Name="GroupUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__membe__6477ECF3">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="TransactionDiary2" Type="Self.TransactionDiary2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="TransactionDiary2">
+              <PropertyRef Name="memberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__UserI__6383C8BA">
+          <End Role="TheUser" Type="Self.TheUser" Multiplicity="0..1" />
+          <End Role="TransactionDiary2" Type="Self.TransactionDiary2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TransactionDiary2">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuanLyPhongNetDBModelStoreContainer">
+          <EntitySet Name="Bill" EntityType="Self.Bill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Drink" EntityType="Self.Drink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Food" EntityType="Self.Food" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupClient" EntityType="Self.GroupClient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupClientAndGroupUser" EntityType="Self.GroupClientAndGroupUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupUser" EntityType="Self.GroupUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginMember" EntityType="Self.LoginMember" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberInformation" EntityType="Self.MemberInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderCard" EntityType="Self.OrderCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDrink" EntityType="Self.OrderDrink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderFood" EntityType="Self.OrderFood" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TheCard" EntityType="Self.TheCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TheUser" EntityType="Self.TheUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionDiary2" EntityType="Self.TransactionDiary2" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Bill__FoundedUse__6754599E" Association="Self.FK__Bill__FoundedUse__6754599E">
+            <End Role="TheUser" EntitySet="TheUser" />
+            <End Role="Bill" EntitySet="Bill" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Client__GroupCli__412EB0B6" Association="Self.FK__Client__GroupCli__412EB0B6">
+            <End Role="GroupClient" EntitySet="GroupClient" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Drink__CategoryN__45F365D3" Association="Self.FK__Drink__CategoryN__45F365D3">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Drink" EntitySet="Drink" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Food__CategoryNa__48CFD27E" Association="Self.FK__Food__CategoryNa__48CFD27E">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Food" EntitySet="Food" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupClie__Group__3D5E1FD2" Association="Self.FK__GroupClie__Group__3D5E1FD2">
+            <End Role="GroupUser" EntitySet="GroupUser" />
+            <End Role="GroupClientAndGroupUser" EntitySet="GroupClientAndGroupUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupClie__Group__3E52440B" Association="Self.FK__GroupClie__Group__3E52440B">
+            <End Role="GroupClient" EntitySet="GroupClient" />
+            <End Role="GroupClientAndGroupUser" EntitySet="GroupClientAndGroupUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginMemb__Clien__2DE6D218" Association="Self.FK__LoginMemb__Clien__2DE6D218">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="LoginMember" EntitySet="LoginMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginMemb__Membe__2CF2ADDF" Association="Self.FK__LoginMemb__Membe__2CF2ADDF">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="LoginMember" EntitySet="LoginMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Member__GroupUse__59FA5E80" Association="Self.FK__Member__GroupUse__59FA5E80">
+            <End Role="GroupUser" EntitySet="GroupUser" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MemberInf__membe__60A75C0F" Association="Self.FK__MemberInf__membe__60A75C0F">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="MemberInformation" EntitySet="MemberInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderCard__CardI__571DF1D5" Association="Self.FK__OrderCard__CardI__571DF1D5">
+            <End Role="TheCard" EntitySet="TheCard" />
+            <End Role="OrderCard" EntitySet="OrderCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderCard__Clien__5629CD9C" Association="Self.FK__OrderCard__Clien__5629CD9C">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="OrderCard" EntitySet="OrderCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDrin__Clien__4E88ABD4" Association="Self.FK__OrderDrin__Clien__4E88ABD4">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="OrderDrink" EntitySet="OrderDrink" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDrin__Drink__4F7CD00D" Association="Self.FK__OrderDrin__Drink__4F7CD00D">
+            <End Role="Drink" EntitySet="Drink" />
+            <End Role="OrderDrink" EntitySet="OrderDrink" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderFood__Clien__52593CB8" Association="Self.FK__OrderFood__Clien__52593CB8">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="OrderFood" EntitySet="OrderFood" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderFood__FoodI__534D60F1" Association="Self.FK__OrderFood__FoodI__534D60F1">
+            <End Role="Food" EntitySet="Food" />
+            <End Role="OrderFood" EntitySet="OrderFood" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TheCard__Categor__4BAC3F29" Association="Self.FK__TheCard__Categor__4BAC3F29">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="TheCard" EntitySet="TheCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TheUser__GroupUs__3A81B327" Association="Self.FK__TheUser__GroupUs__3A81B327">
+            <End Role="GroupUser" EntitySet="GroupUser" />
+            <End Role="TheUser" EntitySet="TheUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__membe__6477ECF3" Association="Self.FK__Transacti__membe__6477ECF3">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="TransactionDiary2" EntitySet="TransactionDiary2" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__UserI__6383C8BA" Association="Self.FK__Transacti__UserI__6383C8BA">
+            <End Role="TheUser" EntitySet="TheUser" />
+            <End Role="TransactionDiary2" EntitySet="TransactionDiary2" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuanLyPhongNetDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bill">
+          <Key>
+            <PropertyRef Name="BillID" />
+          </Key>
+          <Property Name="BillID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FoundedUserID" Type="Int32" />
+          <Property Name="FoundedUserName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="FoundedDate" Type="DateTime" Precision="0" />
+          <Property Name="PriceTotal" Type="Double" />
+          <NavigationProperty Name="TheUser" Relationship="Self.FK__Bill__FoundedUse__6754599E" FromRole="Bill" ToRole="TheUser" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryName" />
+          </Key>
+          <Property Name="CategoryName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategotyType" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Drinks" Relationship="Self.FK__Drink__CategoryN__45F365D3" FromRole="Category" ToRole="Drink" />
+          <NavigationProperty Name="Foods" Relationship="Self.FK__Food__CategoryNa__48CFD27E" FromRole="Category" ToRole="Food" />
+          <NavigationProperty Name="TheCards" Relationship="Self.FK__TheCard__Categor__4BAC3F29" FromRole="Category" ToRole="TheCard" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientName" />
+          </Key>
+          <Property Name="ClientName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GroupClientName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="StatusClient" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GroupClient" Relationship="Self.FK__Client__GroupCli__412EB0B6" FromRole="Client" ToRole="GroupClient" />
+          <NavigationProperty Name="LoginMembers" Relationship="Self.FK__LoginMemb__Clien__2DE6D218" FromRole="Client" ToRole="LoginMember" />
+          <NavigationProperty Name="OrderCards" Relationship="Self.FK__OrderCard__Clien__5629CD9C" FromRole="Client" ToRole="OrderCard" />
+          <NavigationProperty Name="OrderDrinks" Relationship="Self.FK__OrderDrin__Clien__4E88ABD4" FromRole="Client" ToRole="OrderDrink" />
+          <NavigationProperty Name="OrderFoods" Relationship="Self.FK__OrderFood__Clien__52593CB8" FromRole="Client" ToRole="OrderFood" />
+        </EntityType>
+        <EntityType Name="Drink">
+          <Key>
+            <PropertyRef Name="DrinkID" />
+          </Key>
+          <Property Name="DrinkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DrinkName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="PriceUnit" Type="Double" />
+          <Property Name="UnitLot" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="InventoryNumber" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Drink__CategoryN__45F365D3" FromRole="Drink" ToRole="Category" />
+          <NavigationProperty Name="OrderDrinks" Relationship="Self.FK__OrderDrin__Drink__4F7CD00D" FromRole="Drink" ToRole="OrderDrink" />
+        </EntityType>
+        <EntityType Name="Food">
+          <Key>
+            <PropertyRef Name="FoodID" />
+          </Key>
+          <Property Name="FoodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FoodName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="PriceUnit" Type="Double" />
+          <Property Name="UnitLot" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="InventoryNumber" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Food__CategoryNa__48CFD27E" FromRole="Food" ToRole="Category" />
+          <NavigationProperty Name="OrderFoods" Relationship="Self.FK__OrderFood__FoodI__534D60F1" FromRole="Food" ToRole="OrderFood" />
+        </EntityType>
+        <EntityType Name="GroupClient">
+          <Key>
+            <PropertyRef Name="GroupName" />
+          </Key>
+          <Property Name="GroupName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Discription" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Client__GroupCli__412EB0B6" FromRole="GroupClient" ToRole="Client" />
+          <NavigationProperty Name="GroupClientAndGroupUsers" Relationship="Self.FK__GroupClie__Group__3E52440B" FromRole="GroupClient" ToRole="GroupClientAndGroupUser" />
+        </EntityType>
+        <EntityType Name="GroupClientAndGroupUser">
+          <Key>
+            <PropertyRef Name="GroupUserName" />
+            <PropertyRef Name="GroupClientName" />
+          </Key>
+          <Property Name="GroupUserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GroupClientName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GiaDichVu" Type="Double" />
+          <NavigationProperty Name="GroupClient" Relationship="Self.FK__GroupClie__Group__3E52440B" FromRole="GroupClientAndGroupUser" ToRole="GroupClient" />
+          <NavigationProperty Name="GroupUser" Relationship="Self.FK__GroupClie__Group__3D5E1FD2" FromRole="GroupClientAndGroupUser" ToRole="GroupUser" />
+        </EntityType>
+        <EntityType Name="GroupUser">
+          <Key>
+            <PropertyRef Name="GroupName" />
+          </Key>
+          <Property Name="GroupName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GroupClientAndGroupUsers" Relationship="Self.FK__GroupClie__Group__3D5E1FD2" FromRole="GroupUser" ToRole="GroupClientAndGroupUser" />
+          <NavigationProperty Name="Members" Relationship="Self.FK__Member__GroupUse__59FA5E80" FromRole="GroupUser" ToRole="Member" />
+          <NavigationProperty Name="TheUsers" Relationship="Self.FK__TheUser__GroupUs__3A81B327" FromRole="GroupUser" ToRole="TheUser" />
+        </EntityType>
+        <EntityType Name="LoginMember">
+          <Key>
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="LoginID" Type="Int32" Nullable="false" />
+          <Property Name="MemberID" Type="Int32" />
+          <Property Name="ClientName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LoginDate" Type="DateTime" Precision="0" />
+          <Property Name="StartTime" Type="Time" Precision="7" />
+          <Property Name="UseTime" Type="Time" Precision="7" />
+          <Property Name="LeftTime" Type="Time" Precision="7" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__LoginMemb__Clien__2DE6D218" FromRole="LoginMember" ToRole="Client" />
+          <NavigationProperty Name="Member" Relationship="Self.FK__LoginMemb__Membe__2CF2ADDF" FromRole="LoginMember" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="GroupUser" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentTime" Type="Time" Precision="7" />
+          <Property Name="CurrentMoney" Type="Double" />
+          <Property Name="StatusAccount" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GroupUser1" Relationship="Self.FK__Member__GroupUse__59FA5E80" FromRole="Member" ToRole="GroupUser" />
+          <NavigationProperty Name="LoginMembers" Relationship="Self.FK__LoginMemb__Membe__2CF2ADDF" FromRole="Member" ToRole="LoginMember" />
+          <NavigationProperty Name="MemberInformation" Relationship="Self.FK__MemberInf__membe__60A75C0F" FromRole="Member" ToRole="MemberInformation" />
+          <NavigationProperty Name="TransactionDiary2" Relationship="Self.FK__Transacti__membe__6477ECF3" FromRole="Member" ToRole="TransactionDiary2" />
+        </EntityType>
+        <EntityType Name="MemberInformation">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="MemberName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FoundedDate" Type="DateTime" Precision="0" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="MemberAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Member" Relationship="Self.FK__MemberInf__membe__60A75C0F" FromRole="MemberInformation" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="OrderCard">
+          <Key>
+            <PropertyRef Name="ClientName" />
+            <PropertyRef Name="CardID" />
+          </Key>
+          <Property Name="ClientName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CardID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="PriceTotal" Type="Double" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__OrderCard__Clien__5629CD9C" FromRole="OrderCard" ToRole="Client" />
+          <NavigationProperty Name="TheCard" Relationship="Self.FK__OrderCard__CardI__571DF1D5" FromRole="OrderCard" ToRole="TheCard" />
+        </EntityType>
+        <EntityType Name="OrderDrink">
+          <Key>
+            <PropertyRef Name="ClientName" />
+            <PropertyRef Name="DrinkID" />
+          </Key>
+          <Property Name="ClientName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DrinkID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="PriceTotal" Type="Double" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__OrderDrin__Clien__4E88ABD4" FromRole="OrderDrink" ToRole="Client" />
+          <NavigationProperty Name="Drink" Relationship="Self.FK__OrderDrin__Drink__4F7CD00D" FromRole="OrderDrink" ToRole="Drink" />
+        </EntityType>
+        <EntityType Name="OrderFood">
+          <Key>
+            <PropertyRef Name="ClientName" />
+            <PropertyRef Name="FoodID" />
+          </Key>
+          <Property Name="ClientName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FoodID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="PriceTotal" Type="Double" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__OrderFood__Clien__52593CB8" FromRole="OrderFood" ToRole="Client" />
+          <NavigationProperty Name="Food" Relationship="Self.FK__OrderFood__FoodI__534D60F1" FromRole="OrderFood" ToRole="Food" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TheCard">
+          <Key>
+            <PropertyRef Name="CardID" />
+          </Key>
+          <Property Name="CardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="PriceUnit" Type="Double" />
+          <Property Name="UnitLot" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="InventoryNumber" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__TheCard__Categor__4BAC3F29" FromRole="TheCard" ToRole="Category" />
+          <NavigationProperty Name="OrderCards" Relationship="Self.FK__OrderCard__CardI__571DF1D5" FromRole="TheCard" ToRole="OrderCard" />
+        </EntityType>
+        <EntityType Name="TheUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="loginPass" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="GroupUser" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Bills" Relationship="Self.FK__Bill__FoundedUse__6754599E" FromRole="TheUser" ToRole="Bill" />
+          <NavigationProperty Name="GroupUser1" Relationship="Self.FK__TheUser__GroupUs__3A81B327" FromRole="TheUser" ToRole="GroupUser" />
+          <NavigationProperty Name="TransactionDiary2" Relationship="Self.FK__Transacti__UserI__6383C8BA" FromRole="TheUser" ToRole="TransactionDiary2" />
+        </EntityType>
+        <EntityType Name="TransactionDiary2">
+          <Key>
+            <PropertyRef Name="TD_ID" />
+          </Key>
+          <Property Name="TD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="memberID" Type="Int32" />
+          <Property Name="TransacDate" Type="DateTime" Precision="0" />
+          <Property Name="AddTime" Type="Time" Precision="7" />
+          <Property Name="AddMoney" Type="Double" />
+          <Property Name="UseTime" Type="Time" Precision="7" />
+          <Property Name="Note" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Member" Relationship="Self.FK__Transacti__membe__6477ECF3" FromRole="TransactionDiary2" ToRole="Member" />
+          <NavigationProperty Name="TheUser" Relationship="Self.FK__Transacti__UserI__6383C8BA" FromRole="TransactionDiary2" ToRole="TheUser" />
+        </EntityType>
+        <Association Name="FK__Bill__FoundedUse__6754599E">
+          <End Role="TheUser" Type="Self.TheUser" Multiplicity="0..1" />
+          <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="FoundedUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Drink__CategoryN__45F365D3">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Drink" Type="Self.Drink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryName" />
+            </Principal>
+            <Dependent Role="Drink">
+              <PropertyRef Name="CategoryName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Food__CategoryNa__48CFD27E">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Food" Type="Self.Food" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryName" />
+            </Principal>
+            <Dependent Role="Food">
+              <PropertyRef Name="CategoryName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TheCard__Categor__4BAC3F29">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="TheCard" Type="Self.TheCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryName" />
+            </Principal>
+            <Dependent Role="TheCard">
+              <PropertyRef Name="CategoryName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Client__GroupCli__412EB0B6">
+          <End Role="GroupClient" Type="Self.GroupClient" Multiplicity="0..1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupClient">
+              <PropertyRef Name="GroupName" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="GroupClientName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginMemb__Clien__2DE6D218">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="LoginMember" Type="Self.LoginMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientName" />
+            </Principal>
+            <Dependent Role="LoginMember">
+              <PropertyRef Name="ClientName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderCard__Clien__5629CD9C">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="OrderCard" Type="Self.OrderCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientName" />
+            </Principal>
+            <Dependent Role="OrderCard">
+              <PropertyRef Name="ClientName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDrin__Clien__4E88ABD4">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="OrderDrink" Type="Self.OrderDrink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientName" />
+            </Principal>
+            <Dependent Role="OrderDrink">
+              <PropertyRef Name="ClientName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderFood__Clien__52593CB8">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="OrderFood" Type="Self.OrderFood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientName" />
+            </Principal>
+            <Dependent Role="OrderFood">
+              <PropertyRef Name="ClientName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDrin__Drink__4F7CD00D">
+          <End Role="Drink" Type="Self.Drink" Multiplicity="1" />
+          <End Role="OrderDrink" Type="Self.OrderDrink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drink">
+              <PropertyRef Name="DrinkID" />
+            </Principal>
+            <Dependent Role="OrderDrink">
+              <PropertyRef Name="DrinkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderFood__FoodI__534D60F1">
+          <End Role="Food" Type="Self.Food" Multiplicity="1" />
+          <End Role="OrderFood" Type="Self.OrderFood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Food">
+              <PropertyRef Name="FoodID" />
+            </Principal>
+            <Dependent Role="OrderFood">
+              <PropertyRef Name="FoodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupClie__Group__3E52440B">
+          <End Role="GroupClient" Type="Self.GroupClient" Multiplicity="1" />
+          <End Role="GroupClientAndGroupUser" Type="Self.GroupClientAndGroupUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupClient">
+              <PropertyRef Name="GroupName" />
+            </Principal>
+            <Dependent Role="GroupClientAndGroupUser">
+              <PropertyRef Name="GroupClientName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupClie__Group__3D5E1FD2">
+          <End Role="GroupUser" Type="Self.GroupUser" Multiplicity="1" />
+          <End Role="GroupClientAndGroupUser" Type="Self.GroupClientAndGroupUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupUser">
+              <PropertyRef Name="GroupName" />
+            </Principal>
+            <Dependent Role="GroupClientAndGroupUser">
+              <PropertyRef Name="GroupUserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Member__GroupUse__59FA5E80">
+          <End Role="GroupUser" Type="Self.GroupUser" Multiplicity="0..1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupUser">
+              <PropertyRef Name="GroupName" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="GroupUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TheUser__GroupUs__3A81B327">
+          <End Role="GroupUser" Type="Self.GroupUser" Multiplicity="0..1" />
+          <End Role="TheUser" Type="Self.TheUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupUser">
+              <PropertyRef Name="GroupName" />
+            </Principal>
+            <Dependent Role="TheUser">
+              <PropertyRef Name="GroupUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginMemb__Membe__2CF2ADDF">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="LoginMember" Type="Self.LoginMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="LoginMember">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MemberInf__membe__60A75C0F">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="MemberInformation" Type="Self.MemberInformation" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="MemberInformation">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__membe__6477ECF3">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="TransactionDiary2" Type="Self.TransactionDiary2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="TransactionDiary2">
+              <PropertyRef Name="memberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderCard__CardI__571DF1D5">
+          <End Role="TheCard" Type="Self.TheCard" Multiplicity="1" />
+          <End Role="OrderCard" Type="Self.OrderCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheCard">
+              <PropertyRef Name="CardID" />
+            </Principal>
+            <Dependent Role="OrderCard">
+              <PropertyRef Name="CardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__UserI__6383C8BA">
+          <End Role="TheUser" Type="Self.TheUser" Multiplicity="0..1" />
+          <End Role="TransactionDiary2" Type="Self.TransactionDiary2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TransactionDiary2">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuanLyPhongNetDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bills" EntityType="Self.Bill" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Drinks" EntityType="Self.Drink" />
+          <EntitySet Name="Foods" EntityType="Self.Food" />
+          <EntitySet Name="GroupClients" EntityType="Self.GroupClient" />
+          <EntitySet Name="GroupClientAndGroupUsers" EntityType="Self.GroupClientAndGroupUser" />
+          <EntitySet Name="GroupUsers" EntityType="Self.GroupUser" />
+          <EntitySet Name="LoginMembers" EntityType="Self.LoginMember" />
+          <EntitySet Name="Members" EntityType="Self.Member" />
+          <EntitySet Name="MemberInformations" EntityType="Self.MemberInformation" />
+          <EntitySet Name="OrderCards" EntityType="Self.OrderCard" />
+          <EntitySet Name="OrderDrinks" EntityType="Self.OrderDrink" />
+          <EntitySet Name="OrderFoods" EntityType="Self.OrderFood" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TheCards" EntityType="Self.TheCard" />
+          <EntitySet Name="TheUsers" EntityType="Self.TheUser" />
+          <EntitySet Name="TransactionDiary2" EntityType="Self.TransactionDiary2" />
+          <AssociationSet Name="FK__Bill__FoundedUse__6754599E" Association="Self.FK__Bill__FoundedUse__6754599E">
+            <End Role="TheUser" EntitySet="TheUsers" />
+            <End Role="Bill" EntitySet="Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Drink__CategoryN__45F365D3" Association="Self.FK__Drink__CategoryN__45F365D3">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Drink" EntitySet="Drinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Food__CategoryNa__48CFD27E" Association="Self.FK__Food__CategoryNa__48CFD27E">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Food" EntitySet="Foods" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TheCard__Categor__4BAC3F29" Association="Self.FK__TheCard__Categor__4BAC3F29">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="TheCard" EntitySet="TheCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Client__GroupCli__412EB0B6" Association="Self.FK__Client__GroupCli__412EB0B6">
+            <End Role="GroupClient" EntitySet="GroupClients" />
+            <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginMemb__Clien__2DE6D218" Association="Self.FK__LoginMemb__Clien__2DE6D218">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="LoginMember" EntitySet="LoginMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderCard__Clien__5629CD9C" Association="Self.FK__OrderCard__Clien__5629CD9C">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="OrderCard" EntitySet="OrderCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDrin__Clien__4E88ABD4" Association="Self.FK__OrderDrin__Clien__4E88ABD4">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="OrderDrink" EntitySet="OrderDrinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderFood__Clien__52593CB8" Association="Self.FK__OrderFood__Clien__52593CB8">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="OrderFood" EntitySet="OrderFoods" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDrin__Drink__4F7CD00D" Association="Self.FK__OrderDrin__Drink__4F7CD00D">
+            <End Role="Drink" EntitySet="Drinks" />
+            <End Role="OrderDrink" EntitySet="OrderDrinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderFood__FoodI__534D60F1" Association="Self.FK__OrderFood__FoodI__534D60F1">
+            <End Role="Food" EntitySet="Foods" />
+            <End Role="OrderFood" EntitySet="OrderFoods" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupClie__Group__3E52440B" Association="Self.FK__GroupClie__Group__3E52440B">
+            <End Role="GroupClient" EntitySet="GroupClients" />
+            <End Role="GroupClientAndGroupUser" EntitySet="GroupClientAndGroupUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupClie__Group__3D5E1FD2" Association="Self.FK__GroupClie__Group__3D5E1FD2">
+            <End Role="GroupUser" EntitySet="GroupUsers" />
+            <End Role="GroupClientAndGroupUser" EntitySet="GroupClientAndGroupUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Member__GroupUse__59FA5E80" Association="Self.FK__Member__GroupUse__59FA5E80">
+            <End Role="GroupUser" EntitySet="GroupUsers" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TheUser__GroupUs__3A81B327" Association="Self.FK__TheUser__GroupUs__3A81B327">
+            <End Role="GroupUser" EntitySet="GroupUsers" />
+            <End Role="TheUser" EntitySet="TheUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginMemb__Membe__2CF2ADDF" Association="Self.FK__LoginMemb__Membe__2CF2ADDF">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="LoginMember" EntitySet="LoginMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MemberInf__membe__60A75C0F" Association="Self.FK__MemberInf__membe__60A75C0F">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="MemberInformation" EntitySet="MemberInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__membe__6477ECF3" Association="Self.FK__Transacti__membe__6477ECF3">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="TransactionDiary2" EntitySet="TransactionDiary2" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderCard__CardI__571DF1D5" Association="Self.FK__OrderCard__CardI__571DF1D5">
+            <End Role="TheCard" EntitySet="TheCards" />
+            <End Role="OrderCard" EntitySet="OrderCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__UserI__6383C8BA" Association="Self.FK__Transacti__UserI__6383C8BA">
+            <End Role="TheUser" EntitySet="TheUsers" />
+            <End Role="TransactionDiary2" EntitySet="TransactionDiary2" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuanLyPhongNetDBModelStoreContainer" CdmEntityContainer="QuanLyPhongNetDB">
+          <EntitySetMapping Name="Bills">
+            <EntityTypeMapping TypeName="QuanLyPhongNetDBModel.Bill">
+              <MappingFragment StoreEntitySet="Bill">
+                <ScalarProperty Name="BillID" ColumnName="BillID" />
+                <ScalarProperty Name="FoundedUserID" ColumnName="FoundedUserID" />
+                <ScalarProperty Name="FoundedUserName" ColumnName="FoundedUserName" />
+                <ScalarProperty Name="FoundedDate" ColumnName="FoundedDate" />
+                <ScalarProperty Name="PriceTotal" ColumnName="PriceTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="QuanLyPhongNetDBModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategotyType" ColumnName="CategotyType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="QuanLyPhongNetDBModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="GroupClientName" ColumnName="GroupClientName" />
+                <ScalarProperty Name="StatusClient" ColumnName="StatusClient" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drinks">
+            <EntityTypeMapping TypeName="QuanLyPhongNetDBModel.Drink">
+              <MappingFragment StoreEntitySet="Drink">
+                <ScalarProperty Name="DrinkID" ColumnName="DrinkID" />
+                <ScalarProperty Name="DrinkName" ColumnName="DrinkName" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="PriceUnit" ColumnName="PriceUnit" />
+                <ScalarProperty Name="UnitLot" ColumnName="UnitLot" />
+                <ScalarProperty Name="InventoryNumber" ColumnName="InventoryNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Foods">
+            <EntityTypeMapping TypeName="QuanLyPhongNetDBModel.Food">
+              <MappingFragment StoreEntitySet="Food">
+                <ScalarProperty Name="FoodID" ColumnName="FoodID" />
+                <ScalarProperty Name="FoodName" ColumnName="FoodName" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="PriceUnit" ColumnName="PriceUnit" />
+                <ScalarProperty Name="UnitLot" ColumnName="UnitLot" />
+                <ScalarProperty Name="InventoryNumber" ColumnName="InventoryNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupClients">
+            <EntityTypeMapping TypeName="QuanLyPhongNetDBModel.GroupClient">
+              <MappingFragment StoreEntitySet="GroupClient">
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupClientAndGroupUsers">
+            <EntityTypeMapping TypeName="QuanLyPhongNetDBModel.GroupClientAndGroupUser">
+              <MappingFragment StoreEntitySet="GroupClientAndGroupUser">
+                <ScalarProperty Name="GroupUserName" ColumnName="GroupUserName" />
+                <ScalarProperty Name="GroupClientName" ColumnName="GroupClientName" />
+                <ScalarProperty Name="GiaDichVu" ColumnName="GiaDichVu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupUsers">
+            <EntityTypeMapping TypeName="QuanLyPhongNetDBModel.GroupUser">
+              <MappingFragment StoreEntitySet="GroupUser">
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginMembers">
+            <EntityTypeMapping TypeName="QuanLyPhongNetDBModel.LoginMember">
+              <MappingFragment StoreEntitySet="LoginMember">
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="LoginDate" ColumnName="LoginDate" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="UseTime" ColumnName="UseTime" />
+                <ScalarProperty Name="LeftTime" ColumnName="LeftTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="QuanLyPhongNetDBModel.Member">
+              <MappingFragment StoreEntitySet="Member">
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="GroupUser" ColumnName="GroupUser" />
+                <ScalarProperty Name="CurrentTime" ColumnName="CurrentTime" />
+                <ScalarProperty Name="CurrentMoney" ColumnName="CurrentMoney" />
+                <ScalarProperty Name="StatusAccount" ColumnName="StatusAccount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberInformations">
+            <EntityTypeMapping TypeName="QuanLyPhongNetDBModel.MemberInformation">
+              <MappingFragment StoreEntitySet="MemberInformation">
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+                <ScalarProperty Name="FoundedDate" ColumnName="FoundedDate" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="MemberAddress" ColumnName="MemberAddress" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderCards">
+            <EntityTypeMapping TypeName="QuanLyPhongNetDBModel.OrderCard">
+              <MappingFragment StoreEntitySet="OrderCard">
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="CardID" ColumnName="CardID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PriceTotal" ColumnName="PriceTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDrinks">
+            <EntityTypeMapping TypeName="QuanLyPhongNetDBModel.OrderDrink">
+              <MappingFragment StoreEntitySet="OrderDrink">
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="DrinkID" ColumnName="DrinkID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PriceTotal" ColumnName="PriceTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderFoods">
+            <EntityTypeMapping TypeName="QuanLyPhongNetDBModel.OrderFood">
+              <MappingFragment StoreEntitySet="OrderFood">
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="FoodID" ColumnName="FoodID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PriceTotal" ColumnName="PriceTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="QuanLyPhongNetDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TheCards">
+            <EntityTypeMapping TypeName="QuanLyPhongNetDBModel.TheCard">
+              <MappingFragment StoreEntitySet="TheCard">
+                <ScalarProperty Name="CardID" ColumnName="CardID" />
+                <ScalarProperty Name="CardName" ColumnName="CardName" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="PriceUnit" ColumnName="PriceUnit" />
+                <ScalarProperty Name="UnitLot" ColumnName="UnitLot" />
+                <ScalarProperty Name="InventoryNumber" ColumnName="InventoryNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TheUsers">
+            <EntityTypeMapping TypeName="QuanLyPhongNetDBModel.TheUser">
+              <MappingFragment StoreEntitySet="TheUser">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="loginPass" ColumnName="loginPass" />
+                <ScalarProperty Name="GroupUser" ColumnName="GroupUser" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionDiary2">
+            <EntityTypeMapping TypeName="QuanLyPhongNetDBModel.TransactionDiary2">
+              <MappingFragment StoreEntitySet="TransactionDiary2">
+                <ScalarProperty Name="TD_ID" ColumnName="TD_ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="memberID" ColumnName="memberID" />
+                <ScalarProperty Name="TransacDate" ColumnName="TransacDate" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="AddMoney" ColumnName="AddMoney" />
+                <ScalarProperty Name="UseTime" ColumnName="UseTime" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

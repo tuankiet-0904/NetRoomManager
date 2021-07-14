@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLyPhongNet.GUI", "QuanLyPhongNet.GUI\QuanLyPhongNet.GUI.csproj", "{A4DA5F5B-1758-44A6-97E0-FCD6B3042218}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLyPhongNet.BUS", "QuanLyPhongNet.BUS\QuanLyPhongNet.BUS.csproj", "{DD1070B6-D655-4D07-9A75-8C61BE057D7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLyPhongNet.DAL", "QuanLyPhongNet.DAL\QuanLyPhongNet.DAL.csproj", "{F4BEECAD-8F6F-49A0-8F56-279EF0018920}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLyPhongNet.DTO", "QuanLyPhongNet.DTO\QuanLyPhongNet.DTO.csproj", "{26FFB750-A298-4712-BFB5-BF6BE81806BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClientServer", "ClientServer", "{A3155589-9255-4D64-BEAE-EA8A81C89B26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "May_1", "May_1\May_1.csproj", "{6CF85FDC-ACEE-4FEA-8CAD-D54F3B2738AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "May_2", "May_2\May_2.csproj", "{E334E697-4BB8-4A6A-8485-E09D9F413A43}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A4DA5F5B-1758-44A6-97E0-FCD6B3042218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4DA5F5B-1758-44A6-97E0-FCD6B3042218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4DA5F5B-1758-44A6-97E0-FCD6B3042218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4DA5F5B-1758-44A6-97E0-FCD6B3042218}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD1070B6-D655-4D07-9A75-8C61BE057D7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD1070B6-D655-4D07-9A75-8C61BE057D7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD1070B6-D655-4D07-9A75-8C61BE057D7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD1070B6-D655-4D07-9A75-8C61BE057D7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4BEECAD-8F6F-49A0-8F56-279EF0018920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4BEECAD-8F6F-49A0-8F56-279EF0018920}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4BEECAD-8F6F-49A0-8F56-279EF0018920}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4BEECAD-8F6F-49A0-8F56-279EF0018920}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26FFB750-A298-4712-BFB5-BF6BE81806BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26FFB750-A298-4712-BFB5-BF6BE81806BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26FFB750-A298-4712-BFB5-BF6BE81806BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26FFB750-A298-4712-BFB5-BF6BE81806BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CF85FDC-ACEE-4FEA-8CAD-D54F3B2738AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CF85FDC-ACEE-4FEA-8CAD-D54F3B2738AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CF85FDC-ACEE-4FEA-8CAD-D54F3B2738AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CF85FDC-ACEE-4FEA-8CAD-D54F3B2738AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E334E697-4BB8-4A6A-8485-E09D9F413A43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E334E697-4BB8-4A6A-8485-E09D9F413A43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E334E697-4BB8-4A6A-8485-E09D9F413A43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E334E697-4BB8-4A6A-8485-E09D9F413A43}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6CF85FDC-ACEE-4FEA-8CAD-D54F3B2738AB} = {A3155589-9255-4D64-BEAE-EA8A81C89B26}
+		{E334E697-4BB8-4A6A-8485-E09D9F413A43} = {A3155589-9255-4D64-BEAE-EA8A81C89B26}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {19AF1A0F-C660-47E6-9958-68132E6F6996}
+	EndGlobalSection
+EndGlobal

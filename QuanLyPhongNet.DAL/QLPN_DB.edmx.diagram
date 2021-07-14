@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5c6921e19a014070b8580952796a4ffe" Name="Diagram1">
+        <EntityTypeShape EntityType="DoAnModel.AfterPayClient" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnModel.BeforePayClient" Width="1.5" PointX="8.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnModel.Bill" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnModel.Category" Width="1.5" PointX="3.75" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnModel.Client" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnModel.Drink" Width="1.5" PointX="6" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnModel.Food" Width="1.5" PointX="3" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnModel.GroupClient" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnModel.GroupClientAndGroupUser" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnModel.GroupUser" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnModel.LoginMember" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnModel.Member" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnModel.MemberInformation" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnModel.OrderCard" Width="1.5" PointX="8.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnModel.OrderDrink" Width="1.5" PointX="8.25" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnModel.OrderFood" Width="1.5" PointX="5.25" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnModel.TheCard" Width="1.5" PointX="6" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnModel.TheUser" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoAnModel.TransactionDiary" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="DoAnModel.FK__AfterPayC__BillI__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__AfterPayC__Clien__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__BeforePay__BillI__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__BeforePay__Clien__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__Bill__FoundedUse__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__Drink__CategoryN__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__Food__CategoryNa__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__TheCard__Categor__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__Client__GroupCli__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__LoginMemb__Clien__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__OrderCard__Clien__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__OrderDrin__Clien__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__OrderFood__Clien__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__OrderDrin__Drink__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__OrderFood__FoodI__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__GroupClie__Group__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__GroupClie__Group__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__Member__GroupUse__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__TheUser__GroupUs__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__LoginMemb__membe__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__MemberInf__membe__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__Transacti__membe__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__OrderCard__CardI__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="DoAnModel.FK__Transacti__UserN__5165187F" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

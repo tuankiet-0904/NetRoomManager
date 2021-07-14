@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2743990bbb2b4c71b4f594c46f82534e" Name="Diagram1">
+        <EntityTypeShape EntityType="QuanLyPhongNetDBModel.Bill" Width="1.5" PointX="5.25" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyPhongNetDBModel.Category" Width="1.5" PointX="3.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyPhongNetDBModel.Client" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyPhongNetDBModel.Drink" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyPhongNetDBModel.Food" Width="1.5" PointX="6" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyPhongNetDBModel.GroupClient" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyPhongNetDBModel.GroupClientAndGroupUser" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyPhongNetDBModel.GroupUser" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyPhongNetDBModel.LoginMember" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyPhongNetDBModel.Member" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyPhongNetDBModel.MemberInformation" Width="1.5" PointX="5.25" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyPhongNetDBModel.OrderCard" Width="1.5" PointX="8.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyPhongNetDBModel.OrderDrink" Width="1.5" PointX="8.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyPhongNetDBModel.OrderFood" Width="1.5" PointX="8.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyPhongNetDBModel.sysdiagram" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyPhongNetDBModel.TheCard" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyPhongNetDBModel.TheUser" Width="1.5" PointX="3" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyPhongNetDBModel.TransactionDiary2" Width="1.5" PointX="8.25" PointY="16.125" IsExpanded="true" />
+        <AssociationConnector Association="QuanLyPhongNetDBModel.FK__Bill__FoundedUse__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyPhongNetDBModel.FK__Drink__CategoryN__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyPhongNetDBModel.FK__Food__CategoryNa__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyPhongNetDBModel.FK__TheCard__Categor__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyPhongNetDBModel.FK__Client__GroupCli__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyPhongNetDBModel.FK__LoginMemb__Clien__2DE6D218" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyPhongNetDBModel.FK__OrderCard__Clien__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyPhongNetDBModel.FK__OrderDrin__Clien__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyPhongNetDBModel.FK__OrderFood__Clien__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyPhongNetDBModel.FK__OrderDrin__Drink__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyPhongNetDBModel.FK__OrderFood__FoodI__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyPhongNetDBModel.FK__GroupClie__Group__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyPhongNetDBModel.FK__GroupClie__Group__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyPhongNetDBModel.FK__Member__GroupUse__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyPhongNetDBModel.FK__TheUser__GroupUs__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyPhongNetDBModel.FK__LoginMemb__Membe__2CF2ADDF" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyPhongNetDBModel.FK__MemberInf__membe__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyPhongNetDBModel.FK__Transacti__membe__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyPhongNetDBModel.FK__OrderCard__CardI__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyPhongNetDBModel.FK__Transacti__UserI__6383C8BA" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
