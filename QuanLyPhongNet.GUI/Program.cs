@@ -14,7 +14,6 @@ namespace QuanLyPhongNet.GUI
         [STAThread]
         static void Main()
         {
-            // sadalshds
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new DangNhap());
