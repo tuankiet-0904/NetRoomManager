@@ -298,10 +298,17 @@ namespace QuanLyPhongNet.BUS
             return total;
         }
 
-        public void ShutDown(int index)
+        public void ShutDown(string nameClient)
         {
-            InfoClient client = usingClient[index];
-            usingClient.Remove(usingClient[index]);
+            InfoClient client = new InfoClient();
+            foreach (InfoClient i in usingClient)
+            {
+                if (i.nameClient.Equals(nameClient))
+                {
+                    client = i;
+                }
+            }
+            usingClient.Remove(client);
             client.client.Send(ConvertToByte("ShutDown!"));
         }
 

@@ -485,8 +485,8 @@ namespace QuanLyPhongNet.GUI
                 TimeSpan useTime = leftTime - loginMember.StartTime;
                 servermanager.SaveLogoutInfo(loginMember.LoginID, useTime, leftTime);
             }
-            int index = drgvUsingClient.SelectedRows[0].Index;
-            servermanager.ShutDown(index);
+            string clientName = drgvUsingClient.SelectedRows[0].Cells[0].Value.ToString();
+            servermanager.ShutDown(clientName);
             if (servermanager.usingClient.Count == 0)
             {
                 LoadDRGVUsingClient();
@@ -1186,7 +1186,35 @@ namespace QuanLyPhongNet.GUI
 
         private void GiaoDienChinh_FormClosing(object sender, FormClosingEventArgs e)
         {
-            servermanager.CloseSocketConnection();
+            if (servermanager.usingClient.Count > 0)
+            {
+                if (MessageBox.Show("Vẫn còn máy con đang hoạt động!\nBạn có chắc muốn thoát?", "Chú ý!", 
+                                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    foreach (InfoClient i in servermanager.usingClient.ToList())    
+                    {
+                        if (i.stateClient.Equals("MEMBER USING"))
+                        {
+                            // Save Logout Info
+                            string accountUsing = i.nameCustomer;
+                            LoginMember loginMember = FindLoginMember(accountUsing);
+                            TimeSpan current = DateTime.Now.TimeOfDay;
+                            TimeSpan leftTime = TimeSpan.Parse(current.Hours + ":" + current.Minutes + ":" + current.Seconds);
+                            TimeSpan useTime = leftTime - loginMember.StartTime;
+                            servermanager.SaveLogoutInfo(loginMember.LoginID, useTime, leftTime);
+                            // Logout Member
+                            string nameClient = i.nameClient;
+                            servermanager.ShutDown(nameClient);
+                        }
+                    }
+                    servermanager.CloseSocketConnection();
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+            else servermanager.CloseSocketConnection();
         }
     }
 }

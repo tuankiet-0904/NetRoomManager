@@ -92,6 +92,7 @@ namespace May_1
                 TimeSpan totalTime = TimeSpan.Parse(txtTotalTime.Text.ToString());
                 if (useTime > totalTime)
                 {
+                    // Logout khỏi tài khoản
                     clientManager.lockScreen.Show();
                 }
             }
@@ -172,6 +173,7 @@ namespace May_1
 
         private void Timing_FormClosing(object sender, FormClosingEventArgs e)
         {
+            clientManager.CloseSocketConnection();
             Application.Exit();
         }
 
@@ -182,6 +184,7 @@ namespace May_1
 
         private void picLock_Click(object sender, EventArgs e)
         {
+            // Vẫn trừ tiền, chỉ có thể đăng nhập lại bằng tài khoản đang tính tiền
             clientManager.lockScreen.Visible = true;
             clientManager.lockScreen.TopMost = true;
             clientManager.lockScreen.resetTxt();
