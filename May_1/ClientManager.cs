@@ -67,7 +67,7 @@ namespace DoAnSE
             client.Send(ConvertToByte("AllowToLogInPls!!|" + userName + "|" + passWord + "|" + "MAY-1|"));
         }
 
-        public void SendMessage (string message)
+        public void SendMessage(string message)
         {
             client.Send(ConvertToByte("Message!!|" + message + "|" + "May-1|"));
         }
