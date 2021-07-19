@@ -41,6 +41,7 @@ namespace QuanLyPhongNet.BUS
         const string USING = "USING";
         public TimeSpan totalTime;
         public static string clientsend;
+        public string clientDisconnect = ""; 
 
         public ServerManager()
         {
@@ -166,6 +167,10 @@ namespace QuanLyPhongNet.BUS
                                 currentClient.Send(ConvertToByte("Wrong Old Password!|"));
                                 break;
                         }
+                    }
+                    if (lstMessege[request].Equals("Disconnect!!"))
+                    {
+                        clientDisconnect = lstMessege[1];
                     }
                 }
             }

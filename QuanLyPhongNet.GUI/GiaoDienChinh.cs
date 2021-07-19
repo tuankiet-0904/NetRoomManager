@@ -20,7 +20,7 @@ namespace QuanLyPhongNet.GUI
             InitializeComponent();
             servermanager = new ServerManager();
             CheckForIllegalCrossThreadCalls = false;
-            timerHome.Interval = 500;
+            timerHome.Interval = 200;
             timerHome.Enabled = true;
             timerHome.Start();
             objReader = new NetRoomReader();
@@ -249,6 +249,27 @@ namespace QuanLyPhongNet.GUI
                 {
                     ServerManager.refreshClient = servermanager.usingClient.Count;
                     LoadClient();
+                }
+            }
+            if (servermanager.clientDisconnect != "")
+            {
+                string clientName = servermanager.clientDisconnect;
+                foreach (InfoClient i in servermanager.usingClient.ToList())
+                {
+                    if (i.nameClient.Equals(clientName))
+                    {
+                        servermanager.usingClient.RemoveAt(servermanager.usingClient.IndexOf(i));
+                        servermanager.clientDisconnect = "";
+                        if (servermanager.usingClient.Count > 0)
+                        {
+                            LoadClient();
+                        }
+                        else
+                        {
+                            LoadDRGVUsingClient();
+                        }
+                        break;
+                    }
                 }
             }
         }
