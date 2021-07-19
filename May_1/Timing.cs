@@ -93,7 +93,13 @@ namespace May_1
                 if (useTime > totalTime)
                 {
                     // Logout khỏi tài khoản
-                    clientManager.lockScreen.Show();
+                    TimeSpan current = DateTime.Now.TimeOfDay;
+                    TimeSpan leftTime = TimeSpan.Parse(current.Hours + ":" + current.Minutes + ":" + current.Seconds);
+                    clientManager.LogoutMember(userName, remain, clientManager.loginID, use, leftTime);
+                    clientManager.lockScreen.Visible = true;
+                    clientManager.lockScreen.resetTxt();
+                    clientManager.lockScreen.TopMost = true;
+                    clientManager.lockScreen.showLoginStatus("");
                 }
             }
         }

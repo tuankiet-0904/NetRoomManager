@@ -92,7 +92,14 @@ namespace May_2
                 TimeSpan totalTime = TimeSpan.Parse(txtTotalTime.Text.ToString());
                 if (useTime > totalTime)
                 {
-                    clientManager.lockScreen.Show();
+                    // Logout khỏi tài khoản
+                    TimeSpan current = DateTime.Now.TimeOfDay;
+                    TimeSpan leftTime = TimeSpan.Parse(current.Hours + ":" + current.Minutes + ":" + current.Seconds);
+                    clientManager.LogoutMember(userName, remain, clientManager.loginID, use, leftTime);
+                    clientManager.lockScreen.Visible = true;
+                    clientManager.lockScreen.resetTxt();
+                    clientManager.lockScreen.TopMost = true;
+                    clientManager.lockScreen.showLoginStatus("");
                 }
             }
         }
@@ -172,6 +179,7 @@ namespace May_2
 
         private void Timing_FormClosing(object sender, FormClosingEventArgs e)
         {
+            clientManager.CloseSocketConnection();
             Application.Exit();
         }
 
@@ -182,6 +190,7 @@ namespace May_2
 
         private void picLock_Click(object sender, EventArgs e)
         {
+            // Vẫn trừ tiền, chỉ có thể đăng nhập lại bằng tài khoản đang tính tiền
             clientManager.lockScreen.Visible = true;
             clientManager.lockScreen.TopMost = true;
             clientManager.lockScreen.resetTxt();
