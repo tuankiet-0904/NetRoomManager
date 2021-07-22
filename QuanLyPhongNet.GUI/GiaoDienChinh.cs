@@ -248,7 +248,7 @@ namespace QuanLyPhongNet.GUI
                 if (ServerManager.refreshClient != servermanager.usingClient.Count)
                 {
                     ServerManager.refreshClient = servermanager.usingClient.Count;
-                    LoadClient();
+                    if (servermanager.usingClient.Count > 0) LoadClient();
                 }
             }
             if (servermanager.clientDisconnect != "")
@@ -258,6 +258,16 @@ namespace QuanLyPhongNet.GUI
                 {
                     if (i.nameClient.Equals(clientName))
                     {
+                        if (i.stateClient.Equals("MEMBER USING"))
+                        {
+                            // Save Logout Info
+                            string accountUsing = i.nameCustomer;
+                            LoginMember loginMember = FindLoginMember(accountUsing);
+                            TimeSpan current = DateTime.Now.TimeOfDay;
+                            TimeSpan leftTime = TimeSpan.Parse(current.Hours + ":" + current.Minutes + ":" + current.Seconds);
+                            TimeSpan useTime = leftTime - loginMember.StartTime;
+                            servermanager.SaveLogoutInfo(loginMember.LoginID, useTime, leftTime);
+                        }
                         servermanager.usingClient.RemoveAt(servermanager.usingClient.IndexOf(i));
                         servermanager.clientDisconnect = "";
                         if (servermanager.usingClient.Count > 0)
