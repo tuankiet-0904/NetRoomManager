@@ -281,6 +281,7 @@ namespace QuanLyPhongNet.GUI
                         break;
                     }
                 }
+                LoadDRGVNKDN();
             }
         }
 
@@ -489,6 +490,7 @@ namespace QuanLyPhongNet.GUI
                 TimeSpan leftTime = TimeSpan.Parse(current.Hours + ":" + current.Minutes + ":" + current.Seconds);
                 TimeSpan useTime = leftTime - loginMember.StartTime;
                 servermanager.SaveLogoutInfo(loginMember.LoginID, useTime, leftTime);
+                LoadDRGVNKDN();
             }
             if (drgvUsingClient.SelectedRows.Count < 1) return;
             int index = drgvUsingClient.SelectedRows[0].Index;
@@ -515,6 +517,7 @@ namespace QuanLyPhongNet.GUI
                 TimeSpan leftTime = TimeSpan.Parse(current.Hours + ":" + current.Minutes + ":" + current.Seconds);
                 TimeSpan useTime = leftTime - loginMember.StartTime;
                 servermanager.SaveLogoutInfo(loginMember.LoginID, useTime, leftTime);
+                LoadDRGVNKDN();
             }
             string clientName = drgvUsingClient.SelectedRows[0].Cells[0].Value.ToString();
             servermanager.ShutDown(clientName);

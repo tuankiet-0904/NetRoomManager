@@ -116,25 +116,25 @@ namespace QuanLyPhongNet.BUS
                                 int memberID = NetRoomReader.Instance.FindIDByAccountName(lstMessege[1]);
                                 currentClient.Send(ConvertToByte("OkePlayGo|" + lstMessege[1] + "|" + totalTime + "|" + loginID + "|"));
                                 SaveLoginInfo(loginID, memberID, lstMessege[3], DateTime.Now.Date, DateTime.Now.TimeOfDay);
-                                ChangeStateClient(currentClient, "MEMBER USING", lstMessege[1]);
+                                ChangeStateClient(currentClient, lstMessege[1],"MEMBER USING");
                                 refreshClient = 9999;
                                 break;
                             case 1:
                                 currentClient.Send(ConvertToByte("Your account is exhausted. Recharge to use it!!!|" + lstMessege[1] + "|" + totalTime + "|"));
-                                ChangeStateClient(currentClient, "WAITING", lstMessege[1]);
+                                ChangeStateClient(currentClient, lstMessege[1], "WAITING");
                                 break;
                             case 2:
                                 currentClient.Send(ConvertToByte("Acount not exist !! Or Wrong Username, Password|" + lstMessege[1] + "|" + totalTime + "|"));
-                                ChangeStateClient(currentClient, "WAITING", lstMessege[1]);
+                                ChangeStateClient(currentClient, lstMessege[1], "WAITING");
                                 break;
                         }
                     }
                     if (lstMessege[request].Equals("LogOutPls!!"))
                     {
                         UpdateRemainTime(lstMessege[1], TimeSpan.Parse(lstMessege[2]));
-                        ChangeStateClient(currentClient, "WAITING", lstMessege[1]);
-                        refreshClient = 9999;
                         SaveLogoutInfo(Convert.ToInt32(lstMessege[3]), TimeSpan.Parse(lstMessege[4]), TimeSpan.Parse(lstMessege[5]));
+                        ChangeStateClient(currentClient, lstMessege[1], "WAITING");
+                        refreshClient = 9999;                       
                     }
                     if (lstMessege[request].Equals("Message!!"))
                     {
@@ -325,15 +325,23 @@ namespace QuanLyPhongNet.BUS
             client.client.Send(ConvertToByte("LockClient!"));
         }
 
-        public void ChangeStateClient(Socket client, string state, string userName)
+        public void ChangeStateClient(Socket client, string userName, string state)
         {
             foreach (InfoClient cli in usingClient)
             {
                 if (cli.client == client)
                 {
                     cli.stateClient = state;
-                    if (state.Equals("WAITING")) cli.nameCustomer = "";
-                    else cli.nameCustomer = userName;
+                    if (state.Equals("WAITING"))
+                    {
+                        cli.nameCustomer = "";
+                        cli.startTime = DateTime.MinValue;
+                    }
+                    else
+                    {
+                        cli.nameCustomer = userName;
+                        cli.startTime = DateTime.Now;
+                    }
                 }
             }
         }
