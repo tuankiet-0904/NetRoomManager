@@ -43,8 +43,15 @@ namespace QuanLyPhongNet.GUI
             {
                 Member member = new Member();
                 member.AccountName = txtName.Text;
+                member.MemberID = NetRoomReader.Instance.FindIDByAccountName(member.AccountName);
                 member.Password = txtPass.Text;
                 member.CurrentMoney = float.Parse(txtCurrentTime.Text);
+                member.GroupUser = "Hội Viên";
+                if (txtAddMoney.Text.Equals("0"))
+                {
+                    MessageBox.Show("Vui lòng nhập số tiền nạp!", "Chú ý!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 float AddMoney = 0;
                 if (txtAddMoney.Text.IndexOf('-') == 0)
                 {
@@ -57,7 +64,6 @@ namespace QuanLyPhongNet.GUI
                     AddMoney = float.Parse(txtAddMoney.Text);
                     member.CurrentMoney = float.Parse(txtCurrentTime.Text) + AddMoney;
                 }
-                member.GroupUser = "Hội Viên";
                 if (member.CurrentMoney > 0)
                 {
                     member.StatusAccount = "Cho Phép";
@@ -66,35 +72,25 @@ namespace QuanLyPhongNet.GUI
                 member.CurrentTime = NetRoomWritter.Instance.ChangeMoneyToTime((float)member.CurrentMoney);
                 if (NetRoomReader.Instance.CheckAccount(txtName.Text))
                 {
-                    if (txtAddMoney.Text.Equals("0"))
-                    {
-                        MessageBox.Show("Vui lòng nhập số tiền nạp!", "Chú ý!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
                     NetRoomWritter.Instance.InsertMember(member);
+                    member.MemberID = NetRoomReader.Instance.FindIDByAccountName(member.AccountName);
+                    NetRoomWritter.Instance.InsertMemberInfo(member.MemberID, DateTime.Now.Date);
                 }
                 else
                 {
-                    if (txtAddMoney.Text.Equals("0"))
-                    {
-                        MessageBox.Show("Vui lòng nhập số tiền nạp!", "Chú ý!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
                     MessageBox.Show("Bạn đã nạp " + txtAddMoney.Text + " đồng vào tài khoản " + txtName.Text,
                                     "Thông báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     NetRoomWritter.Instance.UpdateMember(member);
                 }
 
-                member.MemberID = NetRoomReader.Instance.FindIDByAccountName(member.AccountName);
-                NetRoomWritter.Instance.InsertMemberInfo(member.MemberID, DateTime.Now.Date);
-
                 TransactionDiary2 td = new TransactionDiary2();
+                MessageBox.Show(member.MemberID.ToString());
+                td.memberID = member.MemberID;
                 td.UserID = ServerManager.MemberID;
                 td.UserName = NetRoomReader.Instance.FindUserNameByID(ServerManager.MemberID);
-                td.memberID = member.MemberID;
                 td.TransacDate = DateTime.Now;
-                td.AddMoney = AddMoney;
                 td.AddTime = NetRoomWritter.Instance.ChangeMoneyToTime(AddMoney);
+                td.AddMoney = AddMoney;
                 td.Note = txtNote.Text;
                 NetRoomWritter.Instance.InsertTransactionDiary(td);
                 this.Dispose();

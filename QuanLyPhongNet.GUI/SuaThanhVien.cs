@@ -22,6 +22,17 @@ namespace QuanLyPhongNet.GUI
             _ID = id;
         }
 
+        private void SuaThongTin_Load(object sender, EventArgs e)
+        {
+            DTO.Member member = NetRoomReader.Instance.GetMemberByID(_ID);
+            txtName.Text = member.AccountName;
+            txtPass.Text = member.Password;
+            txtCurrentMoney.Text = member.CurrentMoney.ToString();
+            cbbGroupUser.SelectedItem = member.GroupUserName.ToString();
+            txtCurrentMoney.Enabled = false;
+            txtAddMoney.Enabled = false;
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (txtPass.Text == "")
@@ -51,17 +62,6 @@ namespace QuanLyPhongNet.GUI
             NetRoomWritter.Instance.UpdateMember(member);
             MessageBox.Show("Cập nhật tài khoản thành công!", "Thông báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Dispose();
-        }
-
-        private void SuaThongTin_Load(object sender, EventArgs e)
-        {
-            DTO.Member member = NetRoomReader.Instance.GetMemberByID(_ID);
-            txtName.Text = member.AccountName;
-            txtPass.Text = member.Password;
-            txtCurrentMoney.Text = member.CurrentMoney.ToString();
-            cbbGroupUser.SelectedItem = member.GroupUserName.ToString();
-            txtCurrentMoney.Enabled = false;
-            txtAddMoney.Enabled = false;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
