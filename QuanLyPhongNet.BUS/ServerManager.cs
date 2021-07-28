@@ -288,7 +288,7 @@ namespace QuanLyPhongNet.BUS
             {
                 return 0;
             }
-            
+
             TimeSpan time = DateTime.Now.Subtract(client.startTime);
             
             client.stateClient = "WAITING";

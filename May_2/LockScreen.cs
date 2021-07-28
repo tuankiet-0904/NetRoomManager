@@ -7,12 +7,16 @@ namespace May_2
     public partial class LockScreen : Form
     {
         public ClientManager clientManager;
+        public bool lockMode;
+        private string password = "";
+
         public LockScreen(ClientManager x)
         {
             this.clientManager = x;
             InitializeComponent();
             timer1.Interval = 500;
             timer1.Enabled = true;
+            this.lockMode = false;
         }
         private void LockScreen_Load(object sender, EventArgs e)
         {
@@ -27,11 +31,9 @@ namespace May_2
         {
             if (groupBox1.Visible == false)
             {
-                txtUserName.Clear();
-                txtPassword.Clear();
+                resetTxt();
                 groupBox1.Visible = true;
                 loginStatus.Visible = false;
-                txtUserName.Select();
             }
         }
 
@@ -39,36 +41,45 @@ namespace May_2
         {
             if (groupBox1.Visible == false)
             {
-                txtUserName.Clear();
-                txtPassword.Clear();
+                resetTxt();
                 groupBox1.Visible = true;
                 loginStatus.Visible = false;
-                txtUserName.Select();
             }
         }
 
         private void LoginClickEventHandler(object sender, EventArgs e)
         {
-            timer1.Start();
+            if (lockMode)
+            {
+                if (txtUserName.Text.Equals(clientManager.userName) && txtPassword.Text.Equals(password))
+                {
+                    this.lockMode = false;
+                    this.Visible = false;
+                    this.TopMost = false;
+                }
+                else
+                {
+                    showLoginStatus("Sai tài khoản hoặc mật khẩu!");
+                }
+                resetTxt();
+            }
+            else
+            {
+                timer1.Start();
 
-            string userName = txtUserName.Text.ToString();
-            string passWord = txtPassword.Text.ToString();
-            showLoginStatus("");
-            resetTxt();
+                string userName = txtUserName.Text.ToString();
+                string passWord = txtPassword.Text.ToString();
+                showLoginStatus("");
 
-            clientManager.Login(userName, passWord);
+                clientManager.Login(userName, passWord);
+            }
         }
 
         private void bttCancel_Click(object sender, EventArgs e)
         {
             groupBox1.Visible = false;
         }
-        public void showLoginStatus(string message)
-        {
-            loginStatus.Text = message;
-            loginStatus.Visible = true;
-        }
-
+        
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (clientManager.message2.Equals("Acount not exist !! Or Wrong Username, Password"))
@@ -94,6 +105,12 @@ namespace May_2
                 clientManager.message2 = "";
                 resetTxt();
             }
+            if (clientManager.message2.Equals("OkePlayGo"))
+            {
+                password = txtPassword.Text;
+                clientManager.message2 = "";
+                resetTxt();
+            }
         }
 
         private void txtUserName_KeyDown(object sender, KeyEventArgs e)
@@ -103,6 +120,13 @@ namespace May_2
                 btnLogin.PerformClick();
             }
         }
+
+        public void showLoginStatus(string message)
+        {
+            loginStatus.Text = message;
+            loginStatus.Visible = true;
+        }
+
         public void resetTxt()
         {
             txtUserName.Clear();

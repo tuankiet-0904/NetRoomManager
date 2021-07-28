@@ -229,12 +229,17 @@ namespace QuanLyPhongNet.GUI
 
         private void picOpenClient_Click(object sender, EventArgs e)
         {
-            if (servermanager.usingClient.Count == 0)
+            if (drgvUsingClient.SelectedRows.Count < 1) return;
+            if (drgvUsingClient.SelectedRows[0].Cells[2].Value.ToString().Equals("DISCONNECT"))
             {
                 MessageBox.Show("Máy này chưa được kết nối!", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (drgvUsingClient.SelectedRows.Count < 1) return;
+            if (drgvUsingClient.SelectedRows[0].Cells[2].Value.ToString().Equals("MEMBER USING"))
+            {
+                MessageBox.Show("Máy này đang được sử dụng!", "Thông báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             int index = drgvUsingClient.SelectedRows[0].Index;
             servermanager.UsingWithGuess(servermanager.usingClient[index].nameClient);
             servermanager.usingClient[index].stateClient = "USING";
@@ -441,19 +446,19 @@ namespace QuanLyPhongNet.GUI
 
         private void picCalculateMoney_Click(object sender, EventArgs e)
         {
-            if (servermanager.usingClient.Count == 0)
+            if (drgvUsingClient.SelectedRows.Count < 1) return;
+            if (drgvUsingClient.SelectedRows[0].Cells[2].Value.ToString().Equals("DISCONNECT"))
             {
                 MessageBox.Show("Máy này chưa được kết nối!", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (drgvUsingClient.SelectedRows.Count < 1) return;
             int index = drgvUsingClient.SelectedRows[0].Index;
-            txtTotalPrice.Text = servermanager.TotalPrice(index).ToString();
             if (servermanager.usingClient[index].stateClient != "USING")
             {
                 MessageBox.Show("Không thể tính tiền khách này!", "Chú ý!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            txtTotalPrice.Text = servermanager.TotalPrice(index).ToString();
             servermanager.usingClient[index].stateClient = "WAITING";
             servermanager.usingClient[index].startTime = new DateTime();
             LoadClient();
@@ -477,7 +482,8 @@ namespace QuanLyPhongNet.GUI
 
         private void picLockClient_Click(object sender, EventArgs e)
         {
-            if (servermanager.usingClient.Count == 0)
+            if (drgvUsingClient.SelectedRows.Count < 1) return;
+            if (drgvUsingClient.SelectedRows[0].Cells[2].Value.ToString().Equals("DISCONNECT"))
             {
                 MessageBox.Show("Máy này chưa được kết nối!", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -490,9 +496,7 @@ namespace QuanLyPhongNet.GUI
                 TimeSpan leftTime = TimeSpan.Parse(current.Hours + ":" + current.Minutes + ":" + current.Seconds);
                 TimeSpan useTime = leftTime - loginMember.StartTime;
                 servermanager.SaveLogoutInfo(loginMember.LoginID, useTime, leftTime);
-                LoadDRGVNKDN();
             }
-            if (drgvUsingClient.SelectedRows.Count < 1) return;
             int index = drgvUsingClient.SelectedRows[0].Index;
             servermanager.LockClient(index);
             servermanager.usingClient[index].stateClient = "WAITING";
@@ -502,13 +506,12 @@ namespace QuanLyPhongNet.GUI
 
         private void picShutdownClient_Click(object sender, EventArgs e)
         {
+            if (drgvUsingClient.SelectedRows.Count < 1) return;
             if (servermanager.usingClient.Count == 0)
             {
                 MessageBox.Show("Máy này chưa được kết nối!", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }
-            if (drgvUsingClient.SelectedRows.Count < 1) return;
-            
+            } 
             string accountUsing = drgvUsingClient.SelectedRows[0].Cells[1].Value.ToString();
             if (!accountUsing.Equals(""))
             {
@@ -517,7 +520,6 @@ namespace QuanLyPhongNet.GUI
                 TimeSpan leftTime = TimeSpan.Parse(current.Hours + ":" + current.Minutes + ":" + current.Seconds);
                 TimeSpan useTime = leftTime - loginMember.StartTime;
                 servermanager.SaveLogoutInfo(loginMember.LoginID, useTime, leftTime);
-                LoadDRGVNKDN();
             }
             string clientName = drgvUsingClient.SelectedRows[0].Cells[0].Value.ToString();
             servermanager.ShutDown(clientName);

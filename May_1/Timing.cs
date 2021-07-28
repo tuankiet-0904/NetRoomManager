@@ -191,8 +191,10 @@ namespace May_1
         private void picLock_Click(object sender, EventArgs e)
         {
             // Vẫn trừ tiền, chỉ có thể đăng nhập lại bằng tài khoản đang tính tiền
+            clientManager.lockScreen.lockMode = true;
             clientManager.lockScreen.Visible = true;
             clientManager.lockScreen.TopMost = true;
+            clientManager.lockScreen.showLoginStatus("Chế độ chờ - Mời đăng nhập lại để tiếp tục!");
             clientManager.lockScreen.resetTxt();
         }
 

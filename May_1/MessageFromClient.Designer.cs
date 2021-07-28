@@ -92,7 +92,7 @@ namespace May_1
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MessageFromClient";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Chat";
+            this.Text = "Chat: MAY-1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MessageFromClient_FormClosing);
             this.Load += new System.EventHandler(this.MessageFromClient_Load);
             this.ResumeLayout(false);

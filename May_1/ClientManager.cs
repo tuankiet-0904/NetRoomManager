@@ -59,7 +59,11 @@ namespace DoAnSE
 
         public void CloseSocketConnection()
         {
-            client.Send(ConvertToByte("Disconnect!!|" + "MAY-1|"));
+            try
+            {
+                client.Send(ConvertToByte("Disconnect!!|" + "MAY-1|"));
+            }
+            catch { }
             client.Close();
         }
 
