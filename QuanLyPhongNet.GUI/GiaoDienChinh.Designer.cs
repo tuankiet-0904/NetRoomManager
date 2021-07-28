@@ -139,8 +139,8 @@ namespace QuanLyPhongNet.GUI
             this.label30 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.drgvNKDN = new System.Windows.Forms.DataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.txtNKDN = new System.Windows.Forms.TextBox();
+            this.cbbNKDN = new System.Windows.Forms.ComboBox();
             this.dateTimePicker5 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker6 = new System.Windows.Forms.DateTimePicker();
             this.label32 = new System.Windows.Forms.Label();
@@ -456,7 +456,7 @@ namespace QuanLyPhongNet.GUI
             this.drgvDrink.Name = "drgvDrink";
             this.drgvDrink.RowHeadersWidth = 62;
             this.drgvDrink.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.drgvDrink.Size = new System.Drawing.Size(1592, 661);
+            this.drgvDrink.Size = new System.Drawing.Size(1592, 670);
             this.drgvDrink.TabIndex = 1;
             this.drgvDrink.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.drgvDrink_CellDoubleClick);
             // 
@@ -487,7 +487,7 @@ namespace QuanLyPhongNet.GUI
             this.drgvCard.Name = "drgvCard";
             this.drgvCard.RowHeadersWidth = 62;
             this.drgvCard.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.drgvCard.Size = new System.Drawing.Size(1592, 661);
+            this.drgvCard.Size = new System.Drawing.Size(1592, 670);
             this.drgvCard.TabIndex = 1;
             this.drgvCard.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.drgvCard_CellDoubleClick);
             // 
@@ -1333,7 +1333,7 @@ namespace QuanLyPhongNet.GUI
             this.drgvUser.Name = "drgvUser";
             this.drgvUser.RowHeadersWidth = 62;
             this.drgvUser.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.drgvUser.Size = new System.Drawing.Size(1579, 637);
+            this.drgvUser.Size = new System.Drawing.Size(1579, 646);
             this.drgvUser.TabIndex = 8;
             // 
             // picAddUser
@@ -1715,8 +1715,8 @@ namespace QuanLyPhongNet.GUI
             this.tabLoginDiary.Controls.Add(this.label30);
             this.tabLoginDiary.Controls.Add(this.label31);
             this.tabLoginDiary.Controls.Add(this.drgvNKDN);
-            this.tabLoginDiary.Controls.Add(this.textBox1);
-            this.tabLoginDiary.Controls.Add(this.comboBox1);
+            this.tabLoginDiary.Controls.Add(this.txtNKDN);
+            this.tabLoginDiary.Controls.Add(this.cbbNKDN);
             this.tabLoginDiary.Controls.Add(this.dateTimePicker5);
             this.tabLoginDiary.Controls.Add(this.dateTimePicker6);
             this.tabLoginDiary.Controls.Add(this.label32);
@@ -1785,36 +1785,37 @@ namespace QuanLyPhongNet.GUI
             this.drgvNKDN.Size = new System.Drawing.Size(1613, 705);
             this.drgvNKDN.TabIndex = 42;
             // 
-            // textBox1
+            // txtNKDN
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.txtNKDN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(1322, 21);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(242, 34);
-            this.textBox1.TabIndex = 40;
+            this.txtNKDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNKDN.Location = new System.Drawing.Point(1322, 21);
+            this.txtNKDN.Margin = new System.Windows.Forms.Padding(4);
+            this.txtNKDN.Name = "txtNKDN";
+            this.txtNKDN.Size = new System.Drawing.Size(242, 34);
+            this.txtNKDN.TabIndex = 40;
             // 
-            // comboBox1
+            // cbbNKDN
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.cbbNKDN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.ForeColor = System.Drawing.Color.Blue;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cbbNKDN.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbbNKDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbNKDN.ForeColor = System.Drawing.Color.Blue;
+            this.cbbNKDN.FormattingEnabled = true;
+            this.cbbNKDN.Items.AddRange(new object[] {
             "All",
             "Login ID",
             "ID tài khoản",
             "Tên máy trạm",
             "Ngày đăng nhập"});
-            this.comboBox1.Location = new System.Drawing.Point(928, 20);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(264, 37);
-            this.comboBox1.TabIndex = 39;
+            this.cbbNKDN.Location = new System.Drawing.Point(928, 20);
+            this.cbbNKDN.Margin = new System.Windows.Forms.Padding(4);
+            this.cbbNKDN.Name = "cbbNKDN";
+            this.cbbNKDN.Size = new System.Drawing.Size(264, 37);
+            this.cbbNKDN.TabIndex = 39;
+            this.cbbNKDN.SelectedIndexChanged += new System.EventHandler(this.cbbNKDN_SelectedIndexChanged);
             // 
             // dateTimePicker5
             // 
@@ -2082,8 +2083,8 @@ namespace QuanLyPhongNet.GUI
         private Label label30;
         private Label label31;
         private DataGridView drgvNKDN;
-        private TextBox textBox1;
-        private ComboBox comboBox1;
+        private TextBox txtNKDN;
+        private ComboBox cbbNKDN;
         private DateTimePicker dateTimePicker5;
         private DateTimePicker dateTimePicker6;
         private Label label32;
