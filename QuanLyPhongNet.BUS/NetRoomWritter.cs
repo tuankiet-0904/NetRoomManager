@@ -52,108 +52,12 @@ namespace QuanLyPhongNet.BUS
             TDObjectWriter = new ProcessTD();
         }
 
-        public void InsertClient(string clientName, string groupClientName, string note)
-        {
-            clientObjectWriter.InsertClient(clientName, groupClientName, note);
-        }
+        //************************************************************************************************//
 
+        // GroupClient
         public void InsertClientGroup(string clientGroupName, string description)
         {
             groupClientObjectWriter.InsertGroupClient(clientGroupName, description);
-        }
-
-        public void InsertUser(int ID, string name, string loginPass, string phone, string email)
-        {
-            userObjectWriter.InsertUser(ID, name, loginPass, phone, email);
-        }
-
-        public void InsertLoginMember(LoginMember loginMember)
-        {
-            loginMemberObjectWriter.InsertLoginMember(loginMember);
-        }
-
-        public void InsertMember(Member member)
-        {
-            memberObjectWriter.InsertMember(member);
-        }
-
-        public void InsertMemberInfo(int memberID, DateTime foundedDate)
-        {
-            memberInfoObjectWriter.InsertMemberInfo(memberID, foundedDate);
-        }
-
-        public void InsertBill(Bill bill)
-        {
-            billObjectWriter.CreateNewBill(bill);
-        }
-
-        public void InsertFood(string name, string categoryName, float priceUnit, string unitLot, int inventoryNumber)
-        {
-            foodObjectWriter.InsertFood(name, categoryName, priceUnit, unitLot, inventoryNumber);
-
-        }
-
-        public void InsertDrink(string name, string categoryName, float priceUnit, string unitLot, int inventoryNumber)
-        {
-            drinkObjectWriter.InsertDrink(name, categoryName, priceUnit, unitLot, inventoryNumber);
-        }
-
-        public void InsertCard(string name, string categoryName, float priceUnit, string unitLot, int inventoryNumber)
-        {
-            cardObjectWriter.InsertCard(name, categoryName, priceUnit, unitLot, inventoryNumber);
-        }
-
-        public void InsertCategory(string name, string type)
-        {
-            categoryObjectWriter.InsertCatergory(name, type);
-        }
-        public void InsertTransactionDiary(TransactionDiary2 TD)
-        {
-            TDObjectWriter.InsertTD(TD);
-        }
-
-        public void UpdateLoginMember(int loginID, TimeSpan useTime, TimeSpan leftTime)
-        {
-            loginMemberObjectWriter.UpdateLoginMember(loginID, useTime, leftTime);
-        }
- 
-        public void UpdateMember(Member member)
-        {
-            memberObjectWriter.UpdateMember(member);
-        }
-
-        public void UpdateMemberInfo(MemberInformation memberInfo)
-        {
-            memberInfoObjectWriter.UpdateMemberInfo(memberInfo);
-        }
-
-        public void UpdateFood(int foodID, string name, string categoryName, float priceUnit, string unitLot, int inventoryNumber)
-        {
-            foodObjectWriter.UpdateFood(foodID, name, categoryName, priceUnit, unitLot, inventoryNumber);
-        }
-
-        public void UpdateDrink(int drinkID, string name, string categoryName, float priceUnit, string unitLot, int inventoryNumber)
-        {
-            drinkObjectWriter.UpdateDrink(drinkID, name, categoryName, priceUnit, unitLot, inventoryNumber);
-        }
-
-        public void UpdateCard(int cardID, string name, string categoryName, float priceUnit, string unitLot, int inventoryNumber)
-        {
-            cardObjectWriter.UpdateCard(cardID, name, categoryName, priceUnit, unitLot, inventoryNumber);
-        }
-
-        public void UpdateCategory(string categoryName, string newName, string newType)
-        {
-            categoryObjectWriter.UpdateCategory(categoryName, newName, newType);
-        }
-        public void UpdateTransactionDiary(TransactionDiary2 TD)
-        {
-            TDObjectWriter.UpdateTD(TD);
-        }
-
-        public void UpdateClient(string clientName, string groupClientName, string note, string status = "DISCONNET")
-        {
-            clientObjectWriter.UpdateClient(clientName, groupClientName, note, status);
         }
 
         public void UpdateGroupClient(string groupClientName, string description)
@@ -161,49 +65,17 @@ namespace QuanLyPhongNet.BUS
             groupClientObjectWriter.UpdateGroupClient(groupClientName, description);
         }
 
-        public void UpdateGroupUser(string groupUserName, string typeName)
-        {
-            groupUserObjectWriter.UpdateGroupUser(groupUserName, typeName);
-        }
-
-        public void UpdateUser(int ID, string name, string loginPass, string phone, string email)
-        {
-            userObjectWriter.UpdateUser(ID, name, loginPass, phone, email);
-        }
-
-        public void DeleteMember(int memberID)
-        {
-            memberObjectWriter.DeleteMember(memberID);
-        }
-
-        public void DeleteFood(int foodID)
-        {
-            foodObjectWriter.DeleteFood(foodID);
-        }
-
-        public void DeleteDrink(int drinkID)
-        {
-            drinkObjectWriter.DeleteDrink(drinkID);
-        }
-
-        public void DeleteCard(int cardID)
-        {
-            cardObjectWriter.DeleteCard(cardID);
-        }
-
-        public void DeleteCategory(string categoryName)
-        {
-            categoryObjectWriter.DeleteCategory(categoryName);
-        }
-
-        public void DeleteClient(string clientName)
-        {
-            clientObjectWriter.DeleteClient(clientName);
-        }
-
         public void DeleteGroupClient(string groupName)
         {
             groupClientObjectWriter.DeleteGroupClient(groupName);
+        }
+
+        //************************************************************************************************//
+
+        // GroupUser
+        public void UpdateGroupUser(string groupUserName, string typeName)
+        {
+            groupUserObjectWriter.UpdateGroupUser(groupUserName, typeName);
         }
 
         public void DeleteGroupUser(string groupName)
@@ -211,23 +83,163 @@ namespace QuanLyPhongNet.BUS
             groupUserObjectWriter.DeleteGroupUser(groupName);
         }
 
+        //************************************************************************************************//
+
+        // Category
+        public void InsertCategory(string name, string type)
+        {
+            categoryObjectWriter.InsertCatergory(name, type);
+        }
+
+        public void UpdateCategory(string categoryName, string newName, string newType)
+        {
+            categoryObjectWriter.UpdateCategory(categoryName, newName, newType);
+        }
+
+        public void DeleteCategory(string categoryName)
+        {
+            categoryObjectWriter.DeleteCategory(categoryName);
+        }
+
+        //************************************************************************************************//
+
+        // Food
+        public void InsertFood(string name, string categoryName, float priceUnit, string unitLot, int inventoryNumber)
+        {
+            foodObjectWriter.InsertFood(name, categoryName, priceUnit, unitLot, inventoryNumber);
+
+        }
+
+        public void UpdateFood(int foodID, string name, string categoryName, float priceUnit, string unitLot, int inventoryNumber)
+        {
+            foodObjectWriter.UpdateFood(foodID, name, categoryName, priceUnit, unitLot, inventoryNumber);
+        }
+
+        public void DeleteFood(int foodID)
+        {
+            foodObjectWriter.DeleteFood(foodID);
+        }
+
+        //************************************************************************************************//
+
+        // Drink
+        public void InsertDrink(string name, string categoryName, float priceUnit, string unitLot, int inventoryNumber)
+        {
+            drinkObjectWriter.InsertDrink(name, categoryName, priceUnit, unitLot, inventoryNumber);
+        }
+
+        public void UpdateDrink(int drinkID, string name, string categoryName, float priceUnit, string unitLot, int inventoryNumber)
+        {
+            drinkObjectWriter.UpdateDrink(drinkID, name, categoryName, priceUnit, unitLot, inventoryNumber);
+        }
+
+        public void DeleteDrink(int drinkID)
+        {
+            drinkObjectWriter.DeleteDrink(drinkID);
+        }
+
+
+        //************************************************************************************************//
+
+        // Card
+        public void InsertCard(string name, string categoryName, float priceUnit, string unitLot, int inventoryNumber)
+        {
+            cardObjectWriter.InsertCard(name, categoryName, priceUnit, unitLot, inventoryNumber);
+        }
+
+        public void UpdateCard(int cardID, string name, string categoryName, float priceUnit, string unitLot, int inventoryNumber)
+        {
+            cardObjectWriter.UpdateCard(cardID, name, categoryName, priceUnit, unitLot, inventoryNumber);
+        }
+
+        public void DeleteCard(int cardID)
+        {
+            cardObjectWriter.DeleteCard(cardID);
+        }
+
+        //************************************************************************************************//
+
+        // Member
+        public void InsertMember(Member member)
+        {
+            memberObjectWriter.InsertMember(member);
+        }
+
+        public void UpdateMember(Member member)
+        {
+            memberObjectWriter.UpdateMember(member);
+        }
+
+        public void DeleteMember(int memberID)
+        {
+            memberObjectWriter.DeleteMember(memberID);
+        }
+
+        //************************************************************************************************//
+
+        // LoginMember
+        public void InsertLoginMember(LoginMember loginMember)
+        {
+            loginMemberObjectWriter.InsertLoginMember(loginMember);
+        }
+
+        public void UpdateLoginMember(int loginID, TimeSpan useTime, TimeSpan leftTime)
+        {
+            loginMemberObjectWriter.UpdateLoginMember(loginID, useTime, leftTime);
+        }
+
+        //************************************************************************************************//
+
+        // MemberInfo
+        public void InsertMemberInfo(int memberID, DateTime foundedDate)
+        {
+            memberInfoObjectWriter.InsertMemberInfo(memberID, foundedDate);
+        }
+
+        public void UpdateMemberInfo(MemberInformation memberInfo)
+        {
+            memberInfoObjectWriter.UpdateMemberInfo(memberInfo);
+        }
+
+        //************************************************************************************************//
+
+        // User
+        public void InsertUser(int ID, string name, string loginPass, string phone, string email)
+        {
+            userObjectWriter.InsertUser(ID, name, loginPass, phone, email);
+        }
+
+        public void UpdateUser(int ID, string name, string loginPass, string phone, string email)
+        {
+            userObjectWriter.UpdateUser(ID, name, loginPass, phone, email);
+        }
+
         public void DeleteUser(int ID)
         {
             userObjectWriter.DeleteUser(ID);
         }
-        public TimeSpan ChangeMoneyToTime(float money)
+
+        //************************************************************************************************//
+
+        // Client
+        public void InsertClient(string clientName, string groupClientName, string note)
         {
-            float timemoney = money / 100;
-            TimeSpan time = TimeSpan.Zero;
-            if (money >= 0)
-            {
-                time = TimeSpan.FromMinutes((double)(new decimal(timemoney)));
-            }
-            return time;
+            clientObjectWriter.InsertClient(clientName, groupClientName, note);
         }
-        public void ChangeStatusClient (string clientname, int check)
+
+        public void UpdateClient(string clientName, string groupClientName, string note, string status = "DISCONNET")
         {
-            
+            clientObjectWriter.UpdateClient(clientName, groupClientName, note, status);
+        }
+
+        public void DeleteClient(string clientName)
+        {
+            clientObjectWriter.DeleteClient(clientName);
+        }
+
+        public void ChangeStatusClient(string clientname, int check)
+        {
+
             foreach (DTO.Client i in NetRoomReader.Instance.GetAllClients())
             {
                 if (i.ClientName == clientname)
@@ -242,6 +254,41 @@ namespace QuanLyPhongNet.BUS
                     }
                 }
             }
+        }
+
+        //************************************************************************************************//
+
+        // TransactionDiary
+        public void InsertTransactionDiary(TransactionDiary2 TD)
+        {
+            TDObjectWriter.InsertTD(TD);
+        }
+
+        public void UpdateTransactionDiary(TransactionDiary2 TD)
+        {
+            TDObjectWriter.UpdateTD(TD);
+        }
+
+        //************************************************************************************************//
+
+        // Bill
+        public void InsertBill(Bill bill)
+        {
+            billObjectWriter.CreateNewBill(bill);
+        }
+
+        //************************************************************************************************//
+
+        // Các hàm khác
+        public TimeSpan ChangeMoneyToTime(float money)
+        {
+            float timemoney = money / 100;
+            TimeSpan time = TimeSpan.Zero;
+            if (money >= 0)
+            {
+                time = TimeSpan.FromMinutes((double)(new decimal(timemoney)));
+            }
+            return time;
         }
     }
 }

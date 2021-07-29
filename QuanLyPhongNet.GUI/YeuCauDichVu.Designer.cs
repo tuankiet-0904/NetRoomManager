@@ -59,7 +59,7 @@ namespace QuanLyPhongNet.GUI
             // 
             // btnCancel
             // 
-            this.btnCancel.BackColor = System.Drawing.Color.Black;
+            this.btnCancel.BackColor = System.Drawing.Color.Purple;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -147,6 +147,7 @@ namespace QuanLyPhongNet.GUI
             // 
             // txtInventory
             // 
+            this.txtInventory.Enabled = false;
             this.txtInventory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtInventory.Location = new System.Drawing.Point(158, 27);
             this.txtInventory.Margin = new System.Windows.Forms.Padding(4);
@@ -248,6 +249,7 @@ namespace QuanLyPhongNet.GUI
             // 
             // txtGroupName
             // 
+            this.txtGroupName.Enabled = false;
             this.txtGroupName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtGroupName.Location = new System.Drawing.Point(147, 23);
             this.txtGroupName.Margin = new System.Windows.Forms.Padding(4);

@@ -13,19 +13,6 @@ namespace QuanLyPhongNet.BUS
 {
     public class ServerManager
     {
-           
-        static private ServerManager _instance;
-        static public ServerManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                _instance = new ServerManager();
-                return _instance;
-            }
-        private set { }
-        }
-            
         IPEndPoint iP;
         Socket socketServer;
         public List<InfoClient> usingClient = new List<InfoClient>();
@@ -41,7 +28,19 @@ namespace QuanLyPhongNet.BUS
         const string USING = "USING";
         public TimeSpan totalTime;
         public static string clientsend;
-        public string clientDisconnect = ""; 
+        public string clientDisconnect = "";
+        
+        static private ServerManager _instance;
+        static public ServerManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                _instance = new ServerManager();
+                return _instance;
+            }
+        private set { }
+        }
 
         public ServerManager()
         {
@@ -52,11 +51,6 @@ namespace QuanLyPhongNet.BUS
             OkeFine.IsBackground = true;
             OkeFine.Start();
         }
-
-        public void CloseSocketConnection()
-        {
-            socketServer.Close();
-        } 
 
         public void StartAceptClient()
         {
@@ -78,6 +72,11 @@ namespace QuanLyPhongNet.BUS
 
                 }
             }
+        }
+
+        public void CloseSocketConnection()
+        {
+            socketServer.Close();
         }
 
         public void ReceiveDataFromClient(object obj)
@@ -281,6 +280,7 @@ namespace QuanLyPhongNet.BUS
             }
             return minutes;
         }
+        
         public float TotalPrice(int index)
         {
             InfoClient client = usingClient[index];
@@ -401,6 +401,7 @@ namespace QuanLyPhongNet.BUS
             binaryFormatter.Serialize(memoryStream, obj);
             return memoryStream.ToArray();
         }
+        
         object CovertToMessege(byte[] messege)
         {
             MemoryStream memoryStream = new MemoryStream(messege);
@@ -475,8 +476,6 @@ namespace QuanLyPhongNet.BUS
             {
                 return false;
             }
-        }
-
-        
+        }  
     }
 }

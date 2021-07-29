@@ -20,6 +20,19 @@ namespace QuanLyPhongNet.GUI
             _ID = ID;
         }
 
+        private void ThemSuaNguoiDung_Load(object sender, EventArgs e)
+        {
+            DTO.User user = NetRoomReader.Instance.GetUserByID(_ID);
+            if (user != null)
+            {
+                txtID.Text = user.ID.ToString();
+                txtName.Text = user.UserName;
+                txtPass.Text = user.LoginPass;
+                txtPhoneNumber.Text = user.PhoneNumber;
+                txtEmail.Text = user.Email;
+            }
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (txtID.Text != "" || txtName.Text != "" || txtPass.Text != "")
@@ -63,19 +76,6 @@ namespace QuanLyPhongNet.GUI
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Dispose();
-        }
-
-        private void ThemSuaNguoiDung_Load(object sender, EventArgs e)
-        {
-            DTO.User user = NetRoomReader.Instance.GetUserByID(_ID);
-            if (user != null)
-            {
-                txtID.Text = user.ID.ToString();
-                txtName.Text = user.UserName;
-                txtPass.Text = user.LoginPass;
-                txtPhoneNumber.Text = user.PhoneNumber;
-                txtEmail.Text = user.Email;
-            }
-        }
+        }  
     }
 }

@@ -20,6 +20,16 @@ namespace QuanLyPhongNet.GUI
             InitializeComponent();
         }
 
+        private void ThemSuaNhomMay_Load(object sender, EventArgs e)
+        {
+            DTO.GroupClient clientGroup = NetRoomReader.Instance.GetClientGroupByName(clientGroupName);
+            if (clientGroup != null)
+            {
+                txtClientGroupName.Text = clientGroup.GroupClientName;
+                txtNote.Text = clientGroup.Description;
+            }
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (txtClientGroupName.Text != "" || txtNote.Text != "")
@@ -35,7 +45,7 @@ namespace QuanLyPhongNet.GUI
                 }
                 else
                 {
-                    if (MessageBox.Show("Máy trạm này đã tồn tại!\nBạn có chắc muốn cập nhật không?", "Thông báo!",
+                    if (MessageBox.Show("Máy trạm này đã tồn tại!\nBạn có chắc muốn cập nhật mô tả không?", "Thông báo!",
                                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
                         NetRoomWritter.Instance.UpdateGroupClient(txtClientGroupName.Text, txtNote.Text);
@@ -55,16 +65,6 @@ namespace QuanLyPhongNet.GUI
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Dispose();
-        }
-
-        private void ThemSuaNhomMay_Load(object sender, EventArgs e)
-        {
-            DTO.GroupClient clientGroup = NetRoomReader.Instance.GetClientGroupByName(clientGroupName);
-            if (clientGroup != null)
-            {
-                txtClientGroupName.Text = clientGroup.GroupClientName;
-                txtNote.Text = clientGroup.Description;
-            }
         }
     }
 }

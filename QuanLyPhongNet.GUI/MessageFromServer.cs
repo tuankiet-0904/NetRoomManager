@@ -29,15 +29,10 @@ namespace QuanLyPhongNet.GUI
             comboBox1.SelectedIndex = 0;
         }
 
-        private void btnSend_Click(object sender, EventArgs e)
+        private void MessageFromServer_Load(object sender, EventArgs e)
         {
-            String time = DateTime.Now.ToString("HH:mm:ss");
-            if (txtSend.Text != string.Empty)
-                serverManager.SendMessage("[" + time + "] " + "Máy chủ: " + txtSend.Text, comboBox1.Text);
-            string sendTo = "To " + comboBox1.Text + ": ";
-            AllMessageBox.Items.Add(new ListViewItem() { Text = "[" + time + "] " + sendTo + txtSend.Text, ForeColor = Color.Red });
-            txtSend.Clear();
             txtSend.Select();
+            comboBox1.SelectedIndex = 0;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -53,24 +48,29 @@ namespace QuanLyPhongNet.GUI
             }
         }
 
-        private void MessageFromServer_Load(object sender, EventArgs e)
-        {
-            txtSend.Select();
-            comboBox1.SelectedIndex = 0;
-        }
-
         public void LoadCBBUsingClients()
         {
             if (serverManager.usingClient.Count != 0)
             {
                 foreach (DTO.InfoClient client in serverManager.usingClient)
                 {
-                    if (comboBox1.Items.IndexOf(client.nameClient) == -1)
+                    if (comboBox1.Items.IndexOf(client.nameClient) == -1 && !client.stateClient.Equals("WAITING"))
                     {
                         comboBox1.Items.Add(client.nameClient);
                     }
                 }
             }
+        }
+
+        private void btnSend_Click(object sender, EventArgs e)
+        {
+            String time = DateTime.Now.ToString("HH:mm:ss");
+            if (txtSend.Text != string.Empty)
+                serverManager.SendMessage("[" + time + "] " + "Máy chủ: " + txtSend.Text, comboBox1.Text);
+            string sendTo = "To " + comboBox1.Text + ": ";
+            AllMessageBox.Items.Add(new ListViewItem() { Text = "[" + time + "] " + sendTo + txtSend.Text, ForeColor = Color.Red });
+            txtSend.Clear();
+            txtSend.Select();
         }
 
         private void txtSend_KeyDown(object sender, KeyEventArgs e)

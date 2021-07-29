@@ -26,6 +26,9 @@ namespace QuanLyPhongNet.GUI
             objWriter = new NetRoomWritter();    
         }
 
+        //************************************************************************************************//
+
+        // Quản lý danh mục
         private void QuanLyDanhMuc_Load(object sender, EventArgs e)
         {
             this.Location = new Point(0, 0);
@@ -40,6 +43,7 @@ namespace QuanLyPhongNet.GUI
             LoadSourceToCBO();
             grbInformation.ForeColor = Color.Blue;
         }
+
         private void LoadSourceToDRGV()
         {
             switch (tab.SelectedIndex)
@@ -84,6 +88,7 @@ namespace QuanLyPhongNet.GUI
             LoadSourceToCBO();
             drgvInformation.ClearSelection();
         }
+
         private void LoadSourceToCBO()
         {
             cboFoodCategory.DataSource = objReader.GetAllFoodCategorys();
@@ -102,7 +107,7 @@ namespace QuanLyPhongNet.GUI
             switch (tab.SelectedIndex)
             {
                 case TAB_FOOD:
-                    drgvInformation.DataSource = objReader.GetListFood(cboSearch.SelectedItem.ToString(),txtSearch.Text);
+                    drgvInformation.DataSource = objReader.GetListFood(cboSearch.SelectedItem.ToString(), txtSearch.Text);
                     break;
                 case TAB_DRINK:
                     drgvInformation.DataSource = objReader.GetListDrink(cboSearch.SelectedItem.ToString(), txtSearch.Text);
@@ -220,75 +225,6 @@ namespace QuanLyPhongNet.GUI
             frmOption.ShowDialog();
         }
 
-        private void SearchMouseHoverEventHandler(object sender, EventArgs e)
-        {
-            picSearch.BorderStyle = BorderStyle.Fixed3D;
-        }
-
-        private void SearchMouseLeaveEventHandler(object sender, EventArgs e)
-        {
-            picSearch.BorderStyle = BorderStyle.None;
-        }
-
-        private void AddMouseHoverEventHandler(object sender, EventArgs e)
-        {
-            picAdd.BorderStyle = BorderStyle.Fixed3D;
-        }
-
-        private void AddMouseLeaveEventHandler(object sender, EventArgs e)
-        {
-            picAdd.BorderStyle = BorderStyle.None;
-        }
-
-        private void UpdateMouseHoverEventHandler(object sender, EventArgs e)
-        {
-            picUpdate.BorderStyle = BorderStyle.Fixed3D;
-        }
-
-        private void UpdateMouseLeaveEventHandler(object sender, EventArgs e)
-        {
-            picUpdate.BorderStyle = BorderStyle.None;
-        }
-
-        private void DeleteMouseHoverEventHandler(object sender, EventArgs e)
-        {
-            picDelete.BorderStyle = BorderStyle.Fixed3D;
-        }
-
-        private void DeleteMouseLeaveEventHandler(object sender, EventArgs e)
-        {
-            picDelete.BorderStyle = BorderStyle.None;
-        }
-
-        private void ExitMouseHoverEventHandler(object sender, EventArgs e)
-        {
-            picExit.BorderStyle = BorderStyle.Fixed3D;
-        }
-
-        private void ExitMouseLeaveEventHandler(object sender, EventArgs e)
-        {
-            picExit.BorderStyle = BorderStyle.None;
-        }
-        private void ResetControl(TabPage currentTAB)
-        {
-            foreach (Control c in currentTAB.Controls)
-            {
-                if (c is TextBox)
-                    (c as TextBox).ResetText();
-                else if (c is ComboBox)
-                {
-                    (c as ComboBox).Text = "--Lựa Chọn--";
-                    (c as ComboBox).ForeColor = Color.Blue;
-                }
-            }
-        }
-        private bool CheckValidInput(TabPage currentTAB)
-        {
-            int countFilled = currentTAB.Controls.OfType<TextBox>().Count(x => string.IsNullOrEmpty(x.Text));
-            if (countFilled > 0)
-                return false;
-            return true;
-        }
         private void AddProcess()
         {
             TabPage tp = tab.SelectedTab;
@@ -317,34 +253,42 @@ namespace QuanLyPhongNet.GUI
             LoadSourceToCBO();
             MessageBox.Show("Thêm thành công!", "Thông báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
         public void UpdateProcess()
         {
-                switch (tab.SelectedIndex)
-                {
-                    case TAB_FOOD:
-                        objWriter.UpdateFood(int.Parse(drgvInformation.CurrentRow.Cells[0].Value.ToString()), txtFoodName.Text, cboFoodCategory.Text, float.Parse(txtPriceUnitOfFood.Text), txtUnitLotOfFood.Text, int.Parse(txtInventoryNumberOfFood.Text));
-                        break;
-                    case TAB_DRINK:
-                        objWriter.UpdateDrink(int.Parse(drgvInformation.CurrentRow.Cells[0].Value.ToString()), txtDrinkName.Text, cboDrinkCategory.Text, float.Parse(txtPriceUnitOfDrink.Text), txtUnitLotOfDrink.Text, int.Parse(txtInventoryNumberOfDrink.Text));
-                        break;
-                    case TAB_CARD:
-                        objWriter.UpdateCard(int.Parse(drgvInformation.CurrentRow.Cells[0].Value.ToString()), txtCardName.Text, cboCardCategory.Text, float.Parse(txtPriceUnitOfCard.Text), txtUnitLotOfCard.Text, int.Parse(txtInventoryNumberOfCard.Text));
-                        break;
-                    case TAB_CATEGORY:
-                        objWriter.UpdateCategory(drgvInformation.CurrentRow.Cells[0].Value.ToString(),txtCategoryName.Text, txtCategoryType.Text);
-                        break;
-                }
+            TabPage tp = tab.SelectedTab;
+            if (!CheckValidInput(tp))
+            {
+                MessageBox.Show("Bạn chưa điền đầy đủ thông tin!", "Chú ý!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            switch (tab.SelectedIndex)
+            {
+                case TAB_FOOD:
+                    objWriter.UpdateFood(int.Parse(drgvInformation.CurrentRow.Cells[0].Value.ToString()), txtFoodName.Text, cboFoodCategory.Text, float.Parse(txtPriceUnitOfFood.Text), txtUnitLotOfFood.Text, int.Parse(txtInventoryNumberOfFood.Text));
+                    break;
+                case TAB_DRINK:
+                    objWriter.UpdateDrink(int.Parse(drgvInformation.CurrentRow.Cells[0].Value.ToString()), txtDrinkName.Text, cboDrinkCategory.Text, float.Parse(txtPriceUnitOfDrink.Text), txtUnitLotOfDrink.Text, int.Parse(txtInventoryNumberOfDrink.Text));
+                    break;
+                case TAB_CARD:
+                    objWriter.UpdateCard(int.Parse(drgvInformation.CurrentRow.Cells[0].Value.ToString()), txtCardName.Text, cboCardCategory.Text, float.Parse(txtPriceUnitOfCard.Text), txtUnitLotOfCard.Text, int.Parse(txtInventoryNumberOfCard.Text));
+                    break;
+                case TAB_CATEGORY:
+                    objWriter.UpdateCategory(drgvInformation.CurrentRow.Cells[0].Value.ToString(), txtCategoryName.Text, txtCategoryType.Text);
+                    break;
+            }
 
             TabPage tp = tab.SelectedTab;
-            
+
             ResetControl(tp);
             LoadSourceToCBO();
             LoadSourceToDRGV();
-            MessageBox.Show("Cập nhật thành công!","Thông báo!", MessageBoxButtons.OK,MessageBoxIcon.Information);
+            MessageBox.Show("Cập nhật thành công!", "Thông báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+        
         public void DeleteProcess()
         {
-            if (MessageBox.Show("Bạn có chắc chắn muốn xóa mục này?", "Thông Báo", 
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa mục này?", "Thông Báo",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 TabPage tp = tab.SelectedTab;
@@ -370,7 +314,7 @@ namespace QuanLyPhongNet.GUI
                         }
                         catch
                         {
-                            MessageBox.Show("Bạn không thể xóa danh mục này!\nHãy xóa tất cả các dịch vụ của danh mục này trước!", "Lỗi!", 
+                            MessageBox.Show("Bạn không thể xóa danh mục này!\nHãy xóa tất cả các dịch vụ của danh mục này trước!", "Lỗi!",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                         }
@@ -386,7 +330,8 @@ namespace QuanLyPhongNet.GUI
         {
             txtSearch.Text = "";
             cboSearch.Items.Clear();
-            switch (tab.SelectedIndex){
+            switch (tab.SelectedIndex)
+            {
                 case TAB_CATEGORY:
                     cboSearch.Items.AddRange(new CBBItem[]
                     {
@@ -441,6 +386,34 @@ namespace QuanLyPhongNet.GUI
             }
         }
 
+        private void cboSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtSearch.Text = "";
+            txtSearch.Focus();
+        }
+
+        private void ResetControl(TabPage currentTAB)
+        {
+            foreach (Control c in currentTAB.Controls)
+            {
+                if (c is TextBox)
+                    (c as TextBox).ResetText();
+                else if (c is ComboBox)
+                {
+                    (c as ComboBox).Text = "--Lựa Chọn--";
+                    (c as ComboBox).ForeColor = Color.Blue;
+                }
+            }
+        }
+
+        private bool CheckValidInput(TabPage currentTAB)
+        {
+            int countFilled = currentTAB.Controls.OfType<TextBox>().Count(x => string.IsNullOrEmpty(x.Text));
+            if (countFilled > 0)
+                return false;
+            return true;
+        }
+
         private void drgvInformation_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             switch (tab.SelectedIndex)
@@ -480,6 +453,7 @@ namespace QuanLyPhongNet.GUI
                     }
             }
         }
+        
         private void drgvInformation_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             TabPage tb = tab.SelectedTab;
@@ -487,10 +461,58 @@ namespace QuanLyPhongNet.GUI
             drgvInformation.ClearSelection();
         }
 
-        private void cboSearch_SelectedIndexChanged(object sender, EventArgs e)
+        //************************************************************************************************//
+
+        // Mouse Event Handler
+
+        private void SearchMouseHoverEventHandler(object sender, EventArgs e)
         {
-            txtSearch.Text = "";
-            txtSearch.Focus();
+            picSearch.BorderStyle = BorderStyle.Fixed3D;
         }
+
+        private void SearchMouseLeaveEventHandler(object sender, EventArgs e)
+        {
+            picSearch.BorderStyle = BorderStyle.None;
+        }
+
+        private void AddMouseHoverEventHandler(object sender, EventArgs e)
+        {
+            picAdd.BorderStyle = BorderStyle.Fixed3D;
+        }
+
+        private void AddMouseLeaveEventHandler(object sender, EventArgs e)
+        {
+            picAdd.BorderStyle = BorderStyle.None;
+        }
+
+        private void UpdateMouseHoverEventHandler(object sender, EventArgs e)
+        {
+            picUpdate.BorderStyle = BorderStyle.Fixed3D;
+        }
+
+        private void UpdateMouseLeaveEventHandler(object sender, EventArgs e)
+        {
+            picUpdate.BorderStyle = BorderStyle.None;
+        }
+
+        private void DeleteMouseHoverEventHandler(object sender, EventArgs e)
+        {
+            picDelete.BorderStyle = BorderStyle.Fixed3D;
+        }
+
+        private void DeleteMouseLeaveEventHandler(object sender, EventArgs e)
+        {
+            picDelete.BorderStyle = BorderStyle.None;
+        }
+
+        private void ExitMouseHoverEventHandler(object sender, EventArgs e)
+        {
+            picExit.BorderStyle = BorderStyle.Fixed3D;
+        }
+
+        private void ExitMouseLeaveEventHandler(object sender, EventArgs e)
+        {
+            picExit.BorderStyle = BorderStyle.None;
+        }   
     }
 }

@@ -55,9 +55,9 @@ namespace QuanLyPhongNet.GUI
                 float AddMoney = 0;
                 if (txtAddMoney.Text.IndexOf('-') == 0)
                 {
-                    AddMoney = float.Parse(txtAddMoney.Text.Substring(1));
-                    AddMoney = -AddMoney;
+                    AddMoney = -float.Parse(txtAddMoney.Text.Substring(1));
                     if (member.CurrentMoney + AddMoney < 0) member.CurrentMoney = 0;
+                    else member.CurrentMoney = float.Parse(txtCurrentTime.Text) + AddMoney;
                 }
                 else
                 {
@@ -84,7 +84,6 @@ namespace QuanLyPhongNet.GUI
                 }
 
                 TransactionDiary2 td = new TransactionDiary2();
-                MessageBox.Show(member.MemberID.ToString());
                 td.memberID = member.MemberID;
                 td.UserID = ServerManager.MemberID;
                 td.UserName = NetRoomReader.Instance.FindUserNameByID(ServerManager.MemberID);

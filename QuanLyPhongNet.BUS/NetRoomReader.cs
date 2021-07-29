@@ -20,40 +20,157 @@ namespace QuanLyPhongNet.BUS
             }
             private set { }
         }
-        public List<DTO.Food> GetAllFoods()
+
+        //************************************************************************************************//
+
+        // GroupClient
+        public List<DTO.GroupClient> GetAllGroupClients()
         {
-            return ProcessFood.Instance.LoadAllFoods();
-        }
-        public List<DTO.Drink> GetAllDrinks()
-        {
-            return ProcessDrink.Instance.LoadAllDrinks();
-        }
-        public List<DTO.Card> GetAllCards()
-        {
-            return ProcessCard.Instance.LoadAllCards();
+            return ProcessGroupClient.Instance.LoadAllGroupClients();
         }
 
-        public List<DTO.LoginMember> GetAllLoginMembers()
+        public List<DTO.GroupClient> GetListClientGroup(string searchBy, string searchFor)
         {
-            return ProcessLoginMember.Instance.LoadAllLoginMembers();
+            List<DTO.GroupClient> list = new List<DTO.GroupClient>();
+            foreach (DTO.GroupClient i in GetAllGroupClients())
+            {
+                if (searchBy == "All")
+                {
+                    list.Add(i);
+                }
+                else
+                {
+                    switch (searchBy)
+                    {
+                        case "Nhóm máy":
+                            if (searchFor != "")
+                            {
+                                if (i.GroupClientName.ToLower().Contains(searchFor.ToLower()))
+                                {
+                                    list.Add(i);
+                                }
+                            }
+                            else list.Add(i);
+                            break;
+                        case "Mô tả":
+                            if (searchFor != "")
+                            {
+                                if (i.Description.ToLower().Contains(searchFor.ToLower()))
+                                {
+                                    list.Add(i);
+                                }
+                            }
+                            else list.Add(i);
+                            break;
+                    }
+                }
+            }
+            return list;
         }
 
-        public List<DTO.Member> GetAllMembers()
+        public DTO.GroupClient GetClientGroupByName(string clientGroupName)
         {
-            return ProcessMember.Instance.LoadAllMembers();
+            foreach (DTO.GroupClient clientGroup in GetAllGroupClients())
+            {
+                if (clientGroup.GroupClientName.Equals(clientGroupName)) return clientGroup;
+            }
+            return null;
         }
-        public List<DTO.MemberInformation> GetAllMemberInfos()
+
+        //************************************************************************************************//
+
+        // GroupUser
+        public List<DTO.GroupUser> GetAllGroupUsers()
         {
-            return ProcessMemberInfo.Instance.LoadAllMemberInfo();
+            return ProcessGroupUser.Instance.LoadAllGroupUsers();
         }
-        public List<DTO.User> GetAllUsers()
+
+        public List<DTO.GroupUser> GetListUserGroup(string searchBy, string searchFor)
         {
-            return ProcessUser.Instance.LoadAllUsers();
+            List<DTO.GroupUser> list = new List<DTO.GroupUser>();
+            foreach (DTO.GroupUser i in GetAllGroupUsers())
+            {
+                if (searchBy == "All")
+                {
+                    list.Add(i);
+                }
+                else
+                {
+                    switch (searchBy)
+                    {
+                        case "Tên nhóm người dùng":
+                            if (searchFor != "")
+                            {
+                                if (i.GroupUserName.ToLower().Contains(searchFor.ToLower()))
+                                {
+                                    list.Add(i);
+                                }
+                            }
+                            else list.Add(i);
+                            break;
+                        case "Loại nhóm người dùng":
+                            if (searchFor != "")
+                            {
+                                if (i.TypeName.ToLower().Contains(searchFor.ToLower()))
+                                {
+                                    list.Add(i);
+                                }
+                            }
+                            else list.Add(i);
+                            break;
+                    }
+                }
+            }
+            return list;
         }
+
+        //************************************************************************************************//
+
+        // Category
         public List<DTO.Category> GetAllCategorys()
         {
             return ProcessCategory.Instance.LoadAllCategorys();
         }
+
+        public List<DTO.Category> GetListCategory(string cbbitem, string searchFor)
+        {
+            List<DTO.Category> list = new List<DTO.Category>();
+            foreach (DTO.Category i in GetAllCategorys())
+            {
+                if (cbbitem == "All")
+                {
+                    list.Add(i);
+                }
+                else
+                {
+                    switch (cbbitem)
+                    {
+                        case "Tên danh mục":
+                            if (searchFor != "")
+                            {
+                                if (i.CategoryName.ToLower().Contains(searchFor.ToLower()))
+                                {
+                                    list.Add(i);
+                                }
+                            }
+                            else list.Add(i);
+                            break;
+                        case "Loại danh mục":
+                            if (searchFor != "")
+                            {
+                                if (i.CategoryType.ToLower().Contains(searchFor.ToLower()))
+                                {
+                                    list.Add(i);
+                                }
+                            }
+                            else list.Add(i);
+                            break;
+                    }
+                }
+            }
+            return list;
+        }
+
         public List<DTO.Category> GetAllFoodCategorys()
         {
             List<DTO.Category> list = new List<DTO.Category>();
@@ -66,6 +183,7 @@ namespace QuanLyPhongNet.BUS
             }
             return list;
         }
+
         public List<DTO.Category> GetAllDrinkCategorys()
         {
             List<DTO.Category> list = new List<DTO.Category>();
@@ -78,6 +196,7 @@ namespace QuanLyPhongNet.BUS
             }
             return list;
         }
+
         public List<DTO.Category> GetAllCardCategorys()
         {
             List<DTO.Category> list = new List<DTO.Category>();
@@ -90,85 +209,70 @@ namespace QuanLyPhongNet.BUS
             }
             return list;
         }
-        public List<DTO.Bill> GetAllBills()
+
+        public bool CheckCategory(string name)
         {
-            return ProcessBill.Instance.LoadAllBills();
-        }
-        public List<DTO.GroupClient> GetAllGroupClients()
-        {
-            return ProcessGroupClient.Instance.LoadAllGroupClients();
-        }
-        public List<DTO.Client> GetAllClients()
-        {
-            return ProcessClient.Instance.LoadAllClients();
-        }
-        public List<DTO.GroupUser> GetAllGroupUsers()
-        {
-            return ProcessGroupUser.Instance.LoadAllGroupUsers();
-        }
-        public List<DTO.TransactionDiary> GetAllTransactionDiaries()
-        {
-            return ProcessTD.Instance.LoadAllTDs();
-        }
-       
-        public DTO.Client GetClientByName(string clientName)
-        {
-            foreach(DTO.Client client in GetAllClients())
+            foreach (DTO.Category category in GetAllCategorys())
             {
-                if (client.ClientName.Equals(clientName))
+                if (category.CategoryName.Equals(name))
                 {
-                    return client;
+                    return false;
                 }
             }
-            return null;
+            return true;
         }
 
-        public DTO.User GetUserByID(int ID)
+        //************************************************************************************************//
+
+        // Food
+        public List<DTO.Food> GetAllFoods()
         {
-            foreach (DTO.User i in GetAllUsers())
-            {
-                if (ID == i.ID)
-                {
-                    return i;
-                }
-            }
-            return null;
+            return ProcessFood.Instance.LoadAllFoods();
         }
 
-        public DTO.Member GetMemberByID (int ID)
+        public List<DTO.Food> GetListFood(string searchBy, string searchFor)
         {
-            foreach(DTO.Member i in GetAllMembers())
+            List<DTO.Food> list = new List<DTO.Food>();
+            foreach (DTO.Food i in GetAllFoods())
             {
-                if (ID == i.ID)
+                switch (searchBy)
                 {
-                    return i;
+                    case "All":
+                        list.Add(i);
+                        break;
+                    case "Mã định danh":
+                        if (searchFor != "")
+                        {
+                            if (i.FoodID == Convert.ToInt32(searchFor))
+                            {
+                                list.Add(i);
+                            }
+                        }
+                        else list.Add(i);
+                        break;
+                    case "Tên món ăn":
+                        if (searchFor != "")
+                        {
+                            if (i.Name.ToLower().Contains(searchFor.ToLower()))
+                            {
+                                list.Add(i);
+                            }
+                        }
+                        else list.Add(i);
+                        break;
+                    case "Loại món ăn":
+                        if (searchFor != "")
+                        {
+                            if (i.CategoryName.ToLower().Contains(searchFor.ToLower()))
+                            {
+                                list.Add(i);
+                            }
+                        }
+                        else list.Add(i);
+                        break;
                 }
             }
-            return null;
-        }
-
-        public DTO.Member GetMemberByAccountName(string accountName)
-        {
-            foreach(DTO.Member i in GetAllMembers())
-            {
-                if (i.AccountName.Equals(accountName))
-                {
-                    return i;
-                }
-            }
-            return null;
-        }
-
-        public DTO.MemberInformation GetMemberInfoByID(int ID)
-        {
-            foreach(DTO.MemberInformation i in GetAllMemberInfos())
-            {
-                if (ID == i.MemberID)
-                {
-                    return i;
-                }
-            }
-            return null;
+            return list;
         }
 
         public DTO.Food GetFoodByID(int ID)
@@ -182,6 +286,69 @@ namespace QuanLyPhongNet.BUS
             }
             return null;
         }
+
+        public bool CheckFoodName(string name)
+        {
+            foreach (DTO.Food food in GetAllFoods())
+            {
+                if (food.Name.Equals(name)) return false;
+            }
+            return true;
+        }
+
+        //************************************************************************************************//
+
+        // Drink
+        public List<DTO.Drink> GetAllDrinks()
+        {
+            return ProcessDrink.Instance.LoadAllDrinks();
+        }
+        
+        public List<DTO.Drink> GetListDrink(string searchBy, string searchFor)
+        {
+            List<DTO.Drink> list = new List<DTO.Drink>();
+            foreach (DTO.Drink i in GetAllDrinks())
+            {
+                switch (searchBy)
+                {
+                    case "All":
+                        list.Add(i);
+                        break;
+                    case "Mã định danh":
+                        if (searchFor != "")
+                        {
+                            if (i.DrinkID == Convert.ToInt32(searchFor))
+                            {
+                                list.Add(i);
+                            }
+                        }
+                        else list.Add(i);
+                        break;
+                    case "Tên thức uống":
+                        if (searchFor != "")
+                        {
+                            if (i.Name.ToLower().Contains(searchFor.ToLower()))
+                            {
+                                list.Add(i);
+                            }
+                        }
+                        else list.Add(i);
+                        break;
+                    case "Loại thức uống":
+                        if (searchFor != "")
+                        {
+                            if (i.CategoryName.ToLower().Contains(searchFor.ToLower()))
+                            {
+                                list.Add(i);
+                            }
+                        }
+                        else list.Add(i);
+                        break;
+                }
+            }
+            return list;
+        }
+        
         public DTO.Drink GetDrinkByID(int ID)
         {
             foreach (DTO.Drink i in GetAllDrinks())
@@ -193,6 +360,69 @@ namespace QuanLyPhongNet.BUS
             }
             return null;
         }
+
+        public bool CheckDrinkName(string name)
+        {
+            foreach (DTO.Drink drink in GetAllDrinks())
+            {
+                if (drink.Name.Equals(name)) return false;
+            }
+            return true;
+        }
+
+        //************************************************************************************************//
+
+        // Card
+        public List<DTO.Card> GetAllCards()
+        {
+            return ProcessCard.Instance.LoadAllCards();
+        }
+
+        public List<DTO.Card> GetListCard(string searchBy, string searchFor)
+        {
+            List<DTO.Card> list = new List<DTO.Card>();
+            foreach (DTO.Card i in GetAllCards())
+            {
+                switch (searchBy)
+                {
+                    case "All":
+                        list.Add(i);
+                        break;
+                    case "Mã định danh":
+                        if (searchFor != "")
+                        {
+                            if (i.CardID == Convert.ToInt32(searchFor))
+                            {
+                                list.Add(i);
+                            }
+                        }
+                        else list.Add(i);
+                        break;
+                    case "Tên thẻ cào":
+                        if (searchFor != "")
+                        {
+                            if (i.Name.ToLower().Contains(searchFor.ToLower()))
+                            {
+                                list.Add(i);
+                            }
+                        }
+                        else list.Add(i);
+                        break;
+                    case "Loại thẻ cào":
+                        if (searchFor != "")
+                        {
+                            if (i.CategoryName.ToLower().Contains(searchFor.ToLower()))
+                            {
+                                list.Add(i);
+                            }
+                        }
+                        else list.Add(i);
+                        break;
+                }
+            }
+            return list;
+        }
+
         public DTO.Card GetCardByID(int ID)
         {
             foreach (DTO.Card i in GetAllCards())
@@ -205,13 +435,21 @@ namespace QuanLyPhongNet.BUS
             return null;
         }
 
-        public DTO.GroupClient GetClientGroupByName(string clientGroupName)
+        public bool CheckCardName(string name)
         {
-            foreach (DTO.GroupClient clientGroup in GetAllGroupClients())
+            foreach (DTO.Card card in GetAllCards())
             {
-                if (clientGroup.GroupClientName.Equals(clientGroupName)) return clientGroup;
+                if (card.Name.Equals(name)) return false;
             }
-            return null;
+            return true;
+        }
+
+        //************************************************************************************************//
+
+        // Member
+        public List<DTO.Member> GetAllMembers()
+        {
+            return ProcessMember.Instance.LoadAllMembers();
         }
 
         public List<DTO.Member> GetListMembers(string cbbitem, string searchFor)
@@ -234,7 +472,7 @@ namespace QuanLyPhongNet.BUS
                     }
                     else list.Add(i);
                 }
-                else 
+                else
                 {
                     if (searchFor != "")
                     {
@@ -246,8 +484,142 @@ namespace QuanLyPhongNet.BUS
                     else list.Add(i);
                 }
             }
-            return list;       
+            return list;
         }
+
+        public DTO.Member GetMemberByID(int ID)
+        {
+            foreach (DTO.Member i in GetAllMembers())
+            {
+                if (ID == i.ID)
+                {
+                    return i;
+                }
+            }
+            return null;
+        }
+
+        public DTO.Member GetMemberByAccountName(string accountName)
+        {
+            foreach (DTO.Member i in GetAllMembers())
+            {
+                if (i.AccountName.Equals(accountName))
+                {
+                    return i;
+                }
+            }
+            return null;
+        }
+
+        public bool CheckAccount(string account)
+        {
+            foreach (DTO.Member i in GetAllMembers())
+            {
+                if (i.AccountName.Equals(account)) return false;
+            }
+            return true;
+        }
+
+        public int FindIDByAccountName(string account)
+        {
+            foreach (DTO.Member i in GetAllMembers())
+            {
+                if (i.AccountName.Equals(account)) return i.ID;
+            }
+            return -1;
+        }
+
+        //************************************************************************************************//
+
+        // LoginMember
+        public List<DTO.LoginMember> GetAllLoginMembers()
+        {
+            return ProcessLoginMember.Instance.LoadAllLoginMembers();
+        }
+
+        public List<DTO.LoginMember> GetListLoginMembers(string searchBy, string searchFor)
+        {
+            List<DTO.LoginMember> list = new List<DTO.LoginMember>();
+            foreach (DTO.LoginMember i in GetAllLoginMembers())
+            {
+                switch (searchBy)
+                {
+                    case "All":
+                        list.Add(i);
+                        break;
+                    case "Login ID":
+                        if (searchFor != "")
+                        {
+                            if (i.LoginID == Convert.ToInt32(searchFor))
+                            {
+                                list.Add(i);
+                            }
+                        }
+                        else list.Add(i);
+                        break;
+                    case "ID tài khoản":
+                        if (searchFor != "")
+                        {
+                            if (i.MemberID == Convert.ToInt32(searchFor))
+                            {
+                                list.Add(i);
+                            }
+                        }
+                        else list.Add(i);
+                        break;
+                    case "Tên máy trạm":
+                        if (searchFor != "")
+                        {
+                            if (i.ClientName.ToString().ToLower().Contains(searchFor.ToLower()))
+                            {
+                                list.Add(i);
+                            }
+                        }
+                        else list.Add(i);
+                        break;
+                    case "Ngày đăng nhập":
+                        if (searchFor != "")
+                        {
+                            if (i.LoginDate == DateTime.Parse(searchFor))
+                            {
+                                list.Add(i);
+                            }
+                        }
+                        else list.Add(i);
+                        break;
+                }
+            }
+            return list;
+        }
+
+        //************************************************************************************************//
+
+        // MemberInfo
+        public List<DTO.MemberInformation> GetAllMemberInfos()
+        {
+            return ProcessMemberInfo.Instance.LoadAllMemberInfo();
+        }
+
+        public DTO.MemberInformation GetMemberInfoByID(int ID)
+        {
+            foreach (DTO.MemberInformation i in GetAllMemberInfos())
+            {
+                if (ID == i.MemberID)
+                {
+                    return i;
+                }
+            }
+            return null;
+        }
+
+        //************************************************************************************************//
+
+        // User
+        public List<DTO.User> GetAllUsers()
+        {
+            return ProcessUser.Instance.LoadAllUsers();
+        }
+
         public List<DTO.User> GetListUsers(string searchBy, string searchFor)
         {
             List<DTO.User> list = new List<DTO.User>();
@@ -317,254 +689,93 @@ namespace QuanLyPhongNet.BUS
             return list;
         }
 
-        public List<DTO.GroupClient> GetListClientGroup(string searchBy, string searchFor)
+        public DTO.User GetUserByID(int ID)
         {
-            List<DTO.GroupClient> list = new List<DTO.GroupClient>();
-            foreach (DTO.GroupClient i in GetAllGroupClients())
+            foreach (DTO.User i in GetAllUsers())
             {
-                if (searchBy == "All")
+                if (ID == i.ID)
                 {
-                    list.Add(i);
+                    return i;
                 }
-                else
-                {
-                    switch (searchBy)
-                    {
-                        case "Nhóm máy":
-                            if (searchFor != "")
-                            {
-                                if (i.GroupClientName.ToLower().Contains(searchFor.ToLower()))
-                                {
-                                    list.Add(i);
-                                }
-                            }
-                            else list.Add(i);
-                            break;
-                        case "Mô tả":
-                            if (searchFor != "")
-                            {
-                                if (i.Description.ToLower().Contains(searchFor.ToLower()))
-                                {
-                                    list.Add(i);
-                                }
-                            }
-                            else list.Add(i);
-                            break;
-                    }
-                }
+            }
+            return null;
+        }
+
+        public bool CheckUser(int ID)
+        {
+            foreach (DTO.User i in GetAllUsers())
+            {
+                if (i.ID == ID) return false;
+            }
+            return true;
+        }
+
+        public bool CheckUserPass(int ID, string password)
+        {
+            foreach (DTO.User user in GetAllUsers())
+            {
+                if (user.ID != ID && user.LoginPass == password) return false;
+            }
+            return true;
+        }
+
+        public string FindUserNameByID(int ID)
+        {
+            foreach (DTO.User i in GetAllUsers())
+            {
+                if (i.ID == ID) return i.UserName;
+            }
+            return null;
+        }
+
+        //************************************************************************************************//
+
+        // Client
+        public List<DTO.Client> GetAllClients()
+        {
+            return ProcessClient.Instance.LoadAllClients();
+        }
+
+        public List<DTO.Client> GetAllDisconnect()
+        {
+            List<DTO.Client> list = new List<DTO.Client>();
+            foreach (DTO.Client i in GetAllClients())
+            {
+                i.Status = "DISCONNECT";
+                list.Add(i);
             }
             return list;
         }
 
-        public List<DTO.GroupUser> GetListUserGroup(string searchBy, string searchFor)
+        public DTO.Client GetClientByName(string clientName)
         {
-            List<DTO.GroupUser> list = new List<DTO.GroupUser>();
-            foreach (DTO.GroupUser i in GetAllGroupUsers())
+            foreach (DTO.Client client in GetAllClients())
             {
-                if (searchBy == "All")
+                if (client.ClientName.Equals(clientName))
                 {
-                    list.Add(i);
-                }
-                else
-                {
-                    switch (searchBy)
-                    {
-                        case "Tên nhóm người dùng":
-                            if (searchFor != "")
-                            {
-                                if (i.GroupUserName.ToLower().Contains(searchFor.ToLower()))
-                                {
-                                    list.Add(i);
-                                }
-                            }
-                            else list.Add(i);
-                            break;
-                        case "Loại nhóm người dùng":
-                            if (searchFor != "")
-                            {
-                                if (i.TypeName.ToLower().Contains(searchFor.ToLower()))
-                                {
-                                    list.Add(i);
-                                }
-                            }
-                            else list.Add(i);
-                            break;
-                    }
+                    return client;
                 }
             }
-            return list;
+            return null;
         }
 
-        public List<DTO.Food> GetListFood(string searchBy, string searchFor)
+        public bool CheckClientName(string clientName)
         {
-            List<DTO.Food> list = new List<DTO.Food>();
-            foreach (DTO.Food i in GetAllFoods())
+            foreach (DTO.Client i in GetAllClients())
             {
-                switch (searchBy)
-                {
-                    case "All":
-                        list.Add(i);
-                        break;
-                    case "Mã định danh":
-                        if (searchFor != "")
-                        {
-                            if (i.FoodID == Convert.ToInt32(searchFor))
-                            {
-                                list.Add(i);
-                            }
-                        }
-                        else list.Add(i);
-                        break;
-                    case "Tên món ăn":
-                        if (searchFor != "")
-                        {
-                            if (i.Name.ToLower().Contains(searchFor.ToLower()))
-                            {
-                                list.Add(i);
-                            }
-                        }
-                        else list.Add(i);
-                        break;
-                    case "Loại món ăn":
-                        if (searchFor != "")
-                        {
-                            if (i.CategoryName.ToLower().Contains(searchFor.ToLower()))
-                            {
-                                list.Add(i);
-                            }
-                        }
-                        else list.Add(i);
-                        break;
-                }
+                if (i.ClientName.Equals(clientName)) return true;
             }
-            return list;
+            return false;
         }
-        public List<DTO.Drink> GetListDrink(string searchBy, string searchFor)
+
+        //************************************************************************************************//
+
+        // TransactionDiary
+        public List<DTO.TransactionDiary> GetAllTransactionDiaries()
         {
-            List<DTO.Drink> list = new List<DTO.Drink>();
-            foreach (DTO.Drink i in GetAllDrinks())
-            {
-                switch (searchBy)
-                {
-                    case "All":
-                        list.Add(i);
-                        break;
-                    case "Mã định danh":
-                        if (searchFor != "")
-                        {
-                            if (i.DrinkID == Convert.ToInt32(searchFor))
-                            {
-                                list.Add(i);
-                            }
-                        }
-                        else list.Add(i);
-                        break;
-                    case "Tên thức uống":
-                        if (searchFor != "")
-                        {
-                            if (i.Name.ToLower().Contains(searchFor.ToLower()))
-                            {
-                                list.Add(i);
-                            }
-                        }
-                        else list.Add(i);
-                        break;
-                    case "Loại thức uống":
-                        if (searchFor != "")
-                        {
-                            if (i.CategoryName.ToLower().Contains(searchFor.ToLower()))
-                            {
-                                list.Add(i);
-                            }
-                        }
-                        else list.Add(i);
-                        break;
-                }
-            }
-            return list;
+            return ProcessTD.Instance.LoadAllTDs();
         }
-        public List<DTO.Card> GetListCard(string searchBy, string searchFor)
-        {
-            List<DTO.Card> list = new List<DTO.Card>();
-            foreach (DTO.Card i in GetAllCards())
-            {
-                switch (searchBy)
-                {
-                    case "All":
-                        list.Add(i);
-                        break;
-                    case "Mã định danh":
-                        if (searchFor != "")
-                        {
-                            if (i.CardID == Convert.ToInt32(searchFor))
-                            {
-                                list.Add(i);
-                            }
-                        }
-                        else list.Add(i);
-                        break;
-                    case "Tên thẻ cào":
-                        if (searchFor != "")
-                        {
-                            if (i.Name.ToLower().Contains(searchFor.ToLower()))
-                            {
-                                list.Add(i);
-                            }
-                        }
-                        else list.Add(i);
-                        break;
-                    case "Loại thẻ cào":
-                        if (searchFor != "")
-                        {
-                            if (i.CategoryName.ToLower().Contains(searchFor.ToLower()))
-                            {
-                                list.Add(i);
-                            }
-                        }
-                        else list.Add(i);
-                        break;
-                }
-            }
-            return list;
-        }
-        public List<DTO.Category> GetListCategory(string cbbitem, string searchFor)
-        {
-            List<DTO.Category> list = new List<DTO.Category>();
-            foreach (DTO.Category i in GetAllCategorys())
-            {
-                if (cbbitem == "All")
-                {
-                    list.Add(i);
-                }
-                else
-                {
-                    switch (cbbitem)
-                    {
-                        case "Tên danh mục":
-                            if (searchFor != "")
-                            {
-                                if (i.CategoryName.ToLower().Contains(searchFor.ToLower()))
-                                {
-                                    list.Add(i);
-                                }
-                            }
-                            else list.Add(i);
-                            break;
-                        case "Loại danh mục":
-                            if (searchFor != "")
-                            {
-                                if (i.CategoryType.ToLower().Contains(searchFor.ToLower()))
-                                {
-                                    list.Add(i);
-                                }
-                            }
-                            else list.Add(i);
-                            break;
-                    }
-                }
-            }
-            return list;
-        }
+
         public List<DTO.TransactionDiary> GetListTransactionDiaries(string searchBy, string searchFor)
         {
             List<DTO.TransactionDiary> list = new List<DTO.TransactionDiary>();
@@ -619,6 +830,15 @@ namespace QuanLyPhongNet.BUS
             }
             return list;
         }
+
+        //************************************************************************************************//
+
+        // Bill
+        public List<DTO.Bill> GetAllBills()
+        {
+            return ProcessBill.Instance.LoadAllBills();
+        }
+          
         public List<DTO.Bill> GetListBills(string searchBy, string searchFor)
         {
             List<DTO.Bill> list = new List<DTO.Bill>();
@@ -662,164 +882,6 @@ namespace QuanLyPhongNet.BUS
                 }
             }
             return list;
-        }
-
-        public List<DTO.LoginMember> GetListLoginMembers(string searchBy, string searchFor)
-        {
-            List<DTO.LoginMember> list = new List<DTO.LoginMember>();
-            foreach (DTO.LoginMember i in GetAllLoginMembers())
-            {
-                switch (searchBy)
-                {
-                    case "All":
-                        list.Add(i);
-                        break;
-                    case "Login ID":
-                        if (searchFor != "")
-                        {
-                            if (i.LoginID == Convert.ToInt32(searchFor))
-                            {
-                                list.Add(i);
-                            }
-                        }
-                        else list.Add(i);
-                        break;
-                    case "ID tài khoản":
-                        if (searchFor != "")
-                        {
-                            if (i.MemberID == Convert.ToInt32(searchFor))
-                            {
-                                list.Add(i);
-                            }
-                        }
-                        else list.Add(i);
-                        break;
-                    case "Tên máy trạm":
-                        if (searchFor != "")
-                        {
-                            if (i.ClientName.ToString().ToLower().Contains(searchFor.ToLower()))
-                            {
-                                list.Add(i);
-                            }
-                        }
-                        else list.Add(i);
-                        break;
-                    case "Ngày đăng nhập":
-                        if (searchFor != "")
-                        {
-                            if (i.LoginDate == DateTime.Parse(searchFor))
-                            {
-                                list.Add(i);
-                            }
-                        }
-                        else list.Add(i);
-                        break;
-                }
-            }
-            return list;
-        }
-
-        public List<DTO.Client> GetAllDisconnect()
-        {
-            List<DTO.Client> list = new List<DTO.Client>();
-            foreach(DTO.Client i in GetAllClients())
-            {
-                i.Status = "DISCONNECT";
-                list.Add(i);
-            } 
-            return list;
-        }
-
-        public bool CheckClientName(string clientName)
-        {
-            foreach(DTO.Client i in GetAllClients())
-            {
-                if (i.ClientName.Equals(clientName)) return true;
-            }
-            return false;
-        }
-
-        public bool CheckAccount(string account)
-        {
-            foreach(DTO.Member i in GetAllMembers())
-            {
-                if (i.AccountName.Equals(account)) return false;
-            }
-            return true;
-        }
-
-        public bool CheckUser(int ID)
-        {
-            foreach(DTO.User i in GetAllUsers())
-            {
-                if (i.ID == ID) return false;
-            }
-            return true;
-        }
-
-        public bool CheckUserPass(int ID, string password)
-        {
-            foreach (DTO.User user in GetAllUsers())
-            {
-                if (user.ID != ID && user.LoginPass == password) return false;
-            }
-            return true;
-        }
-
-        public bool CheckFoodName(string name)
-        {
-            foreach (DTO.Food food in GetAllFoods())
-            {
-                if (food.Name.Equals(name)) return false;
-            }
-            return true;
-        }
-
-        public bool CheckDrinkName(string name)
-        {
-            foreach (DTO.Drink drink in GetAllDrinks())
-            {
-                if (drink.Name.Equals(name)) return false;
-            }
-            return true;
-        }
-
-        public bool CheckCardName(string name)
-        {
-            foreach (DTO.Card card in GetAllCards())
-            {
-                if (card.Name.Equals(name)) return false;
-            }
-            return true;
-        }
-
-        public bool CheckCategory(string name)
-        {
-            foreach(DTO.Category category in GetAllCategorys())
-            {
-                if (category.CategoryName.Equals(name))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        public string FindUserNameByID(int ID)
-        {
-            foreach (DTO.User i in GetAllUsers())
-            {
-                if (i.ID == ID) return i.UserName;
-            }
-            return null;
-        }
-        public int FindIDByAccountName(string account)
-        {
-            foreach (DTO.Member i in GetAllMembers())
-            {
-                if (i.AccountName.Equals(account)) return i.ID;
-            }
-            return -1;
-        }
+        }  
     }
 }

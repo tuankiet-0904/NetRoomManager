@@ -15,19 +15,22 @@ namespace QuanLyPhongNet.GUI
     {
         private int _ID;
         private int _Cbbitem;
+        private int _leftAmount;
         public delegate void MyDel();
         public MyDel d { get; set; }
-        public YeuCauDichVu(int id, int cbbitem)
+        public YeuCauDichVu(int id, int cbbitem, int leftAmount)
         {
             InitializeComponent();
             _ID = id;
             _Cbbitem = cbbitem;
+            _leftAmount = leftAmount;
         }
 
         private void YeuCauDichVu_Load(object sender, EventArgs e)
         {
             LoadSourceToAllControls();
         }
+
         private void LoadSourceToAllControls()
         {
             if (_Cbbitem == 0)
@@ -64,6 +67,11 @@ namespace QuanLyPhongNet.GUI
             if (order.Value == 0)
             {
                 MessageBox.Show("Vui lòng chọn số lượng đặt!", "Chú ý!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (order.Value > _leftAmount)
+            {
+                MessageBox.Show("Dịch vụ này chỉ còn lại " + _leftAmount + " trong kho!", "Chú ý!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             MessageBox.Show("Còn lại: " + (Int32.Parse(txtInventory.Text) - (int)order.Value).ToString() + " " + txtUnit.Text,

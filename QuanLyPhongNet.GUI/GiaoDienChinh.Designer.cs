@@ -456,7 +456,7 @@ namespace QuanLyPhongNet.GUI
             this.drgvDrink.Name = "drgvDrink";
             this.drgvDrink.RowHeadersWidth = 62;
             this.drgvDrink.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.drgvDrink.Size = new System.Drawing.Size(1592, 670);
+            this.drgvDrink.Size = new System.Drawing.Size(1592, 661);
             this.drgvDrink.TabIndex = 1;
             this.drgvDrink.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.drgvDrink_CellDoubleClick);
             // 
@@ -487,7 +487,7 @@ namespace QuanLyPhongNet.GUI
             this.drgvCard.Name = "drgvCard";
             this.drgvCard.RowHeadersWidth = 62;
             this.drgvCard.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.drgvCard.Size = new System.Drawing.Size(1592, 670);
+            this.drgvCard.Size = new System.Drawing.Size(1592, 661);
             this.drgvCard.TabIndex = 1;
             this.drgvCard.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.drgvCard_CellDoubleClick);
             // 
@@ -1333,7 +1333,7 @@ namespace QuanLyPhongNet.GUI
             this.drgvUser.Name = "drgvUser";
             this.drgvUser.RowHeadersWidth = 62;
             this.drgvUser.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.drgvUser.Size = new System.Drawing.Size(1579, 646);
+            this.drgvUser.Size = new System.Drawing.Size(1579, 637);
             this.drgvUser.TabIndex = 8;
             // 
             // picAddUser

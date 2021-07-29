@@ -37,9 +37,9 @@ namespace QuanLyPhongNet.GUI
             this.drgvNKHT = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.drgvNKGD = new System.Windows.Forms.DataGridView();
-            this.btnExit = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.chartThongKe = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.btnExit = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.drgvNKHT)).BeginInit();
@@ -100,7 +100,7 @@ namespace QuanLyPhongNet.GUI
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(894, 487);
+            this.tabPage2.Size = new System.Drawing.Size(1164, 558);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Giao Dịch";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -119,20 +119,6 @@ namespace QuanLyPhongNet.GUI
             this.drgvNKGD.Size = new System.Drawing.Size(885, 480);
             this.drgvNKGD.TabIndex = 0;
             // 
-            // btnExit
-            // 
-            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.BackColor = System.Drawing.Color.White;
-            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btnExit.Location = new System.Drawing.Point(1088, 3);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(83, 33);
-            this.btnExit.TabIndex = 1;
-            this.btnExit.Text = "Trở lại";
-            this.btnExit.UseVisualStyleBackColor = false;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.chartThongKe);
@@ -140,7 +126,7 @@ namespace QuanLyPhongNet.GUI
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(1164, 558);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Thống kê";
+            this.tabPage3.Text = "Thống Kê";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // chartThongKe
@@ -166,6 +152,20 @@ namespace QuanLyPhongNet.GUI
             title1.Name = "Thống kê thu nhập hằng tháng";
             title1.Text = "Thống kê thu nhập hằng tháng";
             this.chartThongKe.Titles.Add(title1);
+            // 
+            // btnExit
+            // 
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.BackColor = System.Drawing.Color.White;
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btnExit.Location = new System.Drawing.Point(1088, 3);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(83, 33);
+            this.btnExit.TabIndex = 1;
+            this.btnExit.Text = "Trở lại";
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // BaoCao
             // 

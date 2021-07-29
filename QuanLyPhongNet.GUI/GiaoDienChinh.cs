@@ -581,7 +581,12 @@ namespace QuanLyPhongNet.GUI
                 }
                 else
                 {
-                    if (MessageBox.Show("Bạn có chắc chắn muốn xóa mục này?", "Thông Báo!",
+                    if (drgvUser.SelectedRows[0].Cells[0].Value.ToString().Equals("0"))
+                    {
+                        MessageBox.Show("Không thể xóa tài khoản Manager!", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    if (MessageBox.Show("Bạn có chắc chắn muốn xóa tài khoản này?", "Thông Báo!",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         int ID = int.Parse(drgvUser.CurrentRow.Cells[0].Value.ToString());
@@ -830,7 +835,7 @@ namespace QuanLyPhongNet.GUI
             if (tabCategory.SelectedIndex == 0)
             {
                 YeuCauDichVu frmOrder = new YeuCauDichVu(Int32.Parse(drgvFood.CurrentRow.Cells[0].Value.ToString()),
-                                                    tabCategory.SelectedIndex);
+                                                    tabCategory.SelectedIndex, Int32.Parse(drgvFood.CurrentRow.Cells[5].Value.ToString()));
                 frmOrder.d += new YeuCauDichVu.MyDel(ShowCategory);
                 frmOrder.ShowDialog();
                 Show();
@@ -838,7 +843,7 @@ namespace QuanLyPhongNet.GUI
             else if (tabCategory.SelectedIndex == 1)
             {
                 YeuCauDichVu frmOrder = new YeuCauDichVu(Int32.Parse(drgvDrink.CurrentRow.Cells[0].Value.ToString()),
-                                                    tabCategory.SelectedIndex);
+                                                    tabCategory.SelectedIndex, Int32.Parse(drgvDrink.CurrentRow.Cells[5].Value.ToString()));
                 frmOrder.d += new YeuCauDichVu.MyDel(ShowCategory);
                 frmOrder.ShowDialog();
                 Show();
@@ -846,7 +851,7 @@ namespace QuanLyPhongNet.GUI
             else if (tabCategory.SelectedIndex == 2)
             {
                 YeuCauDichVu frmOrder = new YeuCauDichVu(Int32.Parse(drgvCard.CurrentRow.Cells[0].Value.ToString()),
-                                                    tabCategory.SelectedIndex);
+                                                    tabCategory.SelectedIndex, Int32.Parse(drgvCard.CurrentRow.Cells[5].Value.ToString()));
                 frmOrder.d += new YeuCauDichVu.MyDel(ShowCategory);
                 frmOrder.ShowDialog();
                 Show();
