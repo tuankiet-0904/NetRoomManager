@@ -144,7 +144,7 @@ go
  
 create table LoginMember
 (
-	LoginID int identity(1,001) primary key,
+	LoginID int primary key,
 	MemberID int references Member(MemberID),
 	ClientName varchar(30) references Client(ClientName),
 	LoginDate date,
