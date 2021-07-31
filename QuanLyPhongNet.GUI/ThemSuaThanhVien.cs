@@ -14,9 +14,12 @@ namespace QuanLyPhongNet.GUI
 {
     public partial class ThemSuaThanhVien : Form
     {
-        public ThemSuaThanhVien()
+        ServerManager servermanager;
+
+        public ThemSuaThanhVien(ServerManager x)
         {
             InitializeComponent();
+            servermanager = x;
         }
 
         private void ThemThanhVien_Load(object sender, EventArgs e)
@@ -85,8 +88,8 @@ namespace QuanLyPhongNet.GUI
 
                 TransactionDiary2 td = new TransactionDiary2();
                 td.memberID = member.MemberID;
-                td.UserID = ServerManager.MemberID;
-                td.UserName = NetRoomReader.Instance.FindUserNameByID(ServerManager.MemberID);
+                td.UserID = servermanager.MemberID;
+                td.UserName = NetRoomReader.Instance.FindUserNameByID(servermanager.MemberID);
                 td.TransacDate = DateTime.Now;
                 td.AddTime = NetRoomWritter.Instance.ChangeMoneyToTime(AddMoney);
                 td.AddMoney = AddMoney;

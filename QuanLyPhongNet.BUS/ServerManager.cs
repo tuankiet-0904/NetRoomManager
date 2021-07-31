@@ -16,7 +16,7 @@ namespace QuanLyPhongNet.BUS
         IPEndPoint iP;
         Socket socketServer;
         public List<InfoClient> usingClient = new List<InfoClient>();
-        public static int MemberID;
+        public int MemberID;
         const int portCode = 9999;
         const int maxGetByte = 1024 * 5000;
         public static int MessageCode = -1;
@@ -44,6 +44,7 @@ namespace QuanLyPhongNet.BUS
 
         public ServerManager()
         {
+            MemberID = -1;
             iP = new IPEndPoint(IPAddress.Any, portCode);
             socketServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
             socketServer.Bind(iP);

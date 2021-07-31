@@ -14,11 +14,13 @@ namespace QuanLyPhongNet.GUI
 {
     public partial class SuaThanhVien : Form
     {
+        ServerManager servermanager;
         private int _ID = -1;
         
-        public SuaThanhVien(int id)
+        public SuaThanhVien(ServerManager x, int id)
         {
             InitializeComponent();
+            servermanager = x;
             _ID = id;
         }
 
@@ -53,7 +55,7 @@ namespace QuanLyPhongNet.GUI
             else member.StatusAccount = "Hết Thời Gian";
             member.CurrentTime = NetRoomWritter.Instance.ChangeMoneyToTime((float)member.CurrentMoney);
             TransactionDiary2 td = new TransactionDiary2();
-            td.UserID = ServerManager.MemberID;
+            td.UserID = servermanager.MemberID;
             td.memberID = _ID;
             td.TransacDate = DateTime.Now;
             td.AddMoney = float.Parse(txtAddMoney.Text);

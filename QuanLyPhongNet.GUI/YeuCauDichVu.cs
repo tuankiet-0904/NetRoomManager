@@ -13,14 +13,16 @@ namespace QuanLyPhongNet.GUI
 {
     public partial class YeuCauDichVu : Form
     {
+        ServerManager servermanager;
         private int _ID;
         private int _Cbbitem;
         private int _leftAmount;
         public delegate void MyDel();
         public MyDel d { get; set; }
-        public YeuCauDichVu(int id, int cbbitem, int leftAmount)
+        public YeuCauDichVu(ServerManager x, int id, int cbbitem, int leftAmount)
         {
             InitializeComponent();
+            servermanager = x;
             _ID = id;
             _Cbbitem = cbbitem;
             _leftAmount = leftAmount;
@@ -115,8 +117,8 @@ namespace QuanLyPhongNet.GUI
             }
             DAL.Bill bill = new DAL.Bill();
             bill.FoundedDate = DateTime.Now;
-            bill.FoundedUserID = ServerManager.MemberID;
-            bill.FoundedUserName = NetRoomReader.Instance.FindUserNameByID(ServerManager.MemberID);
+            bill.FoundedUserID = servermanager.MemberID;
+            bill.FoundedUserName = NetRoomReader.Instance.FindUserNameByID(servermanager.MemberID);
             bill.PriceTotal = float.Parse(txtPrice.Text) * (int)order.Value;
             NetRoomWritter.Instance.InsertBill(bill);
             d();

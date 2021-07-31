@@ -220,9 +220,7 @@ namespace QuanLyPhongNet.GUI
 
         private void picExit_Click(object sender, EventArgs e)
         {
-            GiaoDienLuaChon frmOption = new GiaoDienLuaChon();
-            this.Hide();
-            frmOption.ShowDialog();
+            this.Dispose();
         }
 
         private void AddProcess()

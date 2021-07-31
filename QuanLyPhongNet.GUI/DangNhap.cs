@@ -14,9 +14,11 @@ namespace QuanLyPhongNet.GUI
 {
     public partial class DangNhap : Form
     {
+        ServerManager servermanager;
         public DangNhap()
         {
             InitializeComponent();
+            servermanager = new ServerManager();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -39,10 +41,10 @@ namespace QuanLyPhongNet.GUI
                     {
                         if (cboUser.Text.Equals(user.Type) && txtPassword.Text.Equals(user.LoginPass))
                         {
-                            ServerManager.MemberID = user.ID;
+                            servermanager.MemberID = user.ID;
                             if (user.ID != 0)
                             {
-                                GiaoDienChinh frmHome = new GiaoDienChinh();
+                                GiaoDienChinh frmHome = new GiaoDienChinh(servermanager);
                                 this.Hide();
                                 frmHome.ShowDialog();
                                 txtPassword.Text = "";
@@ -50,7 +52,7 @@ namespace QuanLyPhongNet.GUI
                             }
                             else
                             {
-                                GiaoDienLuaChon frmHome = new GiaoDienLuaChon();
+                                GiaoDienLuaChon frmHome = new GiaoDienLuaChon(servermanager);
                                 this.Hide();
                                 frmHome.ShowDialog();
                                 txtPassword.Text = "";
@@ -68,9 +70,55 @@ namespace QuanLyPhongNet.GUI
             }
         }
 
+        private void DangNhap_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (servermanager.usingClient.Count > 0)
+            {
+                if (MessageBox.Show("Vẫn còn máy con đang hoạt động!\nBạn có chắc muốn thoát?", "Chú ý!",
+                                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    foreach (InfoClient i in servermanager.usingClient.ToList())
+                    {
+                        if (i.stateClient.Equals("MEMBER USING"))
+                        {
+                            // Save Logout Info
+                            string accountUsing = i.nameCustomer;
+                            LoginMember loginMember = FindLoginMember(accountUsing);
+                            TimeSpan current = DateTime.Now.TimeOfDay;
+                            TimeSpan leftTime = TimeSpan.Parse(current.Hours + ":" + current.Minutes + ":" + current.Seconds);
+                            TimeSpan useTime = leftTime - loginMember.StartTime;
+                            servermanager.SaveLogoutInfo(loginMember.LoginID, useTime, leftTime);
+                            // Logout Member
+                            string nameClient = i.nameClient;
+                            servermanager.ShutDown(nameClient);
+                        }
+                    }
+                    servermanager.CloseSocketConnection();
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+            else servermanager.CloseSocketConnection();
+        }
+        
         private void DangNhap_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        public LoginMember FindLoginMember(string accountUsing)
+        {
+            Member member = NetRoomReader.Instance.GetMemberByAccountName(accountUsing);
+            foreach (LoginMember i in NetRoomReader.Instance.GetAllLoginMembers())
+            {
+                if (i.MemberID == member.ID && i.LeftTime.Equals(TimeSpan.Zero))
+                {
+                    return i;
+                }
+            }
+            return null;
         }
     }
 }

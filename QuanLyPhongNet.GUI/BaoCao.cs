@@ -46,9 +46,7 @@ namespace QuanLyPhongNet.GUI
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            GiaoDienLuaChon frmHome = new GiaoDienLuaChon();
-            this.Hide();
-            frmHome.ShowDialog();
+            this.Dispose();
         }
 
         //************************************************************************************************//

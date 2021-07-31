@@ -15,10 +15,10 @@ namespace QuanLyPhongNet.GUI
         private NetRoomReader objReader;
         private NetRoomWritter objWriter;
         MessageFromServer chatBox;
-        public GiaoDienChinh()
+        public GiaoDienChinh(ServerManager x)
         {
             InitializeComponent();
-            servermanager = new ServerManager();
+            servermanager = x;
             CheckForIllegalCrossThreadCalls = false;
             timerHome.Interval = 200;
             timerHome.Enabled = true;
@@ -105,8 +105,7 @@ namespace QuanLyPhongNet.GUI
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            servermanager.CloseSocketConnection();
-            this.Dispose();
+            this.Close();
         }
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
@@ -190,33 +189,30 @@ namespace QuanLyPhongNet.GUI
         {
             if (servermanager.usingClient.Count > 0)
             {
-                if (MessageBox.Show("Vẫn còn máy con đang hoạt động!\nBạn có chắc muốn thoát?", "Chú ý!",
+                if (MessageBox.Show("Vẫn còn máy con đang hoạt động!\nBạn có chắc muốn đăng xuất?", "Chú ý!",
                                      MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    foreach (InfoClient i in servermanager.usingClient.ToList())
-                    {
-                        if (i.stateClient.Equals("MEMBER USING"))
-                        {
-                            // Save Logout Info
-                            string accountUsing = i.nameCustomer;
-                            LoginMember loginMember = FindLoginMember(accountUsing);
-                            TimeSpan current = DateTime.Now.TimeOfDay;
-                            TimeSpan leftTime = TimeSpan.Parse(current.Hours + ":" + current.Minutes + ":" + current.Seconds);
-                            TimeSpan useTime = leftTime - loginMember.StartTime;
-                            servermanager.SaveLogoutInfo(loginMember.LoginID, useTime, leftTime);
-                            // Logout Member
-                            string nameClient = i.nameClient;
-                            servermanager.ShutDown(nameClient);
-                        }
-                    }
-                    servermanager.CloseSocketConnection();
+                    servermanager.MemberID = -1;
+                    this.Dispose();
                 }
                 else
                 {
                     e.Cancel = true;
                 }
             }
-            else servermanager.CloseSocketConnection();
+            else
+            {
+                if (MessageBox.Show("Bạn có chắc muốn đăng xuất?", "Chú ý!",
+                                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    servermanager.MemberID = -1;
+                    this.Dispose();
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
         }
 
         //************************************************************************************************//
@@ -283,7 +279,7 @@ namespace QuanLyPhongNet.GUI
             LoadClient();
             DAL.Bill bill = new DAL.Bill();
             bill.FoundedDate = DateTime.Now;
-            bill.FoundedUserID = ServerManager.MemberID;
+            bill.FoundedUserID = servermanager.MemberID;
             bill.PriceTotal = float.Parse(txtTotalPrice.Text);
             NetRoomWritter.Instance.InsertBill(bill);
             LoadDRGVNKGD();
@@ -350,7 +346,7 @@ namespace QuanLyPhongNet.GUI
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (ServerManager.MemberID != 0)
+            if (servermanager.MemberID != 0)
             {
                 MessageBox.Show("Bạn không có quyền thực hiện chức năng này!", "Lỗi!",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -372,7 +368,7 @@ namespace QuanLyPhongNet.GUI
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (ServerManager.MemberID != 0)
+            if (servermanager.MemberID != 0)
             {
                 MessageBox.Show("Bạn không có quyền thực hiện chức năng này!", "Lỗi!",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -400,7 +396,7 @@ namespace QuanLyPhongNet.GUI
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (ServerManager.MemberID != 0)
+            if (servermanager.MemberID != 0)
             {
                 MessageBox.Show("Bạn không có quyền thực hiện chức năng này!", "Lỗi!",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -450,13 +446,13 @@ namespace QuanLyPhongNet.GUI
                         }
         
             private void LoadDRGVClient(string searchBy, string searchFor)
-        {
-            drgvMember.DataSource = NetRoomReader.Instance.GetListMembers(searchBy, searchFor);
-        }
+            {
+                drgvMember.DataSource = NetRoomReader.Instance.GetListMembers(searchBy, searchFor);
+            }
 
             private void drgvMember_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
             {
-                SuaThanhVien f = new SuaThanhVien((int)drgvMember.CurrentRow.Cells[0].Value);
+                SuaThanhVien f = new SuaThanhVien(servermanager, (int)drgvMember.CurrentRow.Cells[0].Value);
                 f.ShowDialog();
                 LoadDRGVNKHT();
             }
@@ -468,27 +464,27 @@ namespace QuanLyPhongNet.GUI
             }
 
             private void picAddMember_Click(object sender, EventArgs e)
-        {
-            ThemSuaThanhVien f = new ThemSuaThanhVien();
-            f.ShowDialog();
-            LoadDRGVMember();
-            LoadDRGVNKHT();
-        }
+            {
+                ThemSuaThanhVien f = new ThemSuaThanhVien(servermanager);
+                f.ShowDialog();
+                LoadDRGVMember();
+                LoadDRGVNKHT();
+            }
 
             private void picUpdateMember_Click(object sender, EventArgs e)
-        {
-            SuaThanhVien f = new SuaThanhVien((int)drgvMember.CurrentRow.Cells[0].Value);
-            f.ShowDialog();
-            LoadDRGVMember();
-            LoadDRGVNKHT();
-        }
+            {
+                SuaThanhVien f = new SuaThanhVien(servermanager, (int)drgvMember.CurrentRow.Cells[0].Value);
+                f.ShowDialog();
+                LoadDRGVMember();
+                LoadDRGVNKHT();
+            }
 
             private void btnSearchMember_Click(object sender, EventArgs e)
-        {
-            string cbbitem = cbbSearchMember.SelectedItem.ToString();
-            string name = txtSearchMember.Text;
-            LoadDRGVClient(cbbitem, name);
-        }
+            {
+                string cbbitem = cbbSearchMember.SelectedItem.ToString();
+                string name = txtSearchMember.Text;
+                LoadDRGVClient(cbbitem, name);
+            }
 
             private void picMemberInfo_Click(object sender, EventArgs e)
             {
@@ -522,7 +518,7 @@ namespace QuanLyPhongNet.GUI
                             drgvUser.Columns[4].HeaderText = "Nhóm người dùng";
                             drgvUser.Columns[5].HeaderText = "Số điện thoại";
                             drgvUser.Columns[6].HeaderText = "Địa chỉ Email";
-                            if (ServerManager.MemberID != 0)
+                            if (servermanager.MemberID != 0)
                             {
                                 drgvUser.Columns[3].Visible = false;
                             }
@@ -531,31 +527,31 @@ namespace QuanLyPhongNet.GUI
             private void LoadDRGVUser(string searchBy, string searchFor)
             {
                 drgvUser.DataSource = NetRoomReader.Instance.GetListUsers(searchBy, searchFor);
-                if (ServerManager.MemberID != 0)
+                if (servermanager.MemberID != 0)
                 {
                     drgvUser.Columns[3].Visible = false;
                 }
             }
 
             private void picAddUser_Click(object sender, EventArgs e)
-        {
-            if (ServerManager.MemberID != 0)
             {
-                MessageBox.Show("Bạn không có quyền thực hiện chức năng này!", "Lỗi!",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (servermanager.MemberID != 0)
+                {
+                    MessageBox.Show("Bạn không có quyền thực hiện chức năng này!", "Lỗi!",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else
+                {
+                    ThemSuaNguoiDung frmAddUser = new ThemSuaNguoiDung();
+                    frmAddUser.ShowDialog();
+                    LoadDRGVUser();
+                }
             }
-            else
-            {
-                ThemSuaNguoiDung frmAddUser = new ThemSuaNguoiDung();
-                frmAddUser.ShowDialog();
-                LoadDRGVUser();
-            }
-        }
 
             private void picUpdateUser_Click(object sender, EventArgs e)
             {
-                if (ServerManager.MemberID != 0)
+                if (servermanager.MemberID != 0)
                 {
                     MessageBox.Show("Bạn không có quyền thực hiện chức năng này!", "Lỗi!",
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -573,7 +569,7 @@ namespace QuanLyPhongNet.GUI
 
             private void picDeleteUser_Click(object sender, EventArgs e)
             {
-                if (ServerManager.MemberID != 0)
+                if (servermanager.MemberID != 0)
                 {
                     MessageBox.Show("Bạn không có quyền thực hiện chức năng này!", "Lỗi!",
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -834,7 +830,7 @@ namespace QuanLyPhongNet.GUI
         {
             if (tabCategory.SelectedIndex == 0)
             {
-                YeuCauDichVu frmOrder = new YeuCauDichVu(Int32.Parse(drgvFood.CurrentRow.Cells[0].Value.ToString()),
+                YeuCauDichVu frmOrder = new YeuCauDichVu(servermanager, Int32.Parse(drgvFood.CurrentRow.Cells[0].Value.ToString()),
                                                     tabCategory.SelectedIndex, Int32.Parse(drgvFood.CurrentRow.Cells[5].Value.ToString()));
                 frmOrder.d += new YeuCauDichVu.MyDel(ShowCategory);
                 frmOrder.ShowDialog();
@@ -842,7 +838,7 @@ namespace QuanLyPhongNet.GUI
             }
             else if (tabCategory.SelectedIndex == 1)
             {
-                YeuCauDichVu frmOrder = new YeuCauDichVu(Int32.Parse(drgvDrink.CurrentRow.Cells[0].Value.ToString()),
+                YeuCauDichVu frmOrder = new YeuCauDichVu(servermanager, Int32.Parse(drgvDrink.CurrentRow.Cells[0].Value.ToString()),
                                                     tabCategory.SelectedIndex, Int32.Parse(drgvDrink.CurrentRow.Cells[5].Value.ToString()));
                 frmOrder.d += new YeuCauDichVu.MyDel(ShowCategory);
                 frmOrder.ShowDialog();
@@ -850,7 +846,7 @@ namespace QuanLyPhongNet.GUI
             }
             else if (tabCategory.SelectedIndex == 2)
             {
-                YeuCauDichVu frmOrder = new YeuCauDichVu(Int32.Parse(drgvCard.CurrentRow.Cells[0].Value.ToString()),
+                YeuCauDichVu frmOrder = new YeuCauDichVu(servermanager, Int32.Parse(drgvCard.CurrentRow.Cells[0].Value.ToString()),
                                                     tabCategory.SelectedIndex, Int32.Parse(drgvCard.CurrentRow.Cells[5].Value.ToString()));
                 frmOrder.d += new YeuCauDichVu.MyDel(ShowCategory);
                 frmOrder.ShowDialog();
@@ -904,6 +900,7 @@ namespace QuanLyPhongNet.GUI
             drgvClientGroup.Columns[0].HeaderText = "Tên nhóm máy";
             drgvClientGroup.Columns[1].HeaderText = "Mô tả";
         }
+        
         private void LoadDRGVClientGroup(string searchBy, string searchFor)
         {
             drgvClientGroup.DataSource = NetRoomReader.Instance.GetListClientGroup(searchBy, searchFor);
@@ -918,7 +915,7 @@ namespace QuanLyPhongNet.GUI
 
         private void picAddGroupClient_Click(object sender, EventArgs e)
         {
-            if (ServerManager.MemberID != 0)
+            if (servermanager.MemberID != 0)
             {
                 MessageBox.Show("Bạn không có quyền thực hiện chức năng này!", "Lỗi!",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -934,7 +931,7 @@ namespace QuanLyPhongNet.GUI
 
         private void picDeleteGroupClient_Click(object sender, EventArgs e)
         {
-            if (ServerManager.MemberID != 0)
+            if (servermanager.MemberID != 0)
             {
                 MessageBox.Show("Bạn không có quyền thực hiện chức năng này!", "Lỗi!",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -965,7 +962,7 @@ namespace QuanLyPhongNet.GUI
 
         private void picUpdateGroupClient_Click(object sender, EventArgs e)
         {
-            if (ServerManager.MemberID != 0)
+            if (servermanager.MemberID != 0)
             {
                 MessageBox.Show("Bạn không có quyền thực hiện chức năng này!", "Lỗi!",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);

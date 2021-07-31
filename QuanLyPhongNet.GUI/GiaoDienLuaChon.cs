@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyPhongNet.BUS;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,14 +13,33 @@ namespace QuanLyPhongNet.GUI
 {
     public partial class GiaoDienLuaChon : Form
     {
-        public GiaoDienLuaChon()
+        ServerManager servermanager;
+        public GiaoDienLuaChon(ServerManager x)
         {
             InitializeComponent();
+            servermanager = x;
         }
 
+        //************************************************************************************************//
+
+        // Giao diện lựa chọn
+        private void GiaoDienLuaChon_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void llblSignOut_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            servermanager.MemberID = -1;
+            this.Dispose();
+        }
+
+        //************************************************************************************************//
+
+        // Pictures Click
         private void picHome_Click(object sender, EventArgs e)
         {
-            GiaoDienChinh frmHome = new GiaoDienChinh();
+            GiaoDienChinh frmHome = new GiaoDienChinh(servermanager);
             this.Hide();
             frmHome.ShowDialog();
             this.Show();
@@ -41,6 +61,9 @@ namespace QuanLyPhongNet.GUI
             this.Show();
         }
 
+        //************************************************************************************************//
+
+        // Mouse Event Handler
         private void picHome_MouseHover(object sender, EventArgs e)
         {
             picHome.BorderStyle = BorderStyle.Fixed3D;
@@ -69,16 +92,6 @@ namespace QuanLyPhongNet.GUI
         private void picReport_MouseLeave(object sender, EventArgs e)
         {
             picReport.BorderStyle = BorderStyle.None;
-        }
-
-        private void GiaoDienLuaChon_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void llblSignOut_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            this.Dispose();
         }
     }
 }
