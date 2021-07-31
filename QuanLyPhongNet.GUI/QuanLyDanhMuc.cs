@@ -277,9 +277,6 @@ namespace QuanLyPhongNet.GUI
                     objWriter.UpdateCategory(drgvInformation.CurrentRow.Cells[0].Value.ToString(), txtCategoryName.Text, txtCategoryType.Text);
                     break;
             }
-
-            TabPage tp = tab.SelectedTab;
-
             ResetControl(tp);
             LoadSourceToCBO();
             LoadSourceToDRGV();

@@ -35,6 +35,14 @@ namespace May_2
             random = new Random();
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+            int avgFrameRate = random.Next(50, 70);
+            txtFrameRate.Items.Add(avgFrameRate.ToString() + "Hz");
+            currentFPS.Text = avgFrameRate.ToString() + "Hz";
+        }
+
         private void btnMouseSetting_Click(object sender, EventArgs e)
         {
             Process.Start("C:\\WINDOWS\\system32\\main.cpl");
@@ -60,12 +68,9 @@ namespace May_2
             Process.Start(System_path);
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void btnExit_Click(object sender, EventArgs e)
         {
-
-            int avgFrameRate = random.Next(50, 70);
-            txtFrameRate.Items.Add(avgFrameRate.ToString() + "Hz");
-            currentFPS.Text = avgFrameRate.ToString() + "Hz";
+            this.Dispose();
         }
     }
 }

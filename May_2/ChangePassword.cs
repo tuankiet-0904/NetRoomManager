@@ -22,6 +22,24 @@ namespace May_2
             timer1.Enabled = true;
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (clientManager.message2.Equals("Update Password Success!"))
+            {
+                timer1.Stop();
+                MessageBox.Show("Thay đổi mật khẩu thành công!", "Thông báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                clientManager.message2 = "";
+                this.Dispose();
+            }
+            if (clientManager.message2.Equals("Wrong Old Password!"))
+            {
+                timer1.Stop();
+                MessageBox.Show("Sai mật khẩu cũ!", "Thông báo!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                clientManager.message2 = "";
+                txtOldPass.Select();
+            }
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             timer1.Start();
@@ -43,24 +61,6 @@ namespace May_2
                 return;
             }
             clientManager.UpdatePassword(clientManager.userName, txtOldPass.Text, txtNewPass.Text);
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (clientManager.message2.Equals("Update Password Success!"))
-            {
-                timer1.Stop();
-                MessageBox.Show("Thay đổi mật khẩu thành công!", "Thông báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                clientManager.message2 = "";
-                this.Dispose();
-            }
-            if (clientManager.message2.Equals("Wrong Old Password!"))
-            {
-                timer1.Stop();
-                MessageBox.Show("Sai mật khẩu cũ!", "Thông báo!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                clientManager.message2 = "";
-                txtOldPass.Select();
-            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)

@@ -18,6 +18,10 @@ namespace May_2
             timer1.Enabled = true;
             this.lockMode = false;
         }
+
+        //************************************************************************************************//
+
+        // LockScreen
         private void LockScreen_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
@@ -25,6 +29,7 @@ namespace May_2
             groupBox1.Visible = true;
             loginStatus.Visible = false;
             txtUserName.Select();
+            this.BackgroundImageLayout = ImageLayout.Stretch;
         }
 
         private void LockScreen_Click(object sender, EventArgs e)
@@ -47,39 +52,6 @@ namespace May_2
             }
         }
 
-        private void LoginClickEventHandler(object sender, EventArgs e)
-        {
-            if (lockMode)
-            {
-                if (txtUserName.Text.Equals(clientManager.userName) && txtPassword.Text.Equals(password))
-                {
-                    this.lockMode = false;
-                    this.Visible = false;
-                    this.TopMost = false;
-                }
-                else
-                {
-                    showLoginStatus("Sai tài khoản hoặc mật khẩu!");
-                }
-                resetTxt();
-            }
-            else
-            {
-                timer1.Start();
-
-                string userName = txtUserName.Text.ToString();
-                string passWord = txtPassword.Text.ToString();
-                showLoginStatus("");
-
-                clientManager.Login(userName, passWord);
-            }
-        }
-
-        private void bttCancel_Click(object sender, EventArgs e)
-        {
-            groupBox1.Visible = false;
-        }
-        
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (clientManager.message2.Equals("Acount not exist !! Or Wrong Username, Password"))
@@ -113,6 +85,45 @@ namespace May_2
             }
         }
 
+        //************************************************************************************************//
+
+        // Buttons Click
+        private void LoginClickEventHandler(object sender, EventArgs e)
+        {
+            if (lockMode)
+            {
+                if (txtUserName.Text.Equals(clientManager.userName) && txtPassword.Text.Equals(password))
+                {
+                    this.lockMode = false;
+                    this.Visible = false;
+                    this.TopMost = false;
+                }
+                else
+                {
+                    showLoginStatus("Sai tài khoản hoặc mật khẩu!");
+                }
+                resetTxt();
+            }
+            else
+            {
+                timer1.Start();
+
+                string userName = txtUserName.Text.ToString();
+                string passWord = txtPassword.Text.ToString();
+                showLoginStatus("");
+
+                clientManager.Login(userName, passWord);
+            }
+        }
+
+        private void bttCancel_Click(object sender, EventArgs e)
+        {
+            groupBox1.Visible = false;
+        }
+
+        //************************************************************************************************//
+
+        // Orther functions
         private void txtUserName_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

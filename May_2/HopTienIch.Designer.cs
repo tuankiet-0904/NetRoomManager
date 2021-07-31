@@ -44,7 +44,7 @@ namespace May_2
             this.btnTimeSetting = new System.Windows.Forms.Button();
             this.btnKeyboardSetting = new System.Windows.Forms.Button();
             this.btnMouseSetting = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
@@ -68,7 +68,7 @@ namespace May_2
             this.currentFPS.BackColor = System.Drawing.SystemColors.Control;
             this.currentFPS.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.currentFPS.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.currentFPS.Location = new System.Drawing.Point(254, 12);
+            this.currentFPS.Location = new System.Drawing.Point(303, 15);
             this.currentFPS.Name = "currentFPS";
             this.currentFPS.Size = new System.Drawing.Size(70, 19);
             this.currentFPS.TabIndex = 3;
@@ -208,16 +208,17 @@ namespace May_2
             this.btnMouseSetting.UseVisualStyleBackColor = false;
             this.btnMouseSetting.Click += new System.EventHandler(this.btnMouseSetting_Click);
             // 
-            // button7
+            // btnExit
             // 
-            this.button7.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.button7.Location = new System.Drawing.Point(685, 501);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 47);
-            this.button7.TabIndex = 5;
-            this.button7.Text = "Đóng";
-            this.button7.UseVisualStyleBackColor = false;
+            this.btnExit.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnExit.Location = new System.Drawing.Point(685, 501);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(75, 47);
+            this.btnExit.TabIndex = 5;
+            this.btnExit.Text = "Đóng";
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // label3
             // 
@@ -239,7 +240,7 @@ namespace May_2
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 553);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button7);
+            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -269,7 +270,7 @@ namespace May_2
         private System.Windows.Forms.Button btnMouseSetting;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListBox txtFrameRate;
         private System.Windows.Forms.Timer timer1;

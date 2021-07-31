@@ -28,28 +28,9 @@ namespace May_1
             timer2.Enabled = true;
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
-        }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            timer2.Start();
-            string newMemberInfo = txtName.Text + "|" + txtFoundedDate.Text + "|" + txtPhoneNumber.Text + "|" +
-                 txtAddress.Text + "|" + txtEmail.Text + "|";
-            clientManager.UpdateMemberInfo(clientManager.userName, newMemberInfo);
-        }
-
         private void ThongTinKhachHang_Load(object sender, EventArgs e)
         {
             clientManager.GetMemberInfo(clientManager.userName);
-        }
-
-        private void btnChangePass_Click(object sender, EventArgs e)
-        {
-            ChangePassword frmChangePass = new ChangePassword(clientManager);
-            frmChangePass.ShowDialog();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -63,7 +44,7 @@ namespace May_1
                 txtPhoneNumber.Text = message[3];
                 txtAddress.Text = message[4];
                 txtEmail.Text = message[5];
-                clientManager.message2 = "";               
+                clientManager.message2 = "";
             }
         }
 
@@ -75,6 +56,25 @@ namespace May_1
                 MessageBox.Show("Cập nhật thông tin thành công!", "Thông báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 clientManager.message2 = "";
             }
+        }
+
+        private void btnChangePass_Click(object sender, EventArgs e)
+        {
+            ChangePassword frmChangePass = new ChangePassword(clientManager);
+            frmChangePass.ShowDialog();
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            timer2.Start();
+            string newMemberInfo = txtName.Text + "|" + txtFoundedDate.Text + "|" + txtPhoneNumber.Text + "|" +
+                 txtAddress.Text + "|" + txtEmail.Text + "|";
+            clientManager.UpdateMemberInfo(clientManager.userName, newMemberInfo);
+        }
+ 
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

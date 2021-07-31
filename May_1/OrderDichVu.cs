@@ -17,11 +17,17 @@ namespace May_1
             InitializeComponent();
         }
 
+        //************************************************************************************************//
+
+        // Order dịch vụ
         private void OrderDichVu_Load(object sender, EventArgs e)
         {
             comboBox1.Enabled = false;
         }
 
+        //************************************************************************************************//
+
+        // Button Add
         private void picAdd_Click(object sender, EventArgs e)
         {
             if (DGVOrder.CurrentRow.Cells[0].Value != null)
@@ -42,6 +48,9 @@ namespace May_1
             picAdd.BorderStyle = BorderStyle.None;
         }
 
+        //************************************************************************************************//
+
+        // Button Sub
         private void picSubtract_Click(object sender, EventArgs e)
         {
             if (DGVOrder.CurrentRow.Cells[0].Value != null)
@@ -66,14 +75,24 @@ namespace May_1
             picSubtract.BorderStyle = BorderStyle.None;
         }
 
+        //************************************************************************************************//
+
+        // Note
+        private void txtNote_TextChanged(object sender, EventArgs e)
+        {
+            if (DGVOrder.CurrentRow.Cells[0].Value != null)
+            {
+                string note = txtNote.Text;
+                DGVOrder.CurrentRow.Cells[4].Value = note;
+            }
+        }
+
+        //************************************************************************************************//
+
+        // Tab Food
         private void listFood_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
         }
 
         private void listFood_ItemChecked(object sender, ItemCheckedEventArgs e)
@@ -98,6 +117,9 @@ namespace May_1
             }
         }
 
+        //************************************************************************************************//
+
+        // Tab Drink
         private void listDrink_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             if (listDrink.SelectedItems.Count > 0)
@@ -120,6 +142,9 @@ namespace May_1
             }
         }
 
+        //************************************************************************************************//
+
+        // Tab Card
         private void listCard_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             if (listCard.SelectedItems.Count > 0)
@@ -142,16 +167,9 @@ namespace May_1
             }
         }
 
-        private int IndexOfOrder(string orderName)
-        {
-            foreach (DataGridViewRow i in DGVOrder.Rows)
-            {
-                if (i.Cells["Order"].Value == null) continue;
-                if (i.Cells["Order"].Value.ToString().Equals(orderName)) return i.Index;
-            }
-            return -1;
-        }
+        //************************************************************************************************//
 
+        // DataGridView Ordered
         private void AddNewOrder(string orderName, string price, string cardPrice)
         {
             DataGridViewRow newRow = (DataGridViewRow)DGVOrder.Rows[0].Clone();
@@ -206,6 +224,35 @@ namespace May_1
             }
         }
 
+        private int IndexOfOrder(string orderName)
+        {
+            foreach (DataGridViewRow i in DGVOrder.Rows)
+            {
+                if (i.Cells["Order"].Value == null) continue;
+                if (i.Cells["Order"].Value.ToString().Equals(orderName)) return i.Index;
+            }
+            return -1;
+        }
+
+        //************************************************************************************************//
+
+        // Button Order
+        private void btnOrder_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //************************************************************************************************//
+
+        // Button Exit
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+
+        //************************************************************************************************//
+
+        // ComboBox Card's price
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             DGVOrder.CurrentRow.Cells[2].Value = RemoveDot(comboBox1.SelectedItem.ToString());
@@ -213,6 +260,9 @@ namespace May_1
             CountTotalPrice();
         }
 
+        //************************************************************************************************//
+
+        // Total Price TextBox
         private string RemoveDot(string input)
         {
             string[] split = input.Split('.');
@@ -224,20 +274,12 @@ namespace May_1
             return res;
         }
 
-        private void txtNote_TextChanged(object sender, EventArgs e)
-        {
-            if (DGVOrder.CurrentRow.Cells[0].Value != null)
-            {
-                string note = txtNote.Text;
-                DGVOrder.CurrentRow.Cells[4].Value = note;
-            }
-        }
-
         private void CountPrice()
         {
             DGVOrder.CurrentRow.Cells[3].Value = Convert.ToInt32(RemoveDot(DGVOrder.CurrentRow.Cells[2].Value.ToString())) *
                 Convert.ToInt32(RemoveDot(DGVOrder.CurrentRow.Cells[1].Value.ToString()));
         }
+        
         private void CountTotalPrice()
         {
             int totalPrice = 0;
@@ -249,11 +291,6 @@ namespace May_1
                 }
             }
             txtTotalPrice.Text = totalPrice.ToString(); 
-        }
-
-        private void btnOrder_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

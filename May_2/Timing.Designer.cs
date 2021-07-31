@@ -204,7 +204,7 @@ namespace May_2
             // picAdtivertise
             // 
             this.picAdtivertise.Image = ((System.Drawing.Image)(resources.GetObject("picAdtivertise.Image")));
-            this.picAdtivertise.Location = new System.Drawing.Point(20, 406);
+            this.picAdtivertise.Location = new System.Drawing.Point(18, 406);
             this.picAdtivertise.Margin = new System.Windows.Forms.Padding(4);
             this.picAdtivertise.Name = "picAdtivertise";
             this.picAdtivertise.Size = new System.Drawing.Size(336, 256);
@@ -215,7 +215,7 @@ namespace May_2
             // picUnitity
             // 
             this.picUnitity.Image = ((System.Drawing.Image)(resources.GetObject("picUnitity.Image")));
-            this.picUnitity.Location = new System.Drawing.Point(254, 326);
+            this.picUnitity.Location = new System.Drawing.Point(245, 326);
             this.picUnitity.Margin = new System.Windows.Forms.Padding(4);
             this.picUnitity.Name = "picUnitity";
             this.picUnitity.Size = new System.Drawing.Size(101, 73);
@@ -227,7 +227,7 @@ namespace May_2
             // picLock
             // 
             this.picLock.Image = global::May_2.Properties.Resources.lock1;
-            this.picLock.Location = new System.Drawing.Point(146, 326);
+            this.picLock.Location = new System.Drawing.Point(137, 326);
             this.picLock.Margin = new System.Windows.Forms.Padding(4);
             this.picLock.Name = "picLock";
             this.picLock.Size = new System.Drawing.Size(101, 73);
@@ -239,7 +239,7 @@ namespace May_2
             // picPassword
             // 
             this.picPassword.Image = global::May_2.Properties.Resources.keys1;
-            this.picPassword.Location = new System.Drawing.Point(36, 326);
+            this.picPassword.Location = new System.Drawing.Point(27, 326);
             this.picPassword.Margin = new System.Windows.Forms.Padding(4);
             this.picPassword.Name = "picPassword";
             this.picPassword.Size = new System.Drawing.Size(101, 73);
@@ -251,7 +251,7 @@ namespace May_2
             // picService
             // 
             this.picService.Image = global::May_2.Properties.Resources.istockphoto_962353378_612x6121;
-            this.picService.Location = new System.Drawing.Point(144, 246);
+            this.picService.Location = new System.Drawing.Point(135, 246);
             this.picService.Margin = new System.Windows.Forms.Padding(4);
             this.picService.Name = "picService";
             this.picService.Size = new System.Drawing.Size(101, 73);
@@ -263,7 +263,7 @@ namespace May_2
             // picMessege
             // 
             this.picMessege.Image = global::May_2.Properties.Resources.email_envelope1;
-            this.picMessege.Location = new System.Drawing.Point(35, 246);
+            this.picMessege.Location = new System.Drawing.Point(26, 246);
             this.picMessege.Margin = new System.Windows.Forms.Padding(4);
             this.picMessege.Name = "picMessege";
             this.picMessege.Size = new System.Drawing.Size(101, 73);
@@ -275,7 +275,7 @@ namespace May_2
             // picLogout
             // 
             this.picLogout.Image = ((System.Drawing.Image)(resources.GetObject("picLogout.Image")));
-            this.picLogout.Location = new System.Drawing.Point(253, 246);
+            this.picLogout.Location = new System.Drawing.Point(244, 246);
             this.picLogout.Margin = new System.Windows.Forms.Padding(4);
             this.picLogout.Name = "picLogout";
             this.picLogout.Size = new System.Drawing.Size(101, 73);

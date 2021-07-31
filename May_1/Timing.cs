@@ -36,6 +36,9 @@ namespace May_1
             chatBox.Visible = false;
         }
 
+        //************************************************************************************************//
+
+        // Timing
         private void Timing_Load(object sender, EventArgs e)
         {
             this.Location = new Point(Screen.PrimaryScreen.Bounds.Right - this.Width + 10, 0);
@@ -103,7 +106,16 @@ namespace May_1
                 }
             }
         }
-        
+
+        private void Timing_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            clientManager.CloseSocketConnection();
+            Application.Exit();
+        }
+
+        //************************************************************************************************//
+
+        // Counting Time
         private void TimeCount()
         {
             txtUseTime.Text = hour.ToString("D2") + ":" + min.ToString("D2") + ":" + sec.ToString("D2");
@@ -157,7 +169,29 @@ namespace May_1
             else
                 money = money + 1.5;
         }
-        
+
+        private void ResetTime()
+        {
+            min = 0;
+            sec = 0;
+            hour = 0;
+            money = 0;
+        }
+
+        //************************************************************************************************//
+
+        // Buttons Click
+        private void picMessege_Click(object sender, EventArgs e)
+        {
+            chatBox.Visible = true;
+        }
+
+        private void picService_Click(object sender, EventArgs e)
+        {
+            OrderDichVu frmOrder = new OrderDichVu();
+            frmOrder.ShowDialog();
+        }
+
         private void LogoutClickEventHandler(object sender, EventArgs e)
         {
             TimeSpan current = DateTime.Now.TimeOfDay;
@@ -169,23 +203,10 @@ namespace May_1
             clientManager.lockScreen.showLoginStatus("");
         }
 
-        private void ResetTime()
+        private void picPassword_Click(object sender, EventArgs e)
         {
-            min = 0;
-            sec = 0;
-            hour = 0;
-            money = 0;
-        }
-
-        private void Timing_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            clientManager.CloseSocketConnection();
-            Application.Exit();
-        }
-
-        private void picMessege_Click(object sender, EventArgs e)
-        {
-            chatBox.Visible = true;
+            ThongTinKhachHang clientInfo = new ThongTinKhachHang(clientManager);
+            clientInfo.ShowDialog();
         }
 
         private void picLock_Click(object sender, EventArgs e)
@@ -198,22 +219,10 @@ namespace May_1
             clientManager.lockScreen.resetTxt();
         }
 
-        private void picPassword_Click(object sender, EventArgs e)
-        {
-            ThongTinKhachHang clientInfo = new ThongTinKhachHang(clientManager);
-            clientInfo.ShowDialog();
-        }
-
         private void picUnitity_Click(object sender, EventArgs e)
         {
             HopTienIch toolBox = new HopTienIch();
             toolBox.ShowDialog();
-        }
-
-        private void picService_Click(object sender, EventArgs e)
-        {
-            OrderDichVu frmOrder = new OrderDichVu();
-            frmOrder.ShowDialog();
         }
     }
 }

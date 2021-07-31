@@ -27,13 +27,11 @@ namespace May_2
             timer1.Start();
         }
 
-        private void btnSend_Click(object sender, EventArgs e)
+        //************************************************************************************************//
+
+        // ChatBox
+        private void MessageFromClient_Load(object sender, EventArgs e)
         {
-            String time = DateTime.Now.ToString("HH:mm:ss");
-            if (txtSend.Text != string.Empty)
-                clientManager.SendMessage("[" + time + "] " + clientManager.userName + ": " + txtSend.Text);
-            AllMessageBox.Items.Add(new ListViewItem() { Text = "[" + time + "] " + clientManager.userName + ": " + txtSend.Text, ForeColor = Color.Blue });
-            txtSend.Clear();
             txtSend.Select();
         }
 
@@ -47,11 +45,28 @@ namespace May_2
             }
         }
 
-        private void MessageFromClient_Load(object sender, EventArgs e)
+        private void MessageFromClient_FormClosing(object sender, FormClosingEventArgs e)
         {
+            this.Visible = false;
+            e.Cancel = true;
+        }
+
+        //************************************************************************************************//
+
+        // Buttons Click
+        private void btnSend_Click(object sender, EventArgs e)
+        {
+            String time = DateTime.Now.ToString("HH:mm:ss");
+            if (txtSend.Text != string.Empty)
+                clientManager.SendMessage("[" + time + "] " + clientManager.userName + ": " + txtSend.Text);
+            AllMessageBox.Items.Add(new ListViewItem() { Text = "[" + time + "] " + clientManager.userName + ": " + txtSend.Text, ForeColor = Color.Blue });
+            txtSend.Clear();
             txtSend.Select();
         }
 
+        //************************************************************************************************//
+
+        // Other functions
         private void txtSend_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -66,12 +81,6 @@ namespace May_2
             {
                 btnSend.PerformClick();
             }
-        }
-
-        private void MessageFromClient_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            this.Visible = false;
-            e.Cancel = true;
         }
     }
 }
