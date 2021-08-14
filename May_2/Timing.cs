@@ -28,6 +28,7 @@ namespace May_2
             CheckForIllegalCrossThreadCalls = false;
             
             clientManager = new ClientManager();
+            clientManager.lockScreen.ShutDown += this.ShutDown;
             timerProgram.Interval = 1000;
             timerProgram.Enabled = true;
             timerProgram.Start();
@@ -109,8 +110,22 @@ namespace May_2
 
         private void Timing_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Hide();
+            notifyIcon.Visible = true;
+            e.Cancel = true;
+        }
+
+        private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Show();
+            this.WindowState = FormWindowState.Normal;
+            notifyIcon.Visible = false;
+        }
+
+        private void ShutDown()
+        {
             clientManager.CloseSocketConnection();
-            Application.Exit();
+            this.Dispose();
         }
 
         //************************************************************************************************//

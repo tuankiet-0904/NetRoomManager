@@ -51,6 +51,7 @@ namespace May_2
             this.picService = new System.Windows.Forms.PictureBox();
             this.picMessege = new System.Windows.Forms.PictureBox();
             this.picLogout = new System.Windows.Forms.PictureBox();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picAdtivertise)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picUnitity)).BeginInit();
@@ -284,6 +285,11 @@ namespace May_2
             this.picLogout.TabStop = false;
             this.picLogout.Click += new System.EventHandler(this.LogoutClickEventHandler);
             // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Text = "Client Timing";
+            this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseDoubleClick);
+            // 
             // Timing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -342,5 +348,6 @@ namespace May_2
         private System.Windows.Forms.Timer timerProgram;
         private System.Windows.Forms.PictureBox picLogout;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
     }
 }

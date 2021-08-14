@@ -283,6 +283,16 @@ namespace May_2.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap power_yellow {
+            get {
+                object obj = ResourceManager.GetObject("power_yellow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap top_5_vi_tuong_ad_ganh_team_tot_nhat_hien_tai_45e265ff6c2013_6d0022b774d0e7b31312db481ccc8170 {
             get {
                 object obj = ResourceManager.GetObject("top-5-vi-tuong-ad-ganh-team-tot-nhat-hien-tai-45e265ff6c2013_6d0022b774d0e7b31312" +

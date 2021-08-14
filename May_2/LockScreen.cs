@@ -9,6 +9,8 @@ namespace May_2
         public ClientManager clientManager;
         public bool lockMode;
         private string password = "";
+        public delegate void MyDel();
+        public MyDel ShutDown;
 
         public LockScreen(ClientManager x)
         {
@@ -121,6 +123,11 @@ namespace May_2
             groupBox1.Visible = false;
         }
 
+        private void btnShutDown_Click(object sender, EventArgs e)
+        {
+            ShutDown();
+        }
+
         //************************************************************************************************//
 
         // Orther functions
@@ -143,6 +150,16 @@ namespace May_2
             txtUserName.Clear();
             txtPassword.Clear();
             txtUserName.Select();
+        }
+
+        private void btnShutDown_MouseHover(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnShutDown_MouseLeave(object sender, EventArgs e)
+        {
+
         }
     }
 }

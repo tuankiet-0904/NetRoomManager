@@ -39,7 +39,9 @@ namespace May_1
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.loginStatus = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnShutDown = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnShutDown)).BeginInit();
             this.SuspendLayout();
             // 
             // txtUserName
@@ -147,12 +149,27 @@ namespace May_1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // btnShutDown
+            // 
+            this.btnShutDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnShutDown.BackColor = System.Drawing.Color.Transparent;
+            this.btnShutDown.BackgroundImage = global::May_1.Properties.Resources.power_yellow;
+            this.btnShutDown.Location = new System.Drawing.Point(738, 388);
+            this.btnShutDown.Name = "btnShutDown";
+            this.btnShutDown.Size = new System.Drawing.Size(50, 50);
+            this.btnShutDown.TabIndex = 18;
+            this.btnShutDown.TabStop = false;
+            this.btnShutDown.Click += new System.EventHandler(this.btnShutDown_Click);
+            this.btnShutDown.MouseLeave += new System.EventHandler(this.btnShutDown_MouseLeave);
+            this.btnShutDown.MouseHover += new System.EventHandler(this.btnShutDown_MouseHover);
+            // 
             // LockScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::May_1.Properties.Resources._6fa9c33211ce7c08f2cc4fcef6144b7d;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnShutDown);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "LockScreen";
@@ -163,6 +180,7 @@ namespace May_1
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LockScreen_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnShutDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -178,5 +196,6 @@ namespace May_1
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox loginStatus;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.PictureBox btnShutDown;
     }
 }
