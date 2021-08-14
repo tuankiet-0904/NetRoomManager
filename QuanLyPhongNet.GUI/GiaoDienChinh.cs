@@ -99,7 +99,6 @@ namespace QuanLyPhongNet.GUI
                         break;
                     }
                 }
-                LoadDRGVNKDN();
             }
         }
 
@@ -280,6 +279,7 @@ namespace QuanLyPhongNet.GUI
             DAL.Bill bill = new DAL.Bill();
             bill.FoundedDate = DateTime.Now;
             bill.FoundedUserID = servermanager.MemberID;
+            bill.FoundedUserName = NetRoomReader.Instance.FindUserNameByID(servermanager.MemberID);
             bill.PriceTotal = float.Parse(txtTotalPrice.Text);
             NetRoomWritter.Instance.InsertBill(bill);
             LoadDRGVNKGD();

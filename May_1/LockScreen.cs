@@ -107,7 +107,7 @@ namespace May_1
                 }
                 else
                 {
-                    showLoginStatus("Sai tài khoản hoặc mật khẩu!");
+                    showLoginStatus("Sai tài khoản! Máy này đang ở chế độ khóa!");
                 }
                 resetTxt();
             }

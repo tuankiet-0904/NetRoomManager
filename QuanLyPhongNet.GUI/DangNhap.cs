@@ -36,7 +36,7 @@ namespace QuanLyPhongNet.GUI
             else
             {
                 try
-                {
+                { 
                     foreach (DTO.User user in NetRoomReader.Instance.GetAllUsers())
                     {
                         if (cboUser.Text.Equals(user.Type) && txtPassword.Text.Equals(user.LoginPass))

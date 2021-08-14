@@ -107,7 +107,7 @@ namespace May_2
                 }
                 else
                 {
-                    showLoginStatus("Sai tài khoản hoặc mật khẩu!");
+                    showLoginStatus("Sai tài khoản! Máy này đang ở chế độ khóa!");
                 }
                 resetTxt();
             }
@@ -159,12 +159,12 @@ namespace May_2
 
         private void btnShutDown_MouseHover(object sender, EventArgs e)
         {
-
+            btnShutDown.BorderStyle = BorderStyle.Fixed3D;
         }
 
         private void btnShutDown_MouseLeave(object sender, EventArgs e)
         {
-
+            btnShutDown.BorderStyle = BorderStyle.None;
         }
     }
 }

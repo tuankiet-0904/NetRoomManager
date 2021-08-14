@@ -116,7 +116,7 @@ namespace QuanLyPhongNet.GUI
             this.drgvNKGD.Name = "drgvNKGD";
             this.drgvNKGD.RowHeadersWidth = 62;
             this.drgvNKGD.RowTemplate.Height = 28;
-            this.drgvNKGD.Size = new System.Drawing.Size(885, 480);
+            this.drgvNKGD.Size = new System.Drawing.Size(1157, 551);
             this.drgvNKGD.TabIndex = 0;
             // 
             // tabPage3
