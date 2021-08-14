@@ -175,6 +175,7 @@ namespace May_1
             this.Name = "LockScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LockScreen";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LockScreen_FormClosing);
             this.Load += new System.EventHandler(this.LockScreen_Load);
             this.Click += new System.EventHandler(this.LockScreen_Click);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LockScreen_KeyDown);

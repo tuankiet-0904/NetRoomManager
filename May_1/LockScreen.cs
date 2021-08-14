@@ -87,6 +87,11 @@ namespace May_1
             }
         }
 
+        private void LockScreen_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+        }
+
         //************************************************************************************************//
 
         // Buttons Click
