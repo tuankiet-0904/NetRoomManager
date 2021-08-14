@@ -202,7 +202,6 @@ namespace May_1
             this.listFood.TileSize = new System.Drawing.Size(304, 50);
             this.listFood.UseCompatibleStateImageBehavior = false;
             this.listFood.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listFood_ItemChecked);
-            this.listFood.SelectedIndexChanged += new System.EventHandler(this.listFood_SelectedIndexChanged);
             // 
             // IMGListFood
             // 

@@ -58,7 +58,7 @@ namespace May_2
         {
             String time = DateTime.Now.ToString("HH:mm:ss");
             if (txtSend.Text != string.Empty)
-                clientManager.SendMessage("[" + time + "] " + clientManager.userName + ": " + txtSend.Text);
+                clientManager.SendMessage(clientManager.userName + ": " + txtSend.Text);
             AllMessageBox.Items.Add(new ListViewItem() { Text = "[" + time + "] " + clientManager.userName + ": " + txtSend.Text, ForeColor = Color.Blue });
             txtSend.Clear();
             txtSend.Select();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoAnSE;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,12 @@ namespace May_1
 {
     public partial class OrderDichVu : Form
     {
-        public OrderDichVu()
+        public ClientManager clientManager;
+
+        public OrderDichVu(ClientManager x)
         {
             InitializeComponent();
+            clientManager = x;
         }
 
         //************************************************************************************************//
@@ -30,7 +34,7 @@ namespace May_1
         // Button Add
         private void picAdd_Click(object sender, EventArgs e)
         {
-            if (DGVOrder.CurrentRow.Cells[0].Value != null)
+            if (DGVOrder.Rows.Count > 1 && DGVOrder.SelectedRows[0].Cells[0].Value != null)
             {
                 DGVOrder.CurrentRow.Cells[1].Value = Convert.ToInt32(DGVOrder.CurrentRow.Cells[1].Value.ToString()) + 1;
                 CountPrice();
@@ -53,7 +57,7 @@ namespace May_1
         // Button Sub
         private void picSubtract_Click(object sender, EventArgs e)
         {
-            if (DGVOrder.CurrentRow.Cells[0].Value != null)
+            if (DGVOrder.Rows.Count > 1 && DGVOrder.SelectedRows[0].Cells[0].Value != null)
             {
                 int value = Convert.ToInt32(DGVOrder.CurrentRow.Cells[1].Value.ToString());
                 if (value > 1)
@@ -80,7 +84,7 @@ namespace May_1
         // Note
         private void txtNote_TextChanged(object sender, EventArgs e)
         {
-            if (DGVOrder.CurrentRow.Cells[0].Value != null)
+            if (DGVOrder.Rows.Count > 1 && DGVOrder.SelectedRows[0].Cells[0].Value != null)
             {
                 string note = txtNote.Text;
                 DGVOrder.CurrentRow.Cells[4].Value = note;
@@ -90,11 +94,6 @@ namespace May_1
         //************************************************************************************************//
 
         // Tab Food
-        private void listFood_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void listFood_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             if (listFood.SelectedItems.Count > 0)
@@ -177,12 +176,12 @@ namespace May_1
             newRow.Cells[1].Value = 1;
             if (cardPrice == null)
             {
-                newRow.Cells[2].Value = RemoveDot(price);
+                newRow.Cells[2].Value = price;
                 newRow.Cells[4].Value = "";
             }
             else
             {
-                newRow.Cells[2].Value = RemoveDot(cardPrice);
+                newRow.Cells[2].Value = cardPrice;
                 newRow.Cells[4].Value = "Thẻ cào";
             }
             newRow.Cells[3].Value = newRow.Cells[2].Value;
@@ -239,7 +238,17 @@ namespace May_1
         // Button Order
         private void btnOrder_Click(object sender, EventArgs e)
         {
-
+            string order = "";
+            foreach (DataGridViewRow i in DGVOrder.Rows)
+            {
+                if (i.Cells[0].Value != null)
+                {
+                    order += i.Cells[0].Value.ToString() + "-" + i.Cells[1].Value.ToString() + "-" + i.Cells[2].Value.ToString() + "-"
+                           + i.Cells[3].Value.ToString() + "-" + i.Cells[4].Value.ToString() + "/";
+                }
+            }
+            order += txtTotalPrice.Text;
+            clientManager.SendOrder(order);
         }
 
         //************************************************************************************************//
@@ -255,9 +264,12 @@ namespace May_1
         // ComboBox Card's price
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DGVOrder.CurrentRow.Cells[2].Value = RemoveDot(comboBox1.SelectedItem.ToString());
-            CountPrice();
-            CountTotalPrice();
+            if (comboBox1.SelectedItem != null)
+            {
+                DGVOrder.CurrentRow.Cells[2].Value = comboBox1.SelectedItem.ToString();
+                CountPrice();
+                CountTotalPrice();
+            }
         }
 
         //************************************************************************************************//
@@ -274,10 +286,24 @@ namespace May_1
             return res;
         }
 
+        public string AddDot(string input)
+        {
+            string res = "";
+            int index = input.Length;
+            while (index > 3)
+            {
+                index -= 3;
+                string sub = input.Substring(index, 3);
+                res = "." + sub + res;
+            }          
+            res = input.Substring(0, index) + res;
+            return res;
+        }
+
         private void CountPrice()
         {
-            DGVOrder.CurrentRow.Cells[3].Value = Convert.ToInt32(RemoveDot(DGVOrder.CurrentRow.Cells[2].Value.ToString())) *
-                Convert.ToInt32(RemoveDot(DGVOrder.CurrentRow.Cells[1].Value.ToString()));
+            DGVOrder.CurrentRow.Cells[3].Value = AddDot((Convert.ToInt32(RemoveDot(DGVOrder.CurrentRow.Cells[2].Value.ToString())) *
+                Convert.ToInt32(RemoveDot(DGVOrder.CurrentRow.Cells[1].Value.ToString()))).ToString());
         }
         
         private void CountTotalPrice()
@@ -290,7 +316,7 @@ namespace May_1
                     totalPrice += Convert.ToInt32(RemoveDot(i.Cells[3].Value.ToString()));
                 }
             }
-            txtTotalPrice.Text = totalPrice.ToString(); 
+            txtTotalPrice.Text = AddDot(totalPrice.ToString()); 
         }
     }
 }

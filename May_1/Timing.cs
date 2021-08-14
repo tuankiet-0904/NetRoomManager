@@ -188,7 +188,7 @@ namespace May_1
 
         private void picService_Click(object sender, EventArgs e)
         {
-            OrderDichVu frmOrder = new OrderDichVu();
+            OrderDichVu frmOrder = new OrderDichVu(clientManager);
             frmOrder.ShowDialog();
         }
 

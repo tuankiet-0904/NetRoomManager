@@ -138,7 +138,8 @@ namespace QuanLyPhongNet.BUS
                     }
                     if (lstMessege[request].Equals("Message!!"))
                     {
-                        MessageFromClient = lstMessege[2] + ": " + lstMessege[1];
+                        String time = "[" + DateTime.Now.ToString("HH:mm:ss") + "]";
+                        MessageFromClient = time + " " + lstMessege[2] + ": " + lstMessege[1];
                         MessageCode = 1;
                         clientsend = lstMessege[2];
                     }
@@ -167,6 +168,13 @@ namespace QuanLyPhongNet.BUS
                                 currentClient.Send(ConvertToByte("Wrong Old Password!|"));
                                 break;
                         }
+                    }
+                    if (lstMessege[request].Equals("Order!!"))
+                    {
+                        String time = "[" + DateTime.Now.ToString("HH:mm:ss") + "]";
+                        MessageFromClient = time + " Order from " + lstMessege[2] + ": |" + lstMessege[1];
+                        MessageCode = 2;
+                        clientsend = lstMessege[2];
                     }
                     if (lstMessege[request].Equals("Disconnect!!"))
                     {

@@ -98,6 +98,11 @@ namespace DoAnSE
             client.Send(ConvertToByte("UpdatePassword!!|" + userName + "|" + oldPass + "|" + newPass + "|"));
         }
 
+        public void SendOrder(string order)
+        {
+            client.Send(ConvertToByte("Order!!|" + order + "|" + "May-1|"));
+        }
+
         public void ReceiveDataFromSever()
         {
             try

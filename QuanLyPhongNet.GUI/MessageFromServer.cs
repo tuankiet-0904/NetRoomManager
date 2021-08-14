@@ -40,11 +40,30 @@ namespace QuanLyPhongNet.GUI
             LoadCBBUsingClients();
             if (ServerManager.MessageCode == 1)
             {
-                this.TopMost = true;
                 this.Visible = true;
                 ServerManager.MessageCode = -1;
-                String time = DateTime.Now.ToString("HH:mm:ss");
                 AllMessageBox.Items.Add(new ListViewItem() { Text = ServerManager.MessageFromClient, ForeColor = Color.Blue });
+            }
+            if (ServerManager.MessageCode == 2) 
+            {
+                this.Visible = true;
+                ServerManager.MessageCode = -1;
+                
+                List<string> message = ServerManager.MessageFromClient.Split('|').ToList();
+                AllMessageBox.Items.Add(new ListViewItem() { Text = message[0], ForeColor = Color.Blue });
+                string Column = string.Format("| {0,-30} {1,-10} {2,-15} {3,-15} {4,-30}",
+                        "Order", "Số lượng", "Đơn giá", "Thành tiền", "Ghi chú thêm");
+                AllMessageBox.Items.Add(new ListViewItem() { Text = Column, ForeColor = Color.Blue });
+
+                List<string> order = message[1].Split('/').ToList();
+                for (int i = 0; i < order.Count-1; i++)
+                { 
+                    List<string> item = order[i].Split('-').ToList();
+                    string res = string.Format("| {0,-20} {1,5} {2,15} {3,15} {4,-30}",
+                           item[0], item[1], item[2], item[3], item[4]);
+                    AllMessageBox.Items.Add(new ListViewItem() { Text = res, ForeColor = Color.Blue });
+                }
+                AllMessageBox.Items.Add(new ListViewItem() { Text = "Tổng cộng: " + order[order.Count - 1], ForeColor = Color.Blue });
             }
         }
 
