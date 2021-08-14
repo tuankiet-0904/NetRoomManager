@@ -51,16 +51,16 @@ namespace QuanLyPhongNet.GUI
                 
                 List<string> message = ServerManager.MessageFromClient.Split('|').ToList();
                 AllMessageBox.Items.Add(new ListViewItem() { Text = message[0], ForeColor = Color.Blue });
-                string Column = string.Format("| {0,-30} {1,-10} {2,-15} {3,-15} {4,-30}",
-                        "Order", "Số lượng", "Đơn giá", "Thành tiền", "Ghi chú thêm");
+                string Column = "Order".PadRight(20) + "Số lượng".PadRight(10) + "Đơn giá".PadRight(15) + 
+                                "Thành tiền".PadRight(15) + "Ghi chú thêm".PadRight(20);
                 AllMessageBox.Items.Add(new ListViewItem() { Text = Column, ForeColor = Color.Blue });
 
                 List<string> order = message[1].Split('/').ToList();
                 for (int i = 0; i < order.Count-1; i++)
                 { 
                     List<string> item = order[i].Split('-').ToList();
-                    string res = string.Format("| {0,-20} {1,5} {2,15} {3,15} {4,-30}",
-                           item[0], item[1], item[2], item[3], item[4]);
+                    string res = item[0].PadRight(20) + item[1].PadRight(10) + item[2].PadRight(15) + 
+                                 item[3].PadRight(15) + item[4].PadRight(20);
                     AllMessageBox.Items.Add(new ListViewItem() { Text = res, ForeColor = Color.Blue });
                 }
                 AllMessageBox.Items.Add(new ListViewItem() { Text = "Tổng cộng: " + order[order.Count - 1], ForeColor = Color.Blue });

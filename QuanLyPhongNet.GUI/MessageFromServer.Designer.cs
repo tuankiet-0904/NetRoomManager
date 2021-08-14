@@ -47,10 +47,10 @@ namespace QuanLyPhongNet.GUI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSend.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtSend.Location = new System.Drawing.Point(9, 445);
+            this.txtSend.Location = new System.Drawing.Point(9, 595);
             this.txtSend.Multiline = false;
             this.txtSend.Name = "txtSend";
-            this.txtSend.Size = new System.Drawing.Size(643, 43);
+            this.txtSend.Size = new System.Drawing.Size(893, 43);
             this.txtSend.TabIndex = 14;
             this.txtSend.Text = "";
             this.txtSend.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSend_KeyDown);
@@ -60,7 +60,7 @@ namespace QuanLyPhongNet.GUI
             this.btnSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSend.BackColor = System.Drawing.Color.DarkTurquoise;
             this.btnSend.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnSend.Location = new System.Drawing.Point(658, 444);
+            this.btnSend.Location = new System.Drawing.Point(908, 594);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(65, 50);
             this.btnSend.TabIndex = 13;
@@ -73,11 +73,11 @@ namespace QuanLyPhongNet.GUI
             this.AllMessageBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.AllMessageBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.AllMessageBox.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AllMessageBox.HideSelection = false;
             this.AllMessageBox.Location = new System.Drawing.Point(9, 9);
             this.AllMessageBox.Name = "AllMessageBox";
-            this.AllMessageBox.Size = new System.Drawing.Size(708, 423);
+            this.AllMessageBox.Size = new System.Drawing.Size(958, 573);
             this.AllMessageBox.TabIndex = 16;
             this.AllMessageBox.UseCompatibleStateImageBehavior = false;
             this.AllMessageBox.View = System.Windows.Forms.View.List;
@@ -90,7 +90,7 @@ namespace QuanLyPhongNet.GUI
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "All"});
-            this.comboBox1.Location = new System.Drawing.Point(586, 400);
+            this.comboBox1.Location = new System.Drawing.Point(836, 550);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(127, 28);
@@ -100,7 +100,7 @@ namespace QuanLyPhongNet.GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(732, 503);
+            this.ClientSize = new System.Drawing.Size(982, 653);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.AllMessageBox);
             this.Controls.Add(this.txtSend);
