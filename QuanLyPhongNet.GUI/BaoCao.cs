@@ -56,12 +56,13 @@ namespace QuanLyPhongNet.GUI
         {
             drgvNKHT.DataSource = NetRoomReader.Instance.GetAllTransactionDiaries();
             drgvNKHT.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            drgvNKHT.Columns[0].HeaderText = "ID tài khoản";
+            drgvNKHT.Columns[0].HeaderText = "ID người dùng";
             drgvNKHT.Columns[1].HeaderText = "Người sử dụng";
-            drgvNKHT.Columns[2].HeaderText = "Ngày nạp";
-            drgvNKHT.Columns[3].HeaderText = "Tiền nạp thêm";
+            drgvNKHT.Columns[2].HeaderText = "ID tài khoản";
+            drgvNKHT.Columns[3].HeaderText = "Ngày nạp";
             drgvNKHT.Columns[4].HeaderText = "Giờ nạp thêm";
-            drgvNKHT.Columns[5].HeaderText = "Ghi Chú";
+            drgvNKHT.Columns[5].HeaderText = "Tiền nạp thêm";
+            drgvNKHT.Columns[6].HeaderText = "Ghi Chú";
         }
 
         //************************************************************************************************//

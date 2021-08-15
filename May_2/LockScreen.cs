@@ -85,6 +85,16 @@ namespace May_2
                 clientManager.message2 = "";
                 resetTxt();
             }
+            if (lockMode == true)
+            {
+                btnShutDown.Visible = false;
+                btnShutDown.Enabled = false;
+            }
+            else
+            {
+                btnShutDown.Visible = true;
+                btnShutDown.Enabled = true;
+            }
         }
 
         private void LockScreen_FormClosing(object sender, FormClosingEventArgs e)
