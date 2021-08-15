@@ -70,7 +70,8 @@ namespace QuanLyPhongNet.BUS
                 }
                 catch
                 {
-
+                    iP = new IPEndPoint(IPAddress.Any, portCode);
+                    socketServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
                 }
             }
         }
