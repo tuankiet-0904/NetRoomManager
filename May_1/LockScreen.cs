@@ -85,16 +85,6 @@ namespace May_1
                 clientManager.message2 = "";
                 resetTxt();
             }
-            if (lockMode == true)
-            {
-                btnShutDown.Visible = false;
-                btnShutDown.Enabled = false;
-            }
-            else
-            {
-                btnShutDown.Visible = true;
-                btnShutDown.Enabled = true;
-            }
         }
 
         private void LockScreen_FormClosing(object sender, FormClosingEventArgs e)
@@ -114,6 +104,7 @@ namespace May_1
                     this.lockMode = false;
                     this.Visible = false;
                     this.TopMost = false;
+                    ShowButtonShutdown();
                 }
                 else
                 {
@@ -165,6 +156,18 @@ namespace May_1
             txtUserName.Clear();
             txtPassword.Clear();
             txtUserName.Select();
+        }
+
+        public void HideButtonShutdown()
+        {
+            btnShutDown.Visible = false;
+            btnShutDown.Enabled = false;
+        }
+
+        public void ShowButtonShutdown()
+        {
+            btnShutDown.Visible = true;
+            btnShutDown.Enabled = true;
         }
 
         private void btnShutDown_MouseHover(object sender, EventArgs e)

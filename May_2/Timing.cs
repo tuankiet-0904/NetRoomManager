@@ -232,6 +232,7 @@ namespace May_2
             clientManager.lockScreen.TopMost = true;
             clientManager.lockScreen.showLoginStatus("Chế độ chờ - Mời đăng nhập lại để tiếp tục!");
             clientManager.lockScreen.resetTxt();
+            clientManager.lockScreen.HideButtonShutdown();
         } 
 
         private void picUnitity_Click(object sender, EventArgs e)
