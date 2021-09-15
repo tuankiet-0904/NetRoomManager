@@ -14,8 +14,6 @@ namespace QuanLyPhongNet.DTO
         private DateTime foundedDate;
         private float priceTotal;
 
-        
-
         public int FoundedUserID
         {
             get

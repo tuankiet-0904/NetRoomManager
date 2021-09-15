@@ -303,7 +303,7 @@ namespace QuanLyPhongNet.BUS
         {
             return ProcessDrink.Instance.LoadAllDrinks();
         }
-        
+
         public List<DTO.Drink> GetListDrink(string searchBy, string searchFor)
         {
             List<DTO.Drink> list = new List<DTO.Drink>();
@@ -348,7 +348,7 @@ namespace QuanLyPhongNet.BUS
             }
             return list;
         }
-        
+
         public DTO.Drink GetDrinkByID(int ID)
         {
             foreach (DTO.Drink i in GetAllDrinks())
@@ -838,7 +838,7 @@ namespace QuanLyPhongNet.BUS
         {
             return ProcessBill.Instance.LoadAllBills();
         }
-          
+
         public List<DTO.Bill> GetListBills(string searchBy, string searchFor)
         {
             List<DTO.Bill> list = new List<DTO.Bill>();
@@ -882,6 +882,6 @@ namespace QuanLyPhongNet.BUS
                 }
             }
             return list;
-        }  
+        }
     }
 }

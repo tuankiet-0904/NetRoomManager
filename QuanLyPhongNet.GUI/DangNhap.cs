@@ -29,14 +29,14 @@ namespace QuanLyPhongNet.GUI
                 cboUser.Select();
             }
             else if (txtPassword.Text.Equals(""))
-            { 
+            {
                 MessageBox.Show("Chưa nhập mật khẩu!", "Chú ý!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtPassword.Select();
             }
             else
             {
                 try
-                { 
+                {
                     foreach (DTO.User user in NetRoomReader.Instance.GetAllUsers())
                     {
                         if (cboUser.Text.Equals(user.Type) && txtPassword.Text.Equals(user.LoginPass))
@@ -102,7 +102,7 @@ namespace QuanLyPhongNet.GUI
             }
             else servermanager.CloseSocketConnection();
         }
-        
+
         private void DangNhap_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();

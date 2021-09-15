@@ -26,7 +26,7 @@ namespace May_1
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
-            
+
             clientManager = new ClientManager();
             clientManager.lockScreen.ShutDown += this.ShutDown;
             timerProgram.Interval = 1000;
@@ -154,7 +154,7 @@ namespace May_1
             }
 
         }
-        
+
         private int ChangeUseTimeToMinutes(String useTime)
         {
             int minutes = 0;
@@ -171,7 +171,7 @@ namespace May_1
 
             return minutes;
         }
-        
+
         private void MoneyCount(String useTime)
         {
             int time = ChangeUseTimeToMinutes(useTime);

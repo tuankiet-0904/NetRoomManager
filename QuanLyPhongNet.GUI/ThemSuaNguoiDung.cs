@@ -37,7 +37,7 @@ namespace QuanLyPhongNet.GUI
         {
             if (txtID.Text != "" || txtName.Text != "" || txtPass.Text != "")
             {
-                
+
                 int new_ID = int.Parse(txtID.Text);
                 if (NetRoomReader.Instance.CheckUserPass(new_ID, txtPass.Text))
                 {
@@ -76,6 +76,6 @@ namespace QuanLyPhongNet.GUI
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Dispose();
-        }  
+        }
     }
 }

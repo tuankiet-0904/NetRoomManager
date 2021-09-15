@@ -431,181 +431,181 @@ namespace QuanLyPhongNet.GUI
             }
         }
 
-            // Member Tab
-            private void LoadDRGVMember()
-                        {
-                            drgvMember.DataSource = NetRoomReader.Instance.GetAllMembers();
-                            drgvMember.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                            drgvMember.Columns[0].HeaderText = "ID";
-                            drgvMember.Columns[1].HeaderText = "Tên tài khoản";
-                            drgvMember.Columns[2].HeaderText = "Mật khẩu";
-                            drgvMember.Columns[3].HeaderText = "Thuộc nhóm";
-                            drgvMember.Columns[4].HeaderText = "Thời gian hiện có";
-                            drgvMember.Columns[5].HeaderText = "Số tiền hiện có";
-                            drgvMember.Columns[6].HeaderText = "Trạng thái";
-                        }
-        
-            private void LoadDRGVClient(string searchBy, string searchFor)
-            {
-                drgvMember.DataSource = NetRoomReader.Instance.GetListMembers(searchBy, searchFor);
-            }
+        // Member Tab
+        private void LoadDRGVMember()
+        {
+            drgvMember.DataSource = NetRoomReader.Instance.GetAllMembers();
+            drgvMember.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            drgvMember.Columns[0].HeaderText = "ID";
+            drgvMember.Columns[1].HeaderText = "Tên tài khoản";
+            drgvMember.Columns[2].HeaderText = "Mật khẩu";
+            drgvMember.Columns[3].HeaderText = "Thuộc nhóm";
+            drgvMember.Columns[4].HeaderText = "Thời gian hiện có";
+            drgvMember.Columns[5].HeaderText = "Số tiền hiện có";
+            drgvMember.Columns[6].HeaderText = "Trạng thái";
+        }
 
-            private void drgvMember_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-            {
-                SuaThanhVien f = new SuaThanhVien(servermanager, (int)drgvMember.CurrentRow.Cells[0].Value);
-                f.ShowDialog();
-                LoadDRGVNKHT();
-            }
+        private void LoadDRGVClient(string searchBy, string searchFor)
+        {
+            drgvMember.DataSource = NetRoomReader.Instance.GetListMembers(searchBy, searchFor);
+        }
 
-            private void cbbSearchMember_SelectedIndexChanged(object sender, EventArgs e)
-            {
-                txtSearchMember.Text = "";
-                txtSearchMember.Focus();
-            }
+        private void drgvMember_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SuaThanhVien f = new SuaThanhVien(servermanager, (int)drgvMember.CurrentRow.Cells[0].Value);
+            f.ShowDialog();
+            LoadDRGVNKHT();
+        }
 
-            private void picAddMember_Click(object sender, EventArgs e)
-            {
-                ThemSuaThanhVien f = new ThemSuaThanhVien(servermanager);
-                f.ShowDialog();
-                LoadDRGVMember();
-                LoadDRGVNKHT();
-            }
+        private void cbbSearchMember_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtSearchMember.Text = "";
+            txtSearchMember.Focus();
+        }
 
-            private void picUpdateMember_Click(object sender, EventArgs e)
-            {
-                SuaThanhVien f = new SuaThanhVien(servermanager, (int)drgvMember.CurrentRow.Cells[0].Value);
-                f.ShowDialog();
-                LoadDRGVMember();
-                LoadDRGVNKHT();
-            }
+        private void picAddMember_Click(object sender, EventArgs e)
+        {
+            ThemSuaThanhVien f = new ThemSuaThanhVien(servermanager);
+            f.ShowDialog();
+            LoadDRGVMember();
+            LoadDRGVNKHT();
+        }
 
-            private void btnSearchMember_Click(object sender, EventArgs e)
-            {
-                string cbbitem = cbbSearchMember.SelectedItem.ToString();
-                string name = txtSearchMember.Text;
-                LoadDRGVClient(cbbitem, name);
-            }
+        private void picUpdateMember_Click(object sender, EventArgs e)
+        {
+            SuaThanhVien f = new SuaThanhVien(servermanager, (int)drgvMember.CurrentRow.Cells[0].Value);
+            f.ShowDialog();
+            LoadDRGVMember();
+            LoadDRGVNKHT();
+        }
 
-            private void picMemberInfo_Click(object sender, EventArgs e)
+        private void btnSearchMember_Click(object sender, EventArgs e)
+        {
+            string cbbitem = cbbSearchMember.SelectedItem.ToString();
+            string name = txtSearchMember.Text;
+            LoadDRGVClient(cbbitem, name);
+        }
+
+        private void picMemberInfo_Click(object sender, EventArgs e)
+        {
+            if (drgvMember.SelectedRows.Count == 0)
             {
-                if (drgvMember.SelectedRows.Count == 0)
+                MessageBox.Show("Bạn chưa chọn tài khoản hội viên nào!", "Thông báo!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (drgvMember.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Bạn chọn quá nhiều tài khoản hội viên!", "Thông báo!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            int memberID = Convert.ToInt32(drgvMember.SelectedRows[0].Cells["ID"].Value);
+            ThongTinKhachHang memberInfo = new ThongTinKhachHang(memberID);
+            memberInfo.ShowDialog();
+        }
+
+        // User Tab
+        private void LoadDRGVUser()
+        {
+            drgvUser.DataSource = NetRoomReader.Instance.GetAllUsers();
+            drgvUser.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            drgvUser.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            drgvUser.Columns[0].HeaderText = "ID";
+            drgvUser.Columns[1].HeaderText = "Tên người dùng";
+            drgvUser.Columns[3].HeaderText = "Mật khẩu";
+            drgvUser.Columns[2].HeaderText = "Kiểu người dùng";
+            drgvUser.Columns[4].HeaderText = "Nhóm người dùng";
+            drgvUser.Columns[5].HeaderText = "Số điện thoại";
+            drgvUser.Columns[6].HeaderText = "Địa chỉ Email";
+            if (servermanager.MemberID != 0)
+            {
+                drgvUser.Columns[3].Visible = false;
+            }
+        }
+
+        private void LoadDRGVUser(string searchBy, string searchFor)
+        {
+            drgvUser.DataSource = NetRoomReader.Instance.GetListUsers(searchBy, searchFor);
+            if (servermanager.MemberID != 0)
+            {
+                drgvUser.Columns[3].Visible = false;
+            }
+        }
+
+        private void picAddUser_Click(object sender, EventArgs e)
+        {
+            if (servermanager.MemberID != 0)
+            {
+                MessageBox.Show("Bạn không có quyền thực hiện chức năng này!", "Lỗi!",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                ThemSuaNguoiDung frmAddUser = new ThemSuaNguoiDung();
+                frmAddUser.ShowDialog();
+                LoadDRGVUser();
+            }
+        }
+
+        private void picUpdateUser_Click(object sender, EventArgs e)
+        {
+            if (servermanager.MemberID != 0)
+            {
+                MessageBox.Show("Bạn không có quyền thực hiện chức năng này!", "Lỗi!",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                int ID = int.Parse(drgvUser.CurrentRow.Cells[0].Value.ToString());
+                int numUser = drgvUser.Rows.Count - 1;
+                ThemSuaNguoiDung frmUpdateUser = new ThemSuaNguoiDung(ID);
+                frmUpdateUser.ShowDialog();
+                LoadDRGVUser();
+            }
+        }
+
+        private void picDeleteUser_Click(object sender, EventArgs e)
+        {
+            if (servermanager.MemberID != 0)
+            {
+                MessageBox.Show("Bạn không có quyền thực hiện chức năng này!", "Lỗi!",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                if (drgvUser.SelectedRows[0].Cells[0].Value.ToString().Equals("0"))
                 {
-                    MessageBox.Show("Bạn chưa chọn tài khoản hội viên nào!", "Thông báo!",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Không thể xóa tài khoản Manager!", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                if (drgvMember.SelectedRows.Count > 1)
-                {
-                    MessageBox.Show("Bạn chọn quá nhiều tài khoản hội viên!", "Thông báo!",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                int memberID = Convert.ToInt32(drgvMember.SelectedRows[0].Cells["ID"].Value);
-                ThongTinKhachHang memberInfo = new ThongTinKhachHang(memberID);
-                memberInfo.ShowDialog();
-            }
-
-            // User Tab
-            private void LoadDRGVUser()
-                        {
-                            drgvUser.DataSource = NetRoomReader.Instance.GetAllUsers();
-                            drgvUser.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                            drgvUser.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                            drgvUser.Columns[0].HeaderText = "ID";
-                            drgvUser.Columns[1].HeaderText = "Tên người dùng";
-                            drgvUser.Columns[3].HeaderText = "Mật khẩu";
-                            drgvUser.Columns[2].HeaderText = "Kiểu người dùng";
-                            drgvUser.Columns[4].HeaderText = "Nhóm người dùng";
-                            drgvUser.Columns[5].HeaderText = "Số điện thoại";
-                            drgvUser.Columns[6].HeaderText = "Địa chỉ Email";
-                            if (servermanager.MemberID != 0)
-                            {
-                                drgvUser.Columns[3].Visible = false;
-                            }
-                        }
-
-            private void LoadDRGVUser(string searchBy, string searchFor)
-            {
-                drgvUser.DataSource = NetRoomReader.Instance.GetListUsers(searchBy, searchFor);
-                if (servermanager.MemberID != 0)
-                {
-                    drgvUser.Columns[3].Visible = false;
-                }
-            }
-
-            private void picAddUser_Click(object sender, EventArgs e)
-            {
-                if (servermanager.MemberID != 0)
-                {
-                    MessageBox.Show("Bạn không có quyền thực hiện chức năng này!", "Lỗi!",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                else
-                {
-                    ThemSuaNguoiDung frmAddUser = new ThemSuaNguoiDung();
-                    frmAddUser.ShowDialog();
-                    LoadDRGVUser();
-                }
-            }
-
-            private void picUpdateUser_Click(object sender, EventArgs e)
-            {
-                if (servermanager.MemberID != 0)
-                {
-                    MessageBox.Show("Bạn không có quyền thực hiện chức năng này!", "Lỗi!",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                else
+                if (MessageBox.Show("Bạn có chắc chắn muốn xóa tài khoản này?", "Thông Báo!",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int ID = int.Parse(drgvUser.CurrentRow.Cells[0].Value.ToString());
-                    int numUser = drgvUser.Rows.Count - 1;
-                    ThemSuaNguoiDung frmUpdateUser = new ThemSuaNguoiDung(ID);
-                    frmUpdateUser.ShowDialog();
+                    NetRoomWritter.Instance.DeleteUser(ID);
+                    MessageBox.Show("Xóa người dùng thành công!", "Thông báo!",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadDRGVUser();
                 }
             }
+        }
 
-            private void picDeleteUser_Click(object sender, EventArgs e)
-            {
-                if (servermanager.MemberID != 0)
-                {
-                    MessageBox.Show("Bạn không có quyền thực hiện chức năng này!", "Lỗi!",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                else
-                {
-                    if (drgvUser.SelectedRows[0].Cells[0].Value.ToString().Equals("0"))
-                    {
-                        MessageBox.Show("Không thể xóa tài khoản Manager!", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    if (MessageBox.Show("Bạn có chắc chắn muốn xóa tài khoản này?", "Thông Báo!",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        int ID = int.Parse(drgvUser.CurrentRow.Cells[0].Value.ToString());
-                        NetRoomWritter.Instance.DeleteUser(ID);
-                        MessageBox.Show("Xóa người dùng thành công!", "Thông báo!",
-                                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadDRGVUser();
-                    }
-                }
-            }
+        private void cbbSearchUser_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtSearchUser.Text = "";
+            txtSearchUser.Focus();
+        }
 
-            private void cbbSearchUser_SelectedIndexChanged(object sender, EventArgs e)
-            {
-                txtSearchUser.Text = "";
-                txtSearchUser.Focus();
-            }
-
-            private void picSearchUser_Click(object sender, EventArgs e)
-            {
-                string searchBy = cbbSearchUser.SelectedItem.ToString();
-                string searchFor = txtSearchUser.Text;
-                LoadDRGVUser(searchBy, searchFor);
-            }
+        private void picSearchUser_Click(object sender, EventArgs e)
+        {
+            string searchBy = cbbSearchUser.SelectedItem.ToString();
+            string searchFor = txtSearchUser.Text;
+            LoadDRGVUser(searchBy, searchFor);
+        }
 
         //************************************************************************************************//
 
@@ -900,7 +900,7 @@ namespace QuanLyPhongNet.GUI
             drgvClientGroup.Columns[0].HeaderText = "Tên nhóm máy";
             drgvClientGroup.Columns[1].HeaderText = "Mô tả";
         }
-        
+
         private void LoadDRGVClientGroup(string searchBy, string searchFor)
         {
             drgvClientGroup.DataSource = NetRoomReader.Instance.GetListClientGroup(searchBy, searchFor);
@@ -1049,7 +1049,7 @@ namespace QuanLyPhongNet.GUI
         {
             btnSearchMember.BorderStyle = BorderStyle.None;
         }
-        
+
         private void picAddMember_MouseHover(object sender, EventArgs e)
         {
             picAddMember.BorderStyle = BorderStyle.Fixed3D;
@@ -1069,7 +1069,7 @@ namespace QuanLyPhongNet.GUI
         {
             picUpdateMember.BorderStyle = BorderStyle.None;
         }
-    
+
         private void picCalculateMoney_MouseHover(object sender, EventArgs e)
         {
             picCalculateMoney.BorderStyle = BorderStyle.Fixed3D;
@@ -1078,7 +1078,7 @@ namespace QuanLyPhongNet.GUI
         private void picCalculateMoney_MouseLeave(object sender, EventArgs e)
         {
             picCalculateMoney.BorderStyle = BorderStyle.None;
-        }   
+        }
 
         private void picOpenClient_MouseHover(object sender, EventArgs e)
         {
@@ -1269,7 +1269,7 @@ namespace QuanLyPhongNet.GUI
         {
             picUpdateGroupClient.BorderStyle = BorderStyle.None;
         }
-       
+
         private void picSendMessage_MouseHover(object sender, EventArgs e)
         {
             picSendMessage.BorderStyle = BorderStyle.Fixed3D;

@@ -35,6 +35,10 @@ namespace DoAnSE
         public int loginID = 0;
         public TimeSpan totalTime;
 
+        public List<String> FoodData = new List<string>();
+        public List<String> DrinkData = new List<string>();
+        public List<String> CardData = new List<string>();
+
         public ClientManager()
         {
             iP = new IPEndPoint(IPAddress.Parse("127.0.0.1"), portCode);
@@ -59,11 +63,7 @@ namespace DoAnSE
 
         public void CloseSocketConnection()
         {
-            try
-            {
-                client.Send(ConvertToByte("Disconnect!!|" + "MAY-2|"));
-            }
-            catch { }
+            client.Send(ConvertToByte("Disconnect!!|" + "MAY-2|"));
             client.Close();
         }
 
@@ -72,9 +72,9 @@ namespace DoAnSE
             client.Send(ConvertToByte("AllowToLogInPls!!|" + userName + "|" + passWord + "|" + "MAY-2|"));
         }
 
-        public void SendMessage (string message)
+        public void SendMessage(string message)
         {
-            client.Send(ConvertToByte("Message!!|" + message + "|" + "May-2|"));
+            client.Send(ConvertToByte("Message!!|" + message + "|" + "May-1|"));
         }
 
         public void LogoutMember(string userName, TimeSpan remainTime, int loginID, TimeSpan useTime, TimeSpan leftTime)
@@ -109,45 +109,79 @@ namespace DoAnSE
             {
                 while (true)
                 {
-                    byte[] messageFromClient = new byte[maxGetByte];
-                    client.Receive(messageFromClient);
-                    string message = CovertToMessage(messageFromClient).ToString();
+                    byte[] messageFromServer = new byte[maxGetByte];
+                    client.Receive(messageFromServer);
+                    string message = ConvertToMessage(messageFromServer).ToString();
                     List<string> lstMessage = message.Split('|').ToList();
                     message = "";
+
+                    if (lstMessage[request].Equals("ServiceData"))
+                    {
+                        String category = "";
+                        for (int i = 1; i < lstMessage.Count - 1; i++)
+                        {
+                            if (lstMessage[i].Equals("FoodData") || lstMessage[i].Equals("DrinkData") || lstMessage[i].Equals("CardData"))
+                            {
+                                category = lstMessage[i];
+                            }
+                            else
+                            {
+                                switch (category)
+                                {
+                                    case "FoodData":
+                                        FoodData.Add(lstMessage[i]);
+                                        break;
+                                    case "DrinkData":
+                                        DrinkData.Add(lstMessage[i]);
+                                        break;
+                                    case "CardData":
+                                        CardData.Add(lstMessage[i]);
+                                        break;
+                                }
+                            }
+                        }
+                    }
+
                     if (lstMessage[request].Equals("UseClient"))
                     {
                         userName = "Customer";
                         requestServer = USECLIENT;
                         lockScreen.Visible = false;
                     }
+
                     if (lstMessage[request].Equals("PAYMENT"))
                     {
                         message2 = "PAYMENT";
                         lockScreen.Visible = true;
                         requestServer = PAYMENT;
                     }
+
                     if (lstMessage[request].Equals("LockClient!"))
                     {
                         message2 = "LockClient!";
                         lockScreen.Visible = true;
                     }
+
                     if (lstMessage[request].Equals("ShutDown!"))
                     {
                         message2 = "ShutDown!";
                         requestServer = SHUTDOWN;
                         CloseSocketConnection();
                     }
+
                     if (lstMessage[request].Equals("Message!!"))
                     {
                         MessageCode = 1;
                         MessageFromServer = lstMessage[1];
                     }
+
                     if (lstMessage[request].Equals("This account is currently being used!"))
                     {
                         message2 = "This account is currently being used!";
                         lockScreen.Visible = true;
                         lockScreen.Show();
                     }
+
                     if (lstMessage[request].Equals("OkePlayGo"))
                     {
                         message2 = "OkePlayGo";
@@ -159,31 +193,37 @@ namespace DoAnSE
                         lockScreen.TopMost = false;
                         lockScreen.Hide();
                     }
+
                     if (lstMessage[request].Equals("Acount not exist !! Or Wrong Username, Password"))
                     {
                         message2 = "Acount not exist !! Or Wrong Username, Password";
                         lockScreen.Visible = true;
                         lockScreen.Show();
                     }
+
                     if (lstMessage[request].Equals("Your account is exhausted. Recharge to use it!!!"))
                     {
                         message2 = "Your account is exhausted. Recharge to use it!!!";
                         lockScreen.Visible = true;
                         lockScreen.Show();
                     }
+
                     if (lstMessage[request].Equals("Member Info!"))
                     {
                         message2 = "Member info received!|" + lstMessage[1] + "|" + lstMessage[2] + "|" +
                             lstMessage[3] + "|" + lstMessage[4] + "|" + lstMessage[5] + "|";
                     }
+
                     if (lstMessage[request].Equals("Update MemberInfo Success!"))
                     {
                         message2 = "Update MemberInfo Success!";
                     }
+
                     if (lstMessage[request].Equals("Update Password Success!"))
                     {
                         message2 = "Update Password Success!";
                     }
+
                     if (lstMessage[request].Equals("Wrong Old Password!"))
                     {
                         message2 = "Wrong Old Password!";
@@ -191,7 +231,7 @@ namespace DoAnSE
                 }
             }
             catch
-            { 
+            {
             }
         }
 
@@ -202,7 +242,7 @@ namespace DoAnSE
             binaryFormatter.Serialize(memoryStream, obj);
             return memoryStream.ToArray();
         }
-        object CovertToMessage(byte[] messege)
+        object ConvertToMessage(byte[] messege)
         {
             MemoryStream memoryStream = new MemoryStream(messege);
             BinaryFormatter binaryFormatter = new BinaryFormatter();

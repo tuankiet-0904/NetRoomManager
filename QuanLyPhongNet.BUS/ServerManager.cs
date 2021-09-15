@@ -29,17 +29,17 @@ namespace QuanLyPhongNet.BUS
         public TimeSpan totalTime;
         public static string clientsend;
         public string clientDisconnect = "";
-        
+
         static private ServerManager _instance;
         static public ServerManager Instance
         {
             get
             {
                 if (_instance == null)
-                _instance = new ServerManager();
+                    _instance = new ServerManager();
                 return _instance;
             }
-        private set { }
+            private set { }
         }
 
         public ServerManager()
@@ -91,10 +91,10 @@ namespace QuanLyPhongNet.BUS
                     byte[] messegeFromClient = new byte[1024 * 5000];
                     currentClient.Receive(messegeFromClient);
 
-                    string messege = (string)CovertToMessege(messegeFromClient);
+                    string messege = (string)ConvertToMessege(messegeFromClient);
                     List<string> lstMessege = messege.Split('|').ToList();
                     if (lstMessege[request].Equals("ConnectWithMePls!!"))
-                    {                  
+                    {
                         usingClient.Add(
                         new InfoClient
                         {
@@ -103,6 +103,8 @@ namespace QuanLyPhongNet.BUS
                             nameClient = lstMessege[1],
                             nameCustomer = ""
                         });
+                        String[] data = GetAllServiceData();
+                        currentClient.Send(ConvertToByte("ServiceData|FoodData|" + data[0] + "DrinkData|" + data[1] + "CardData|" + data[2]));
                         refreshClient = 9999;
                     }
                     if (lstMessege[request].Equals("AllowToLogInPls!!"))
@@ -117,7 +119,7 @@ namespace QuanLyPhongNet.BUS
                                 int memberID = NetRoomReader.Instance.FindIDByAccountName(lstMessege[1]);
                                 currentClient.Send(ConvertToByte("OkePlayGo|" + lstMessege[1] + "|" + totalTime + "|" + loginID + "|"));
                                 SaveLoginInfo(loginID, memberID, lstMessege[3], DateTime.Now.Date, DateTime.Now.TimeOfDay);
-                                ChangeStateClient(currentClient, lstMessege[1],"MEMBER USING");
+                                ChangeStateClient(currentClient, lstMessege[1], "MEMBER USING");
                                 refreshClient = 9999;
                                 break;
                             case 1:
@@ -135,7 +137,7 @@ namespace QuanLyPhongNet.BUS
                         UpdateRemainTime(lstMessege[1], TimeSpan.Parse(lstMessege[2]));
                         SaveLogoutInfo(Convert.ToInt32(lstMessege[3]), TimeSpan.Parse(lstMessege[4]), TimeSpan.Parse(lstMessege[5]));
                         ChangeStateClient(currentClient, lstMessege[1], "WAITING");
-                        refreshClient = 9999;                       
+                        refreshClient = 9999;
                     }
                     if (lstMessege[request].Equals("Message!!"))
                     {
@@ -189,6 +191,31 @@ namespace QuanLyPhongNet.BUS
             }
         }
 
+        public String[] GetAllServiceData()
+        {
+            String[] data = new string[3];
+            // Get all Food's data         
+            foreach (Food food in NetRoomReader.Instance.GetAllFoods())
+            {
+                data[0] += food.Name + ":" + food.PriceUnit + ":" + food.InventoryNumber + "|";
+
+            }
+
+            // Get all Drink's data
+            foreach (Drink drink in NetRoomReader.Instance.GetAllDrinks())
+            {
+                data[1] += drink.Name + ":" + drink.PriceUnit + ":" + drink.InventoryNumber + "|";
+            }
+
+            // Get all Card's data
+            foreach (Card card in NetRoomReader.Instance.GetAllCards())
+            {
+                data[2] += card.Name + ":" + card.PriceUnit + ":" + card.InventoryNumber + "|";
+            }
+
+            return data;
+        }
+
         public void SendMessage(string message, string sendtoclient)
         {
             if (sendtoclient.Equals("All"))
@@ -207,7 +234,7 @@ namespace QuanLyPhongNet.BUS
                 }
                 catch
                 {
-                    MessageBox.Show("Máy trạm này đã ngắt kết nối!", "Lỗi!", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    MessageBox.Show("Máy trạm này đã ngắt kết nối!", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -231,7 +258,7 @@ namespace QuanLyPhongNet.BUS
                 m.AccountName = m.AccountName.ToUpper();
                 if (m.AccountName.Equals(userName))
                 {
-                    float money =  ChangeUseTimeToMinutes(remainTime.ToString()) * 100;
+                    float money = ChangeUseTimeToMinutes(remainTime.ToString()) * 100;
                     DAL.Member member = new DAL.Member
                     {
                         MemberID = m.ID,
@@ -290,7 +317,7 @@ namespace QuanLyPhongNet.BUS
             }
             return minutes;
         }
-        
+
         public float TotalPrice(int index)
         {
             InfoClient client = usingClient[index];
@@ -300,7 +327,7 @@ namespace QuanLyPhongNet.BUS
             }
 
             TimeSpan time = DateTime.Now.Subtract(client.startTime);
-            
+
             client.stateClient = "WAITING";
             client.client.Send(ConvertToByte("PAYMENT"));
             float total = 0;
@@ -411,8 +438,8 @@ namespace QuanLyPhongNet.BUS
             binaryFormatter.Serialize(memoryStream, obj);
             return memoryStream.ToArray();
         }
-        
-        object CovertToMessege(byte[] messege)
+
+        object ConvertToMessege(byte[] messege)
         {
             MemoryStream memoryStream = new MemoryStream(messege);
             BinaryFormatter binaryFormatter = new BinaryFormatter();
@@ -486,6 +513,6 @@ namespace QuanLyPhongNet.BUS
             {
                 return false;
             }
-        }  
+        }
     }
 }

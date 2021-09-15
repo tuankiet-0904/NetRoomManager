@@ -29,9 +29,9 @@ namespace QuanLyPhongNet.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title5 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.drgvNKHT = new System.Windows.Forms.DataGridView();
@@ -84,12 +84,14 @@ namespace QuanLyPhongNet.GUI
             this.drgvNKHT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.drgvNKHT.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.drgvNKHT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.drgvNKHT.Location = new System.Drawing.Point(4, 3);
             this.drgvNKHT.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.drgvNKHT.Name = "drgvNKHT";
+            this.drgvNKHT.ReadOnly = true;
             this.drgvNKHT.RowHeadersWidth = 62;
-            this.drgvNKHT.RowTemplate.Height = 28;
+            this.drgvNKHT.RowTemplate.Height = 3;
             this.drgvNKHT.Size = new System.Drawing.Size(1155, 551);
             this.drgvNKHT.TabIndex = 0;
             // 
@@ -110,10 +112,12 @@ namespace QuanLyPhongNet.GUI
             this.drgvNKGD.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.drgvNKGD.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.drgvNKGD.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.drgvNKGD.Location = new System.Drawing.Point(4, 3);
             this.drgvNKGD.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.drgvNKGD.Name = "drgvNKGD";
+            this.drgvNKGD.ReadOnly = true;
             this.drgvNKGD.RowHeadersWidth = 62;
             this.drgvNKGD.RowTemplate.Height = 28;
             this.drgvNKGD.Size = new System.Drawing.Size(1157, 551);
@@ -134,24 +138,24 @@ namespace QuanLyPhongNet.GUI
             this.chartThongKe.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.Name = "ChartArea1";
-            this.chartThongKe.ChartAreas.Add(chartArea1);
+            chartArea5.Name = "ChartArea1";
+            this.chartThongKe.ChartAreas.Add(chartArea5);
             this.chartThongKe.Location = new System.Drawing.Point(2, 3);
             this.chartThongKe.Name = "chartThongKe";
-            series1.ChartArea = "ChartArea1";
-            series1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            series1.IsValueShownAsLabel = true;
-            series1.LegendText = "Tổng doanh thu";
-            series1.Name = "ThongKe";
-            this.chartThongKe.Series.Add(series1);
+            series5.ChartArea = "ChartArea1";
+            series5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series5.IsValueShownAsLabel = true;
+            series5.LegendText = "Tổng doanh thu";
+            series5.Name = "ThongKe";
+            this.chartThongKe.Series.Add(series5);
             this.chartThongKe.Size = new System.Drawing.Size(1159, 551);
             this.chartThongKe.TabIndex = 0;
             this.chartThongKe.Text = "chart";
-            title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            title1.ForeColor = System.Drawing.Color.Red;
-            title1.Name = "Thống kê thu nhập hằng tháng";
-            title1.Text = "Thống kê thu nhập hằng tháng";
-            this.chartThongKe.Titles.Add(title1);
+            title5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            title5.ForeColor = System.Drawing.Color.Red;
+            title5.Name = "Thống kê thu nhập hằng tháng";
+            title5.Text = "Thống kê thu nhập hằng tháng";
+            this.chartThongKe.Titles.Add(title5);
             // 
             // btnExit
             // 

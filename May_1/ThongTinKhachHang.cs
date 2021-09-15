@@ -71,7 +71,7 @@ namespace May_1
                  txtAddress.Text + "|" + txtEmail.Text + "|";
             clientManager.UpdateMemberInfo(clientManager.userName, newMemberInfo);
         }
- 
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Dispose();

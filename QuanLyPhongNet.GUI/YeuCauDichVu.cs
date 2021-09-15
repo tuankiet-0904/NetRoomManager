@@ -53,7 +53,7 @@ namespace QuanLyPhongNet.GUI
                 txtGroupName.Text = item.CategoryName;
                 txtInventory.Text = item.InventoryNumber.ToString();
             }
-            else if (_Cbbitem ==2)
+            else if (_Cbbitem == 2)
             {
                 DTO.Card item = NetRoomReader.Instance.GetCardByID(_ID);
                 txtName.Text = item.Name;
@@ -88,7 +88,7 @@ namespace QuanLyPhongNet.GUI
                     CategoryName = txtGroupName.Text,
                     InventoryNumber = Int32.Parse(txtInventory.Text) - (int)order.Value
                 };
-                NetRoomWritter.Instance.UpdateFood(_ID, food.Name, food.CategoryName, food.PriceUnit, food.UnitLot, 
+                NetRoomWritter.Instance.UpdateFood(_ID, food.Name, food.CategoryName, food.PriceUnit, food.UnitLot,
                     food.InventoryNumber);
             }
             else if (_Cbbitem == 1)
@@ -113,7 +113,7 @@ namespace QuanLyPhongNet.GUI
                     CategoryName = txtGroupName.Text,
                     InventoryNumber = Int32.Parse(txtInventory.Text) - (int)order.Value
                 };
-                NetRoomWritter.Instance.UpdateCard(_ID, card.Name,card.CategoryName, card.PriceUnit, card.UnitLot, card.InventoryNumber);
+                NetRoomWritter.Instance.UpdateCard(_ID, card.Name, card.CategoryName, card.PriceUnit, card.UnitLot, card.InventoryNumber);
             }
             DAL.Bill bill = new DAL.Bill();
             bill.FoundedDate = DateTime.Now;

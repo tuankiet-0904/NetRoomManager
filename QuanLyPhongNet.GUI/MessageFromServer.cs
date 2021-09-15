@@ -44,22 +44,22 @@ namespace QuanLyPhongNet.GUI
                 ServerManager.MessageCode = -1;
                 AllMessageBox.Items.Add(new ListViewItem() { Text = ServerManager.MessageFromClient, ForeColor = Color.Blue });
             }
-            if (ServerManager.MessageCode == 2) 
+            if (ServerManager.MessageCode == 2)
             {
                 this.Visible = true;
                 ServerManager.MessageCode = -1;
-                
+
                 List<string> message = ServerManager.MessageFromClient.Split('|').ToList();
                 AllMessageBox.Items.Add(new ListViewItem() { Text = message[0], ForeColor = Color.Blue });
-                string Column = "Order".PadRight(20) + "Số lượng".PadRight(10) + "Đơn giá".PadRight(15) + 
+                string Column = "Order".PadRight(20) + "Số lượng".PadRight(10) + "Đơn giá".PadRight(15) +
                                 "Thành tiền".PadRight(15) + "Ghi chú thêm".PadRight(20);
                 AllMessageBox.Items.Add(new ListViewItem() { Text = Column, ForeColor = Color.Blue });
 
                 List<string> order = message[1].Split('/').ToList();
-                for (int i = 0; i < order.Count-1; i++)
-                { 
+                for (int i = 0; i < order.Count - 1; i++)
+                {
                     List<string> item = order[i].Split('-').ToList();
-                    string res = item[0].PadRight(20) + item[1].PadRight(10) + item[2].PadRight(15) + 
+                    string res = item[0].PadRight(20) + item[1].PadRight(10) + item[2].PadRight(15) +
                                  item[3].PadRight(15) + item[4].PadRight(20);
                     AllMessageBox.Items.Add(new ListViewItem() { Text = res, ForeColor = Color.Blue });
                 }

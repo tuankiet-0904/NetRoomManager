@@ -23,7 +23,7 @@ namespace QuanLyPhongNet.GUI
         {
             InitializeComponent();
             objReader = new NetRoomReader();
-            objWriter = new NetRoomWritter();    
+            objWriter = new NetRoomWritter();
         }
 
         //************************************************************************************************//
@@ -280,7 +280,7 @@ namespace QuanLyPhongNet.GUI
             LoadSourceToDRGV();
             MessageBox.Show("Cập nhật thành công!", "Thông báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-        
+
         public void DeleteProcess()
         {
             if (MessageBox.Show("Bạn có chắc chắn muốn xóa mục này?", "Thông Báo",
@@ -448,7 +448,7 @@ namespace QuanLyPhongNet.GUI
                     }
             }
         }
-        
+
         private void drgvInformation_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             TabPage tb = tab.SelectedTab;
@@ -508,6 +508,6 @@ namespace QuanLyPhongNet.GUI
         private void ExitMouseLeaveEventHandler(object sender, EventArgs e)
         {
             picExit.BorderStyle = BorderStyle.None;
-        }   
+        }
     }
 }

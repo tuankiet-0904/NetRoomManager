@@ -16,7 +16,7 @@ namespace QuanLyPhongNet.GUI
     {
         ServerManager servermanager;
         private int _ID = -1;
-        
+
         public SuaThanhVien(ServerManager x, int id)
         {
             InitializeComponent();

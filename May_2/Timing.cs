@@ -26,7 +26,7 @@ namespace May_2
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
-            
+
             clientManager = new ClientManager();
             clientManager.lockScreen.ShutDown += this.ShutDown;
             timerProgram.Interval = 1000;
@@ -154,7 +154,7 @@ namespace May_2
             }
 
         }
-        
+
         private int ChangeUseTimeToMinutes(String useTime)
         {
             int minutes = 0;
@@ -171,7 +171,7 @@ namespace May_2
 
             return minutes;
         }
-        
+
         private void MoneyCount(String useTime)
         {
             int time = ChangeUseTimeToMinutes(useTime);
@@ -233,7 +233,7 @@ namespace May_2
             clientManager.lockScreen.showLoginStatus("Chế độ chờ - Mời đăng nhập lại để tiếp tục!");
             clientManager.lockScreen.resetTxt();
             clientManager.lockScreen.HideButtonShutdown();
-        } 
+        }
 
         private void picUnitity_Click(object sender, EventArgs e)
         {

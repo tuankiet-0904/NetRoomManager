@@ -69,7 +69,7 @@ namespace QuanLyPhongNet.GUI
 
         // Giao Dịch Tab
         private void LoadDGVNKGD()
-        {   
+        {
             drgvNKGD.DataSource = NetRoomReader.Instance.GetAllBills();
             drgvNKGD.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             drgvNKGD.Columns[0].HeaderText = "ID tài khoản";
@@ -111,6 +111,6 @@ namespace QuanLyPhongNet.GUI
                 totalIncome[month] += i.PriceTotal;
             }
         }
-        
+
     }
 }

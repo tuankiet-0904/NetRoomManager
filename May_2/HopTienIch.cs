@@ -17,14 +17,11 @@ namespace May_2
     {
         private Random random;
 
-        // Create the project folder's directory
-        private static String Debug_folder = Directory.GetCurrentDirectory(); // Directory of debug folder
-        private static String Bin_folder = Directory.GetParent(Debug_folder).FullName; // Directory of bin folder
         // Directory of project folder
-        private static String Project_folder = Directory.GetParent(Bin_folder).FullName;
+        private static String Project_folder = Directory.GetCurrentDirectory().Replace("bin\\Debug", "");
         // Directory of access history file
-        private static String Keyboard_path = Project_folder + "\\TienIchShortcut\\Keyboard";
-        private static String System_path = Project_folder + "\\TienIchShortcut\\System";
+        private static String Keyboard_path = Project_folder + "TienIchShortcut\\Keyboard";
+        private static String System_path = Project_folder + "TienIchShortcut\\System";
 
         public HopTienIch()
         {
@@ -37,7 +34,6 @@ namespace May_2
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-
             int avgFrameRate = random.Next(50, 70);
             txtFrameRate.Items.Add(avgFrameRate.ToString() + "Hz");
             currentFPS.Text = avgFrameRate.ToString() + "Hz";

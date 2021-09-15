@@ -31,6 +31,7 @@ namespace QuanLyPhongNet.GUI
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GiaoDienChinh));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.timerHome = new System.Windows.Forms.Timer(this.components);
             this.tabGroupUsers = new System.Windows.Forms.TabPage();
             this.label19 = new System.Windows.Forms.Label();
@@ -1016,7 +1017,6 @@ namespace QuanLyPhongNet.GUI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.drgvNKHT.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.drgvNKHT.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.drgvNKHT.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.drgvNKHT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.drgvNKHT.Location = new System.Drawing.Point(16, 71);
@@ -1158,7 +1158,6 @@ namespace QuanLyPhongNet.GUI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.drgvMember.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.drgvMember.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.drgvMember.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.drgvMember.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.drgvMember.Location = new System.Drawing.Point(14, 87);
@@ -1325,7 +1324,6 @@ namespace QuanLyPhongNet.GUI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.drgvUser.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.drgvUser.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.drgvUser.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.drgvUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.drgvUser.Location = new System.Drawing.Point(14, 87);
@@ -1537,7 +1535,12 @@ namespace QuanLyPhongNet.GUI
             this.drgvUsingClient.Location = new System.Drawing.Point(12, 119);
             this.drgvUsingClient.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.drgvUsingClient.Name = "drgvUsingClient";
+            this.drgvUsingClient.ReadOnly = true;
             this.drgvUsingClient.RowHeadersWidth = 62;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            this.drgvUsingClient.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.drgvUsingClient.RowTemplate.Height = 28;
             this.drgvUsingClient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.drgvUsingClient.Size = new System.Drawing.Size(1617, 659);
